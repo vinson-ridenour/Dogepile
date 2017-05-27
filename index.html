@@ -16,6 +16,53 @@
 </head>
 
 <body>
+
+<!-- hidden on launch -->
+    <header>
+        <div id="headerContainer">
+            <h2 id="logo">Good Dog</h2>
+            <div id="addressDisplay">Your Current Location<div>
+        </div>
+    </header>
+
+<!-- initial search -->
+    <div id="searchContainer">
+        <h1>Good Dog</h1>
+        <form id="addressSearch">
+            <div class="input-group">
+                <input id="address-input" class="form-control" type="text" name="search" placeholder="Address">
+                <div class="input-group-addon btn btn-primary init" id="searchBtn">Fetch</div>
+            </div>
+            <button class="btn btn-primary init" type="submit" id="geoBtn">Use Your Location</button>
+        </form>
+    </div>
+
+<!-- main page -->
+    <div id="mainContainer">
+
+        <div class="row"> 
+
+            <div class="col-md-6">
+                <div id="map">
+                    map
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div id="filter-results">
+                    <ul>
+                        <li><input type="checkbox" id="filter-restaurants">Dog Friendly Restaurants</li>
+                        <li><input type="checkbox" id="filter-parks">Dog Parks</li>
+                        <li><input type="checkbox" id="filter-hotels">Dog Friendly Hotels</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div> 
+
+<script type="text/javascript" src="assets/js/app.js"></script>
+
 </body>
 
 </html>
