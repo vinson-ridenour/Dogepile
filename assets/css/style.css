@@ -2,9 +2,25 @@
     box-sizing: border-box;
 }
 
-#searchContainer{
+#addressSearch{
+	width: 50%;
+}
+
+.footer-copyright {
+	text-align: center;
+}
+
+footer {
+	transition: 1s;
+	opacity: 0;
+}
+
+.btn-large {
+	font-size: 10px;
+}
+
+#searchContainer {
 	visibility: visible;
-	position: absolute;
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -12,6 +28,7 @@
 	align-items: center;
 	margin: 0 auto;
 	flex-direction: column;
+	transition: 1s;
 }
 
 #searchContainer h1 {
@@ -21,13 +38,13 @@
 	margin-bottom: 20px;
 }
 
-#address-input{
+#address-input {
 	width: 500px;
 	height: 50px;
 	font-size: 20px;
 }
 
-.input-group-addon{
+.input-group-addon {
 	color: #fff;
     background-color: #337ab7;
     width: 100px;
@@ -37,16 +54,17 @@
 #geoBtn {
 	margin-top: 10px;
 	font-size: 20px;
-	width: 50%;
 	margin-bottom: 200px;
 }
 
 header {
 	display: flex;
 	justify-content: center;
-	box-shadow: 0 0 5px;
-	visibility: hidden;
+	box-shadow: 0 0 0px;
+
+	transition: 1s;
 }
+
 /*assume new page*/
 #headerContainer {
 	display: inline-flex;
@@ -54,6 +72,8 @@ header {
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+	transition: 1s;
+	opacity: 0;
 }
 
 #logo {
@@ -61,16 +81,18 @@ header {
 	font-size: 50px;
 }
 
-#addressDisplay{
+#addressDisplay {
 	margin: 10px;
 	font-size: 25px;
 }
 
-#mainContainer{
+#mainContainer {
+	opacity: 0;
 	width: 900px;
 	margin: 0 auto;
-	visibility: hidden;
+	transition: 1s;
 }
+
 #map {
 	background-color: gray;
 	margin-top: 10px;
@@ -80,11 +102,27 @@ header {
 #filter-results {
 	margin-top: 10px;
 	padding-top: 20px;
-	/*border: 2px solid red;*/
 }
 
 ul {
 	list-style-type: none;
 	padding-left: 10px;
 	font-size: 20px;
+}
+
+#searchBtn {
+	font-size: 20px;
+	padding: 0 15px;
+}
+
+i {
+	margin-left: 0;
+}
+
+tr{
+	border-bottom: 2px solid gray;
+}
+
+.dirBtn {
+	padding: 0 10px;
 }
