@@ -139,7 +139,7 @@ function getDistanceFromLatLonInM(pointA, pointB) {
   var dLng = deg2rad(pointA.lng - pointB.lng); 
   var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(pointA.lat)) * Math.cos(deg2rad(pointB.lat)) * Math.sin(dLng / 2) * Math.sin(dLng / 2); 
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
-  var d = R * c; // Distance in km
+  var d = R * c; // Distance in m
   return d;
 }
 function deg2rad(deg) {
