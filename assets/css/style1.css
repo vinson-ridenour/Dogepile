@@ -42,12 +42,6 @@ body {
 	margin-bottom: 20px;
 }
 
-#address-input {
-	width: 500px;
-	height: 50px;
-	font-size: 20px;
-}
-
 #geoBtn {
 	margin-top: 10px;
 	font-size: 20px;
@@ -100,7 +94,6 @@ header {
 
 #filter-results {
 	margin-top: 10px;
-	/*padding-top: 20px;*/
 }
 
 i {
@@ -111,12 +104,8 @@ tr {
 	border-bottom: 2px solid gray;
 }
 
-.dirBtn {
-	padding: 0 10px;
-}
-
 #modal1 {
-	height: 100%;
+	height: 60%;
 }
 
 #logo:hover {

@@ -4,18 +4,15 @@ $(document).ready(function() {
 	$(".init").on("click", function (event){
 		event.preventDefault();
 
-		// $("#searchContainer").css("opacity", "0");
-		$("#searchContainer").css("visibility", "hidden");
 		$("body").css("background-image", "none");
+		$("#searchContainer").css("opacity", "0");
 		$("#mainContainer").css("visibility", "visible");
 
 		var showHeader = setTimeout (function(){
 			$("header").css("box-shadow", "0 0 5px");
 			$("header").css("opacity", "1");
-		}, 2000);
-
-		// 	$("#searchContainer").css("visibility", "hidden");
-		// }, 1000);
+			$("#searchContainer").css("visibility", "hidden");
+		}, 1000);
 
 		var showMain = setTimeout (function(){
 			$("#headerContainer").css("opacity", "1");
@@ -24,7 +21,7 @@ $(document).ready(function() {
 		}, 2000);
 	});
 
-	$("#addLoc").on("click", $(".modal").modal())
+	$("#addLoc").on("click", $(".modal").modal());
 
 	$(".dropdown-item").on("click", function(){
 		console.log($(this).attr("data-type"));
