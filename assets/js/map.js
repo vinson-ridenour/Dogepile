@@ -23,9 +23,12 @@ function displayMap(locationArray) {
         }
       }
       
+      // how to call this function?
+      /*
       searchReslt = [
       {lat: 32.7157, lng: -117.1611, type: "restaurant"},
       {lat: 34.0522, lng: -118.2437, type: "park"},
       {lat: 37.7749, lng: -122.4194, type: "park"}
       ];
       displayMap(searchReslt);
+      */
