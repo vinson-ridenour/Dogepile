@@ -10,7 +10,7 @@ $(document).ready(function() {
 		var showMain = setTimeout (function(){
 			$("header").css("box-shadow", "0 0 5px");
 			$("header").css("opacity", "1");
-		}, 1000);
+		}, 2000);
 
 		var showMain = setTimeout (function(){
 			$("#headerContainer").css("opacity", "1");
@@ -20,7 +20,8 @@ $(document).ready(function() {
 		}, 2000);
 	});
 
-	// $("#logo").on("click", function() {
-	// 	window."file:///Users/vinsonridenour/Desktop/UCSD%20Bootcamp/Project1/index.html".reload();
-	// });
+	$("#logo").on("click", function() {
+		var location = "file:///Users/vinsonridenour/Desktop/UCSD%20Bootcamp/Project1/index.html";
+		window.location.reload();
+	});
 });
