@@ -101,7 +101,7 @@ REFERENCE
 https://developers.google.com/maps/documentation/geocoding/intro
 */
 function getCoorUserInput(address) {
-  var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + apiKey;
+  var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(address) + "&key=" + apiKey;
   var convertedCoor = {};
   $.ajax({
     url: queryURL,
