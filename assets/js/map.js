@@ -1,3 +1,5 @@
+var apiKey = "AIzaSyBvUKChGjalgP1YNjJC66vq_tgbRuqa_Oc";
+
 /*
 INPUT
 an array of objects which have at least data fields "lat" and "lng"
@@ -16,7 +18,7 @@ searchReslt = [
 ];
 displayMap(searchReslt);
 */
-function displayMap(locationArray) {
+function displayMapOfLocations(locationArray) {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
     center: locationArray[0]
@@ -51,7 +53,7 @@ a single object which has data fields "lat" and "lng"
 REFERENCE
 https://developers.google.com/maps/documentation/distance-matrix/intro
 */
-function getUserPosition() {
+function getCoorCurrentLocation() {
   var userPosition = {};
 
   map = new google.maps.Map(document.getElementById('map'), {
@@ -86,6 +88,30 @@ function getUserPosition() {
     handleLocationError(false, infoWindow, map.getCenter());
     return null;
   }
+}
+
+/*
+INPUT
+A string of user input address
+
+OUTPUT
+a single object which has data fields "lat" and "lng"
+
+REFERENCE
+https://developers.google.com/maps/documentation/geocoding/intro
+*/
+function getCoorUserInput(address) {
+  var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(address) + "&key=" + apiKey;
+  var convertedCoor = {};
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+    success: function(response) {
+      convertedCoor.lat = response.results[0].geometry.location.lat;
+      convertedCoor.lng = response.results[0].geometry.location.lng;
+    }
+  });
+  return convertedCoor;
 }
 
 /*
