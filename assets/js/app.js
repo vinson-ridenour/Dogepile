@@ -5,6 +5,7 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		$("#searchContainer").css("opacity", "0");
+		$("#mainContainer").css("visibility", "visible");
 		
 		var showMain = setTimeout (function(){
 			$("header").css("box-shadow", "0 0 5px");
