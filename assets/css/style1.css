@@ -124,3 +124,7 @@ tr{
 .dirBtn {
 	padding: 0 10px;
 }
+
+#modal1 {
+	height: 100%;
+}

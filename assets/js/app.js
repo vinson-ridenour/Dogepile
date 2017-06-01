@@ -19,4 +19,11 @@ $(document).ready(function() {
 			$("#searchContainer").css("position", "absolute");
 		}, 2000);
 	});
+
+	$("#addLoc").on("click", $(".modal").modal())
+
+	$(".dropdown-item").on("click", function(){
+		console.log($(this).attr("data-type"))
+		$(".dropdown-button").text($(this).attr("data-type"))
+	})
 });
