@@ -29,6 +29,7 @@ footer {
 	margin: 0 auto;
 	flex-direction: column;
 	transition: 1s;
+	position: absolute;
 }
 
 #searchContainer h1 {
