@@ -95,7 +95,6 @@ header {
 }
 
 #map {
-	background-color: gray;
 	margin-top: 10px;
 	height: 435px;
 }
@@ -111,4 +110,16 @@ i {
 
 tr {
 	border-bottom: 2px solid gray;
+}
+
+.dirBtn {
+	padding: 0 10px;
+}
+
+#modal1 {
+	height: 100%;
+}
+
+#logo:hover {
+	cursor: pointer;
 }
