@@ -119,13 +119,29 @@ INPUT
 an array of objects which have at least data fields "lat" and "lng"
 
 OUTPUT
-an array of objects which have at least data fields "lat" and "lng" (subset of input)
+an array of objects which have data fields "lat" and "lng" (subset of input)
 
 REFERENCE
 https://developers.google.com/maps/documentation/distance-matrix/intro
 */
-function filterLocationObjectArray(locationArray) {
-  //
-  // TODO
-  //
+function filterByDistance(mylocation, distance, places) {
+  var newLocationArray = [];
+  for (var i = 0; i < places.length; i++) {
+    if (getDistanceFromLatLonInM(places[i], mylocation) <= distance) {
+      newLocationArray.push(places[i]);
+    }
+  }
+  return newLocationArray;
+}
+function getDistanceFromLatLonInM(pointA, pointB) {
+  var R = 6371000; // Radius of the earth in m
+  var dLat = deg2rad(pointA.lat - pointB.lat);  // deg2rad below
+  var dLng = deg2rad(pointA.lng - pointB.lng); 
+  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(pointA.lat)) * Math.cos(deg2rad(pointB.lat)) * Math.sin(dLng / 2) * Math.sin(dLng / 2); 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
+  var d = R * c; // Distance in m
+  return d;
+}
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
 }
