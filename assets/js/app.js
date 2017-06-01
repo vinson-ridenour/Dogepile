@@ -19,9 +19,4 @@ $(document).ready(function() {
 			$("#searchContainer").css("position", "absolute");
 		}, 2000);
 	});
-
-	$("#logo").on("click", function() {
-		var location = "file:///Users/vinsonridenour/Desktop/UCSD%20Bootcamp/Project1/index.html";
-		window.location.reload();
-	});
 });
