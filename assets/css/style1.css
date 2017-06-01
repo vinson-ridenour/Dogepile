@@ -125,3 +125,7 @@ tr {
 #modal1 {
 	height: 100%;
 }
+
+#logo:hover {
+	cursor: pointer;
+}

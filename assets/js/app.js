@@ -8,16 +8,16 @@ $(document).ready(function() {
 		$("#mainContainer").css("visibility", "visible")
 
 		
-		var showMain = setTimeout (function(){
+		var showHeader = setTimeout (function(){
 			$("header").css("box-shadow", "0 0 5px");
 			$("header").css("opacity", "1");
+			$("#searchContainer").css("visibility", "hidden");
 		}, 1000);
 
 		var showMain = setTimeout (function(){
 			$("#headerContainer").css("opacity", "1");
 			$("#mainContainer").css("opacity", "1");
 			$("footer").css("opacity", "1");
-			$("#searchContainer").css("position", "absolute");
 		}, 2000);
 	});
 
@@ -27,7 +27,7 @@ $(document).ready(function() {
 		console.log($(this).attr("data-type"))
 		$(".dropdown-button").text($(this).attr("data-type"))
 	})
-	// $("#logo").on("click", function() {
-	// 	window."file:///Users/vinsonridenour/Desktop/UCSD%20Bootcamp/Project1/index.html".reload();
-	// });
+	$("#logo").on("click", function() {
+		location.reload();
+	});
 });
