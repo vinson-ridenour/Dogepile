@@ -10,6 +10,7 @@ body {
 	font-family: 'Indie Flower', cursive;
 	display: flex;
 	flex-direction: column;
+	background-image: url("../images/placeholder.jpg");
 }
 
 .stickyFooter {
@@ -31,6 +32,7 @@ body {
 	flex-direction: column;
 	transition: 1s;
 	position: absolute;
+	background-color: white;
 }
 
 #searchContainer h1 {
@@ -49,7 +51,6 @@ body {
 #geoBtn {
 	margin-top: 10px;
 	font-size: 20px;
-	margin-bottom: 200px;
 }
 
 header {
@@ -93,7 +94,6 @@ header {
 }
 
 #map {
-	background-color: gray;
 	margin-top: 10px;
 	height: 435px;
 }
@@ -109,4 +109,16 @@ i {
 
 tr {
 	border-bottom: 2px solid gray;
+}
+
+.dirBtn {
+	padding: 0 10px;
+}
+
+#modal1 {
+	height: 100%;
+}
+
+#logo:hover {
+	cursor: pointer;
 }

@@ -4,19 +4,34 @@ $(document).ready(function() {
 	$(".init").on("click", function (event){
 		event.preventDefault();
 
-		$("#searchContainer").css("opacity", "0");
+		// $("#searchContainer").css("opacity", "0");
+		$("#searchContainer").css("visibility", "hidden");
+		$("body").css("background-image", "none");
 		$("#mainContainer").css("visibility", "visible");
-		
-		var showMain = setTimeout (function(){
+
+		var showHeader = setTimeout (function(){
 			$("header").css("box-shadow", "0 0 5px");
 			$("header").css("opacity", "1");
 		}, 2000);
+
+		// 	$("#searchContainer").css("visibility", "hidden");
+		// }, 1000);
 
 		var showMain = setTimeout (function(){
 			$("#headerContainer").css("opacity", "1");
 			$("#mainContainer").css("opacity", "1");
 			$("footer").css("opacity", "1");
-			$("#searchContainer").css("position", "absolute");
 		}, 2000);
+	});
+
+	$("#addLoc").on("click", $(".modal").modal())
+
+	$(".dropdown-item").on("click", function(){
+		console.log($(this).attr("data-type"));
+		$(".dropdown-button").text($(this).attr("data-type"));
+	});
+
+	$("#logo").on("click", function() {
+		location.reload();
 	});
 });

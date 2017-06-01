@@ -61,50 +61,80 @@
             </div>
 
             <div class="row">
-                <div class="col s12">
+                <div class="col s6">
                     <button class="btn-large init waves-effect waves-light" type="submit" id="geoBtn">use my location</button>
+                </div>
+                <div class="col s6">
+                    <button data-target="modal1" class="btn-large waves-effect waves-light" type="submit" id="addLocBtn">add new place</button>
                 </div>
             </div>
         </form>
     </div>
 
-<!-- container wrapper -->
-<div class="container">
+    <!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4 class="addVenueText">add a new dog-friendly venue:</h4>
+        <div class="input field">
+            <input id="new-name" type="text" placeholder="place name">
+            <!-- <label for="new-name">place name</label> -->
+        </div>
+        <div class="input field">
+            <input id="new-address" type="text" placeholder="street address">
+            <!-- <label for="new-address">street address</label> -->
+        </div>
+        <!-- Dropdown Trigger -->
+        <button class='dropdown-button btn' data-belowOrigin="true" href='#' data-activates='dropdown1' id=venueTypeBtn>type</button>
+        <!-- Dropdown Structure -->
+        <ul id='dropdown1' class='dropdown-content'>
+            <li class="dropdown-item" data-type="eat">eat</li>
+            <li class="dropdown-item" data-type="play">play</li>
+            <li class="dropdown-item" data-type="stay">stay</li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large" id="shakeBtn">shake</a>
+    </div>
+</div>
 
-<!-- main page -->
-    <div id="mainContainer">
-        <div class="row">
-            <div class="col s6">
-                <div id="map">
-                    map
-                </div>
-            </div>
 
-            <div class="col s6">
-                <div id="filter-results">
-                    <div class="switch filter-restaurants">
-                        <label>
-                        eat
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        </label>
-                    </div>
-                    <div class="switch filter-parks">
-                        <label>
-                        play
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        </label>
-                    </div>
-                    <div class="switch filter-hotels">
-                        <label>
-                        stay
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        </label>
+    <!-- container wrapper -->
+    <div class="container">
+
+    <!-- main page -->
+        <div id="mainContainer">
+            <div class="row"> 
+                <div class="col s6">
+                    <div id="map">
+                        map
                     </div>
                 </div>
-            </div>
+
+                <div class="col s6">
+                    <div id="filter-results">
+                        <div class="switch filter-restaurants">
+                            <label>
+                            eat
+                            <input type="checkbox">
+                            <span class="lever"></span>
+                            </label>
+                        </div>
+                        <div class="switch filter-parks">
+                            <label>
+                            play
+                            <input type="checkbox">
+                            <span class="lever"></span>
+                            </label>
+                        </div>
+                        <div class="switch filter-hotels">
+                            <label>
+                            stay
+                            <input type="checkbox">
+                            <span class="lever"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
             <div class="col s12">
                 <table>
