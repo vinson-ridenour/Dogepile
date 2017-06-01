@@ -4,6 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     
     <!-- Compiled and minified CSS for MATERIALIZE -->
@@ -14,8 +15,13 @@
     
     <!-- Materialize icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
   
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style1.css">
@@ -36,7 +42,7 @@
 
 <!-- initial search -->
     <div id="searchContainer">
-        <h1 class="bounceInRight">aarf!</h1>
+        <h1>aarf!</h1>
 
         <form class="col s12" id="addressSearch">
             <div class="row">
@@ -67,6 +73,7 @@
 <!-- main page -->
     <div id="mainContainer">
         <div class="row"> 
+            
             <div class="col s6">
                 <div id="map">
                     map
@@ -75,11 +82,27 @@
 
             <div class="col s6">
                 <div id="filter-results">
-                    <ul>
-                        <li><input type="checkbox" id="filter-restaurants">eat</li>
-                        <li><input type="checkbox" id="filter-parks">play</li>
-                        <li><input type="checkbox" id="filter-hotels">stay</li>
-                    </ul>
+                    <div class="switch filter-restaurants">
+                        <label>
+                        eat
+                        <input type="checkbox">
+                        <span class="lever"></span>
+                        </label>
+                    </div>
+                    <div class="switch filter-parks">
+                        <label>
+                        play
+                        <input type="checkbox">
+                        <span class="lever"></span>
+                        </label>
+                    </div>
+                    <div class="switch filter-hotels">
+                        <label>
+                        stay
+                        <input type="checkbox">
+                        <span class="lever"></span>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -87,12 +110,7 @@
 </div> <!-- end container div -->
 
 <footer class="page-footer">
-  <div class="footer-copyright">
-    <!-- <div class="container"> -->
-    © 2017 Copyright Team TBD
-    <!-- <a class="grey-text text-lighten-4 right"></a> -->
-    <!-- </div> -->
-  </div>
+    <p>© 2017 Copyright Team TBD</p>
 </footer>
 
 <script type="text/javascript" src="assets/js/app.js"></script>
