@@ -4,7 +4,15 @@
 
 body {
 	font-family: 'Indie Flower', cursive;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
 }
+
+main {
+	flex: 1 0 auto;
+}
+
 
 #addressSearch{
 	width: 50%;
@@ -29,6 +37,7 @@ footer {
 	margin: 0 auto;
 	flex-direction: column;
 	transition: 1s;
+	position: absolute;
 }
 
 #searchContainer h1 {
@@ -88,6 +97,7 @@ header {
 	margin: 0 auto;
 	transition: 1s;
 	opacity: 0;
+	visibility: hidden;
 }
 
 #map {
@@ -101,25 +111,10 @@ header {
 	/*padding-top: 20px;*/
 }
 
-ul {
-	list-style-type: none;
-	padding-left: 10px;
-	font-size: 20px;
-}
-
-#searchBtn {
-	font-size: 20px;
-	padding: 0 15px;
-}
-
 i {
 	margin-left: 0;
 }
 
-tr{
+tr {
 	border-bottom: 2px solid gray;
-}
-
-.dirBtn {
-	padding: 0 10px;
 }
