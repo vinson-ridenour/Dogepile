@@ -89,10 +89,10 @@ header {
 	margin: 0 auto;
 	transition: 1s;
 	opacity: 0;
+	visibility: hidden;
 }
 
 #map {
-	background-color: gray;
 	margin-top: 10px;
 	height: 435px;
 }
