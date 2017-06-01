@@ -4,7 +4,15 @@
 
 body {
 	font-family: 'Indie Flower', cursive;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
 }
+
+main {
+	flex: 1 0 auto;
+}
+
 
 #addressSearch{
 	width: 50%;
@@ -102,22 +110,11 @@ header {
 	/*padding-top: 20px;*/
 }
 
-ul {
-	list-style-type: none;
-	padding-left: 10px;
-	font-size: 20px;
-}
-
-#searchBtn {
-	font-size: 20px;
-	padding: 0 15px;
-}
-
 i {
 	margin-left: 0;
 }
 
-tr{
+tr {
 	border-bottom: 2px solid gray;
 }
 

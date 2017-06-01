@@ -6,6 +6,7 @@ $(document).ready(function() {
 
 		$("#searchContainer").css("opacity", "0");
 		$("#mainContainer").css("visibility", "visible")
+
 		
 		var showMain = setTimeout (function(){
 			$("header").css("box-shadow", "0 0 5px");
@@ -26,4 +27,7 @@ $(document).ready(function() {
 		console.log($(this).attr("data-type"))
 		$(".dropdown-button").text($(this).attr("data-type"))
 	})
+	// $("#logo").on("click", function() {
+	// 	window."file:///Users/vinsonridenour/Desktop/UCSD%20Bootcamp/Project1/index.html".reload();
+	// });
 });
