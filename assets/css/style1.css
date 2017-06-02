@@ -14,16 +14,20 @@ body {
 }
 
 .stickyFooter {
-	flex: 1 0 auto;
+	/*flex: 1 0 auto;*/
+	min-height: 100%;
+	margin-bottom: -50px;
+}
+
+/* sticky footer content */
+
+.stickyFooter:after {
+	content: "";
+	display: block;
 }
 
 #addressSearch {
 	width: 50%;
-}
-
-footer {
-	transition: 1s;
-	opacity: 0;
 }
 
 #searchContainer {

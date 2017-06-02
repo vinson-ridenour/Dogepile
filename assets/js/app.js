@@ -17,7 +17,7 @@ $(document).ready(function() {
 		var showMain = setTimeout (function(){
 			$("#headerContainer").css("opacity", "1");
 			$("#mainContainer").css("opacity", "1");
-			$("footer").css("opacity", "1");
+			$(".page-footer").css("opacity", "1");
 		}, 2000);
 	});
 
