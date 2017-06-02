@@ -101,12 +101,21 @@ REFERENCE
 https://developers.google.com/maps/documentation/geocoding/intro
 */
 function getCoorUserInput(address) {
+  if (address == null || address.length == 0) {
+    console.log("Please enter a valid address.");
+    return null;
+  }
   var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(address) + "&key=" + apiKey;
   var convertedCoor = {};
   $.ajax({
     url: queryURL,
     method: "GET",
     success: function(response) {
+      // deal with the case that user enters an address like "dioqjweoqweq"
+      if (response.status == "ZERO_RESULTS") {
+        console.log("Please enter a valid address.");
+        return null;
+      }
       convertedCoor.lat = response.results[0].geometry.location.lat;
       convertedCoor.lng = response.results[0].geometry.location.lng;
     }
