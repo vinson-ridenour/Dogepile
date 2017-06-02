@@ -23,7 +23,6 @@
  
     <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style1.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style2.css">
 
@@ -31,7 +30,7 @@
 </head>
 
 <body>
-
+<div class="stickyFooter">
 <!-- hidden on launch -->
     <header>
         <div id="headerContainer">
@@ -65,33 +64,38 @@
                     <button class="btn-large init waves-effect waves-light" type="submit" id="geoBtn">use my location</button>
                 </div>
                 <div class="col s6">
-                    <button data-target="modal1" class="btn-large waves-effect waves-light" type="submit" id="addLoc">Add New Place</button>
+                    <button data-target="modal1" class="btn-large waves-effect waves-light" type="submit" id="addLocBtn">add new place</button>
                 </div>
             </div>
         </form>
     </div>
 
     <!-- Modal Structure -->
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <h4>Add a New Dog Friendly Venue</h4>
-            <input id="new-name" type="text" placeholder="Place Name">
-            <input id="new-address" type="text" placeholder="Street Address">
-              <!-- Dropdown Trigger -->
-            <a class='dropdown-button btn' data-belowOrigin="true" href='#' data-activates='dropdown1'>Type</a>
-
-            <!-- Dropdown Structure -->
-            <ul id='dropdown1' class='dropdown-content'>
-                <li class="dropdown-item" data-type="eat">Eat</li>
-                <li class="dropdown-item" data-type="play">Play</li>
-                <li class="dropdown-item" data-type="stay">Stay</li>
-            </ul>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4 class="addVenueText">add a new dog-friendly venue:</h4>
+        <div class="input field">
+            <input id="new-name" type="text" placeholder="place name">
+            <!-- <label for="new-name">place name</label> -->
         </div>
-
-        <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Shake</a>
+        <div class="input field">
+            <input id="new-address" type="text" placeholder="street address">
+            <!-- <label for="new-address">street address</label> -->
         </div>
+        <!-- Dropdown Trigger -->
+        <button class='dropdown-button btn' data-belowOrigin="true" href='#' data-activates='dropdown1' id=venueTypeBtn>type</button>
+        <!-- Dropdown Structure -->
+        <ul id='dropdown1' class='dropdown-content'>
+            <li class="dropdown-item" data-type="eat">eat</li>
+            <li class="dropdown-item" data-type="play">play</li>
+            <li class="dropdown-item" data-type="stay">stay</li>
+        </ul>
     </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large" id="shakeBtn">shake</a>
+    </div>
+</div>
+
 
     <!-- container wrapper -->
     <div class="container">
@@ -159,9 +163,10 @@
         </div>
     </div>
 </div> <!-- end container div -->
+</div>
 
 <footer class="page-footer">
-    <p>© 2017 Copyright Team TBD<p>
+    <p>&copy; 2017 Team TBD</p>
 </footer>
 
 <script type="text/javascript" src="assets/js/app.js"></script>
