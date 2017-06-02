@@ -21,18 +21,23 @@ body {
 	width: 50%;
 }
 
+footer {
+	transition: 1s;
+	opacity: 0;
+}
+
 #searchContainer {
-	visibility: visible;
 	width: 100%;
-	height: 100%;
+	height: 75%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin: 0 auto;
 	flex-direction: column;
 	transition: 1s;
+	visibility: visible;
 	position: absolute;
-	background-color: white;
+	background-color: #fff;
 }
 
 #searchContainer h1 {
@@ -82,7 +87,7 @@ header {
 #mainContainer {
 	width: 900px;
 	margin: 0 auto;
-	transition: 1s;
+	transition: 2s;
 	opacity: 0;
 	visibility: hidden;
 }
@@ -98,10 +103,6 @@ header {
 
 i {
 	margin-left: 0;
-}
-
-tr {
-	border-bottom: 2px solid gray;
 }
 
 #modal1 {

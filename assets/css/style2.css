@@ -5,12 +5,17 @@
 	font-size: 20px;
 }
 
+i.right {
+	margin-left: 5px;
+}
+
 #geoBtn {
 	margin-bottom: 0;
 }
 
 #addLocBtn {
 	margin-top: 10px;
+	margin-left: 20px;
 }
 
 #dirBtn {
@@ -57,7 +62,8 @@ input[type=text]:focus:not([readonly]) {
 	padding: 0;
 	line-height: 60px;
 	transition: 1s;
-	opacity: 0;
+	/*opacity: 0;*/
+	visibility: hidden;
 }
 
 .switch {
