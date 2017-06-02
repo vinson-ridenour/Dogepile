@@ -7,6 +7,11 @@
 
 i.right {
 	margin-left: 5px;
+	font-size: 26px;
+}
+
+i.left {
+	margin-right: 5px;
 }
 
 #geoBtn {
@@ -15,7 +20,7 @@ i.right {
 
 #addLocBtn {
 	margin-top: 10px;
-	margin-left: 20px;
+	margin-left: 25px;
 }
 
 #dirBtn {
@@ -47,6 +52,7 @@ input:not([type]):focus:not([readonly])+label, input[type=text]:focus:not([reado
 
 .input-field .prefix.active {
 	color: #29b6f6;
+	/*color: red;*/
 }
 
 input[type=text]:focus:not([readonly]) {
