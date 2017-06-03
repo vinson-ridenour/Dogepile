@@ -5,6 +5,10 @@
 	font-size: 20px;
 }
 
+#venueTypeBtn {
+	padding: 0 45px;
+}
+
 i.right {
 	margin-left: 5px;
 	font-size: 26px;
@@ -43,8 +47,8 @@ i.left {
 .dropdown-content {
 	min-width: 0;
 	width: 100%;
+	top: 100%;
     position: absolute;
-    top: 100%;
     left: 0;
 }
 
