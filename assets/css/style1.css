@@ -117,3 +117,7 @@ i {
 #logo:hover {
 	cursor: pointer;
 }
+
+.img-results {
+	height: 40px;
+}
