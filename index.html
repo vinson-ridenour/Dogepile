@@ -30,14 +30,7 @@
 </head>
 
 <body>
-<div class="stickyFooter">
-<!-- hidden on launch -->
-    <header>
-        <div id="headerContainer">
-            <h2 id="logo">aarf!</h2>
-            <div id="addressDisplay">Your Current Location</div>
-        </div>
-    </header>
+<!-- <div class="stickyFooter"> -->
 
 <!-- initial search -->
     <div id="searchContainer">
@@ -86,14 +79,16 @@
             <input id="new-address" type="text" placeholder="street address">
             <!-- <label for="new-address">street address</label> -->
         </div>
+        <div class="dropdown-container">
         <!-- Dropdown Trigger -->
-        <button class='dropdown-button btn' data-belowOrigin="true" href='#' data-activates='dropdown1' id=venueTypeBtn>type</button>
+            <button class='dropdown-button btn' data-belowOrigin="true" href='#' data-activates='dropdown1' id=venueTypeBtn>type</button>
         <!-- Dropdown Structure -->
-        <ul id='dropdown1' class='dropdown-content'>
-            <li class="dropdown-item" data-type="eat">eat</li>
-            <li class="dropdown-item" data-type="play">play</li>
-            <li class="dropdown-item" data-type="stay">stay</li>
-        </ul>
+            <ul id='dropdown1' class='dropdown-content'>
+                <li class="dropdown-item" data-type="eat">eat</li>
+                <li class="dropdown-item" data-type="play">play</li>
+                <li class="dropdown-item" data-type="stay">stay</li>
+            </ul>
+        </div>
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large" id="shakeBtn">shake</a>
@@ -101,79 +96,87 @@
 </div>
 
 
-    <!-- container wrapper -->
-    <div class="container">
+    
 
-    <!-- main page -->
-        <div id="mainContainer">
-            <div class="row"> 
-                <div class="col s6">
-                    <div id="map">
-                        map
-                    </div>
-                </div>
 
-                <div class="col s6">
-                    <div id="filter-results">
-                        <div class="switch filter-restaurants">
-                            <label>
-                            eat
-                            <input type="checkbox">
-                            <span class="lever"></span>
-                            </label>
-                        </div>
-                        <div class="switch filter-parks">
-                            <label>
-                            play
-                            <input type="checkbox">
-                            <span class="lever"></span>
-                            </label>
-                        </div>
-                        <div class="switch filter-hotels">
-                            <label>
-                            stay
-                            <input type="checkbox">
-                            <span class="lever"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-            <div class="col s12">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Marker</th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Phone Number</th>
-                            <th>Get Dir Btn</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- populated by js example below-->
-                        <tr>
-                            <td><i class="material-icons">place</i></td>
-                            <td><img class="img-results" href="#"></td>
-                            <td>The Greatest Dog Park</td>
-                            <td>1234 Fido Way San Diego, CA 12345</td>
-                            <td>(123) 456-7890</td>
-                            <td><button class="btn waves-effect waves-light" id="dirBtn">lead the way
-                            <i class="material-icons right">chevron_right</i>
-                            </button></td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="results-page">
+        <!-- hidden on launch -->
+        <header>
+            <div id="headerContainer">
+                <h2 id="logo">aarf!</h2>
+                <div id="addressDisplay">Your Current Location</div>
             </div>
-        </div>
-    </div>
-</div> <!-- end container div -->
-</div>
+        </header>
+        <!-- container wrapper -->
+        <div class="container">
+            <!-- main page -->
+            <div id="mainContainer">
+                <div class="row">
+                    <div class="col s6">
+                        <div id="map">
+                            map
+                        </div>
+                    </div>
+                    <div class="col s6">
+                        <div id="filter-results">
+                            <div class="switch filter-restaurants">
+                                <label>
+                                    eat
+                                    <input type="checkbox">
+                                    <span class="lever"></span>
+                                </label>
+                            </div>
+                            <div class="switch filter-parks">
+                                <label>
+                                    play
+                                    <input type="checkbox">
+                                    <span class="lever"></span>
+                                </label>
+                            </div>
+                            <div class="switch filter-hotels">
+                                <label>
+                                    stay
+                                    <input type="checkbox">
+                                    <span class="lever"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
 
-<footer class="page-footer">
-    &copy; 2017 Team TBD
-</footer>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Marker</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Phone Number</th>
+                                    <th>Get Dir Btn</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- populated by js example below-->
+                                <tr>
+                                    <td><i class="material-icons">place</i></td>
+                                    <td><img class="img-results" href="#"></td>
+                                    <td>The Greatest Dog Park</td>
+                                    <td>1234 Fido Way San Diego, CA 12345</td>
+                                    <td>(123) 456-7890</td>
+                                    <td><button class="btn waves-effect waves-light" id="dirBtn">lead the way
+                                        <i class="material-icons right">chevron_right</i>
+                                    </button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div> <!-- end container div -->
+            <footer class="page-footer">
+                &copy; 2017 Team TBD
+            </footer>
+        </div> <!-- end results page -->
 
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type=“text/javascript” src=“https://maps.googleapis.com/maps/api/js?key=AIzaSyBvUKChGjalgP1YNjJC66vq_tgbRuqa_Oc“></script>
