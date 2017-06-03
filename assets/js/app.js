@@ -9,15 +9,15 @@ $(document).ready(function() {
 		$("#mainContainer").css("visibility", "visible");
 
 		var showHeader = setTimeout (function(){
-			$("header").css("box-shadow", "0 0 5px");
-			$("header").css("opacity", "1");
 			$("#searchContainer").css("visibility", "hidden");
 		}, 1000);
 
 		var showMain = setTimeout (function(){
+			$("header").css("box-shadow", "0 0 5px");
+			$("header").css("opacity", "1");
 			$("#headerContainer").css("opacity", "1");
 			$("#mainContainer").css("opacity", "1");
-			$("footer").css("opacity", "1");
+			$(".page-footer").css("opacity", "1");
 		}, 2000);
 	});
 
