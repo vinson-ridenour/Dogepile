@@ -11,21 +11,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	background-image: url("../images/placeholder.jpg");
-	/*min-height: 100%;*/
-	/*margin-bottom: -50px;*/
 }
-
-/*.stickyFooter {
-	min-height: 100%;
-	margin-bottom: -50px;
-}*/
-
-/* sticky footer content */
-
-/*.stickyFooter:after {
-	content: "";
-	display: block;
-}*/
 
 #addressSearch {
 	width: 50%;
