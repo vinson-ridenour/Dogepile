@@ -12,13 +12,13 @@ $(document).ready(function() {
 			$("header").css("box-shadow", "0 0 5px");
 			$("header").css("opacity", "1");
 			$("#searchContainer").css("visibility", "hidden");
-		}, 1000);
+		}, 500);
 
 		var showMain = setTimeout (function(){
 			$("#headerContainer").css("opacity", "1");
 			$("#mainContainer").css("opacity", "1");
 			$("footer").css("opacity", "1");
-		}, 2000);
+		}, 500);
 	});
 
 	$("#addLoc").on("click", $(".modal").modal());
@@ -31,4 +31,5 @@ $(document).ready(function() {
 	$("#logo").on("click", function() {
 		location.reload();
 	});
+	
 });
