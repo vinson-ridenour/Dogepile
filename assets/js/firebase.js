@@ -10,10 +10,10 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 function saveDataInFirebase(filename) {
-$.getJSON(filename, function(json) {
-  console.log(json); // this will show the info it in firebug console
-  for (var i = 0; i < json.hotels.length; i++) {
-    database.ref(Object.keys(json)[0] + "/" + i).set(json.hotels[0]);
-  }
-});
+  $.getJSON(filename, function(json) {
+    console.log(json); // this will show the info it in firebug console
+    for (var i = 0; i < json.hotels.length; i++) {
+      database.ref(Object.keys(json)[0] + "/" + i).set(json.hotels[0]);
+    }
+  });
 }
