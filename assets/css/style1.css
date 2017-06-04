@@ -62,7 +62,7 @@ header {
 	justify-content: center;
 	height: 50px;
 	box-shadow: 0 0 0px;
-	transition: 1s;
+	transition: .1s;
 	opacity: 0;
 	background-color: #29b6f6;
 }
@@ -74,7 +74,7 @@ header {
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	transition: 1s;
+	transition: .2s;
 	opacity: 0;
 }
 
@@ -116,4 +116,8 @@ i {
 
 #logo:hover {
 	cursor: pointer;
+}
+
+.img-results {
+	height: 40px;
 }

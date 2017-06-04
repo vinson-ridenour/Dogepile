@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 		var showHeader = setTimeout (function(){
 			$("#searchContainer").css("visibility", "hidden");
-		}, 1000);
+		}, 500);
 
 		var showMain = setTimeout (function(){
 			$("header").css("box-shadow", "0 0 5px");
@@ -31,4 +31,5 @@ $(document).ready(function() {
 	$("#logo").on("click", function() {
 		location.reload();
 	});
+	
 });
