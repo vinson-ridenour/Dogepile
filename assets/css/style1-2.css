@@ -13,6 +13,17 @@ body {
 	background-image: url("../images/placeholder.jpg");
 }
 
+.remove-background-image-fade-in {
+	background-image: none;
+    opacity: 1;
+    transition: 1s opacity;
+}
+
+.remove-background-image-fade-in.fade-out {
+	opacity: 0;
+    transition: none;
+}
+
 #searchContainer {
 	width: 100%;
 	height: 100%;
@@ -21,8 +32,8 @@ body {
 	align-items: center;
 	margin: 0 auto;
 	flex-direction: column;
-	transition: 1s;
-	visibility: visible;
+	/*transition: 1s;*/
+	/*visibility: visible;*/
 	position: absolute;
 	background-color: #fff;
 }
@@ -30,11 +41,6 @@ body {
 #addressSearch {
 	width: 50%;
 }
-
-/*#searchContainer2 {
-	width: 75%;
-	height: 75%;
-}*/
 
 #searchContainer h1 {
 	text-align: center;
@@ -52,9 +58,9 @@ header {
 	display: flex;
 	justify-content: center;
 	height: 50px;
-	box-shadow: 0 0 0px;
-	transition: .1s;
-	opacity: 0;
+	box-shadow: 0 0 5px;
+	/*transition: .1s;*/
+	/*opacity: 0;*/
 	background-color: #29b6f6;
 }
 
@@ -65,8 +71,8 @@ header {
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	transition: .2s;
-	opacity: 0;
+	/*transition: .2s;*/
+	/*opacity: 0;*/
 }
 
 #logo {
@@ -83,9 +89,9 @@ header {
 #mainContainer {
 	width: 900px;
 	margin: 0 auto;
-	transition: 2s;
-	opacity: 0;
-	visibility: hidden;
+	/*transition: 2s;*/
+	/*opacity: 0;*/
+	/*visibility: hidden;*/
 }
 
 #map {
