@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     var apiKey = "key=1364252010781583c4d761ee4f7e1b"
-    var queryURL = "https://crossorigin.me/https://api.meetup.com/2/open_events?"+apiKey+"&zip=92105&and_text=False&offset=0&format=json&limited_events=False&photo-host=public&radius=25.0&category=26&desc=False&status=upcoming";
+    var queryURL = "https://crossorigin.me/https://api.meetup.com/2/open_events?"+apiKey+"&zip=92105&and_text=False&fields=photo_url,photo_sample&offset=0&format=json&limited_events=False&photo-host=public&radius=5&category=26&desc=False&status=upcoming";
 
     $.ajax({
         	url: queryURL,
@@ -10,7 +10,6 @@ $(document).ready(function() {
 
             var results = response.results;
             console.log(results)
-            console.log(results[9].venue)
 
         for (var i = 0; i < results.length; i++) {
 
@@ -19,6 +18,12 @@ $(document).ready(function() {
             if (results[i].venue != undefined){
                 var locName = results[i].venue.name; //location's name
                 var locSAdd = results[i].venue.address_1; //street address
+                if (locSAdd.includes("(")){
+                    locSAdd = locSAdd.substring(0, locSAdd.indexOf("("))
+                }
+                if (locSAdd.includes("@")){
+                    locSAdd = locSAdd.substring(0, locSAdd.indexOf("@"))
+                }
                 var locCAdd = results[i].venue.city+","; //city
                 var locStAdd = results[i].venue.state; //state
             } else {
@@ -28,7 +33,7 @@ $(document).ready(function() {
                 var locStAdd = ": ("; //state 
             }
 
-            $("#tableResults").append($("<tr id=meetup"+i+" class=row>"))
+            $("#tableResults").append($("<tr id=meetup"+i+">"))
                 $("#meetup"+i).append("<td class='col s1'><i class=material-icons>place</i></td>");
                 $("#meetup"+i).append("<td class='col s1'><img class=img-results src=assets/images/meetup_logo.jpg></td>");
                 $("#meetup"+i).append("<td class='col s3'><a id=muURL"+i+" href="+muURL+" target=_blank></a></td>");

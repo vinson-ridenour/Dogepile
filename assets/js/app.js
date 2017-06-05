@@ -23,13 +23,15 @@ $(document).ready(function() {
 
 	$("#addLoc").on("click", $(".modal").modal());
 
-	$(".dropdown-item").on("click", function(){
-		console.log($(this).attr("data-type"));
-		$(".dropdown-button").text($(this).attr("data-type"));
+	$(".dropdown-item-venue").on("click", function(){
+		$("#venueTypeBtn").text($(this).attr("data-type"));
 	});
 
 	$("#logo").on("click", function() {
 		location.reload();
 	});
 	
+	$(".dropdown-item-radius").on("click", function(){
+		$("#radiusBtn").text($(this).attr("data-display"));
+	});
 });

@@ -86,9 +86,9 @@
                 <button class='dropdown-button btn' data-belowOrigin="true" href='#' data-activates='dropdown1' id=venueTypeBtn>type</button>
             <!-- Dropdown Structure -->
                 <ul id='dropdown1' class='dropdown-content'>
-                    <li class="dropdown-item" data-type="eat">eat</li>
-                    <li class="dropdown-item" data-type="play">play</li>
-                    <li class="dropdown-item" data-type="stay">stay</li>
+                    <li class="dropdown-item-venue" data-type="eat">eat</li>
+                    <li class="dropdown-item-venue" data-type="play">play</li>
+                    <li class="dropdown-item-venue" data-type="stay">stay</li>
                 </ul>
             </div>
         </div>
@@ -104,7 +104,14 @@
         <header>
             <div id="headerContainer">
                 <h2 id="logo">aarf!</h2>
-                <div id="addressDisplay">Your Current Location</div>
+                <div id="addressDisplay"><button class='dropdown-button btn' data-belowOrigin="false" href='#' data-activates='dropdown2' id=radiusBtn>5 miles</button>
+            <!-- Dropdown Structure -->
+                <ul id='dropdown2' class='dropdown-content'>
+                    <li class="dropdown-item-radius" data-radius="5" data-display="5 Miles (default)">5 Miles (default)</li>
+                    <li class="dropdown-item-radius" data-radius="10" data-display="10 Miles">10 Miles</li>
+                    <li class="dropdown-item-radius" data-radius="15" data-display="15 Miles">15 Miles</li>
+                    <li class="dropdown-item-radius" data-radius="20" data-display="20 Miles">20 Miles</li>
+                </ul>Your Current Location</div>
             </div>
         </header>
 
