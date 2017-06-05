@@ -5,7 +5,7 @@ $(document).ready(function() {
 		
 		event.preventDefault();
 		$("body").css("background-image", "none");
-		window.location.href = "resultsPage.html";
+		window.location.href = "results.html";
 		
 		// $("#searchCoxntainer").css("opacity", "0");
 		// $("#mainContainer").css("visibility", "visible");
