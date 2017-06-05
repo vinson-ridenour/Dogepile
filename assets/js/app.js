@@ -33,7 +33,7 @@ $(document).ready(function() {
 	});
 
 	$("#logo").on("click", function() {
-		window.location.href = "searchPage.html";
+		window.location.href = "index.html";
 	});
 	
 });
