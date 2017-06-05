@@ -1,4 +1,4 @@
-var apiKey = "AIzaSyBvUKChGjalgP1YNjJC66vq_tgbRuqa_Oc";
+var googleMapApiKey = "AIzaSyBvUKChGjalgP1YNjJC66vq_tgbRuqa_Oc";
 
 /*
 INPUT
@@ -100,16 +100,17 @@ a single object which has data fields "lat" and "lng"
 REFERENCE
 https://developers.google.com/maps/documentation/geocoding/intro
 */
-function getCoorUserInput(address) {
+function getCoorFromAddress(address) {
   if (address == null || address.length == 0) {
     console.log("Please enter a valid address.");
     return null;
   }
-  var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(address) + "&key=" + apiKey;
+  var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(address) + "&key=" + googleMapApiKey;
   var convertedCoor = {};
   $.ajax({
     url: queryURL,
     method: "GET",
+    async: false,
     success: function(response) {
       // deal with the case that user enters an address like "dioqjweoqweq"
       if (response.status == "ZERO_RESULTS") {
