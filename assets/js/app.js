@@ -31,4 +31,5 @@ $(document).ready(function() {
 	$("#logo").on("click", function() {
 		location.reload();
 	});
+	
 });
