@@ -25,16 +25,17 @@ body {
 }
 
 #searchContainer {
-	width: 100%;
-	height: 100%;
+	width: 80%;
+	height: 70%;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin: 0 auto;
-	flex-direction: column;
+	/*margin: 0 auto;*/
+	margin: auto;
 	/*transition: 1s;*/
 	/*visibility: visible;*/
-	position: absolute;
+	/*position: absolute;*/
 	background-color: #fff;
 }
 
