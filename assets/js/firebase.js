@@ -25,19 +25,22 @@ moveJsonToFirebase("hotels.json")
 */
 function moveJsonToFirebase(filename) {
   $.getJSON(filename, function(json) {
+    var index = 0;
     for (var i = 0; i < json[Object.keys(json)[0]].length; i++) {
       if (!json[Object.keys(json)[0]][i].address || json[Object.keys(json)[0]][i].address == "") {
-        console.log("Empty address found in " + json[Object.keys(json)[0]][i].name + " (" + Object.keys(json)[0] + "), skip it.");
-        continue;
+        console.log("Invalid address found for " + json[Object.keys(json)[0]][i].name + " (" + Object.keys(json)[0] + ")");
       }
-      database.ref(Object.keys(json)[0]+ "/" + i).set({
-        address: json[Object.keys(json)[0]][i].address,
-        imgURL:  json[Object.keys(json)[0]][i].imgURL,
-        name:    json[Object.keys(json)[0]][i].name,
-        phone:   json[Object.keys(json)[0]][i].phone,
-        lat:     getCoorFromAddress(json[Object.keys(json)[0]][i].address).lat,
-        lng:     getCoorFromAddress(json[Object.keys(json)[0]][i].address).lng
-      });
+      else {
+        database.ref(Object.keys(json)[0]+ "/" + index).set({
+          address: json[Object.keys(json)[0]][i].address,
+          imgURL:  json[Object.keys(json)[0]][i].imgURL,
+          name:    json[Object.keys(json)[0]][i].name,
+          phone:   json[Object.keys(json)[0]][i].phone,
+          lat:     getCoorFromAddress(json[Object.keys(json)[0]][i].address).lat,
+          lng:     getCoorFromAddress(json[Object.keys(json)[0]][i].address).lng
+        });
+        index++;
+      }
     }
   });
 }
