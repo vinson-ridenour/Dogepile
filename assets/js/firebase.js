@@ -11,7 +11,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
-<< << << < HEAD
 /*
 INPUT
 filename (note the file has to be in assets/js/)
