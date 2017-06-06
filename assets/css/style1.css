@@ -8,8 +8,6 @@ html, body {
 
 body {
 	font-family: 'Indie Flower', cursive;
-	display: flex;
-	flex-direction: column;
 	background-image: url("../images/placeholder.jpg");
 }
 
