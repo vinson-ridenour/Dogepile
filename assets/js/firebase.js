@@ -40,7 +40,7 @@ function searchCategory(address, category, radius) {
             console.log("Inside searchCategory...");
             console.log(data.val());
             //let addr = getCoorFromAddress(address);
-            let resultArr = filterByDistance({ lat: 32.8604494, lng: -117.2205901 }, radius, data.val());
+            let resultArr = filterByDistance({ lat: 32.8604494, lng: -117.2205901 }, radius*1000, data.val());
             return resultArr;
         });
     }

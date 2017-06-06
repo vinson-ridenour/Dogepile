@@ -140,8 +140,6 @@ function filterByDistance(myLocation, distance, places) {
     console.log("Filtering");
     console.log(myLocation);
     for (var i = 0; i < places.length; i++) {
-        console.log("Index: " + i);
-        console.log("Name: " + places[i].name);
         if (getDistanceFromLatLonInM(places[i], myLocation) <= distance) {
             newLocationArray.push(places[i]);
         }
