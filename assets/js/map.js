@@ -19,27 +19,27 @@ searchReslt = [
 displayMap(searchReslt);
 */
 function displayMapOfLocations(locationArray) {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
-    center: locationArray[0]
-  });
-
-  for (var i = 0; i < locationArray.length; i++) {
-    /*var markerIcon = "";
-    switch (locationArray[i].type) {
-      case "restaurant":
-      markerIcon = "1.png";
-      break;
-      case "park":
-      markerIcon = "2.png";
-      break;
-    }*/
-    var marker = new google.maps.Marker({
-      position: locationArray[i],
-      //icon: markerIcon,
-      map: map
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: locationArray[0]
     });
-  }
+
+    for (var i = 0; i < locationArray.length; i++) {
+        /*var markerIcon = "";
+        switch (locationArray[i].type) {
+          case "restaurant":
+          markerIcon = "1.png";
+          break;
+          case "park":
+          markerIcon = "2.png";
+          break;
+        }*/
+        var marker = new google.maps.Marker({
+            position: locationArray[i],
+            //icon: markerIcon,
+            map: map
+        });
+    }
 }
 
 
@@ -54,41 +54,39 @@ REFERENCE
 https://developers.google.com/maps/documentation/distance-matrix/intro
 */
 function getCoorCurrentLocation() {
+    var userPosition = {};
 
-  var userPosition = {};
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        // this location will immediately get updated if user position is feteched sucessfully
+        center: { lat: 32.7157, lng: -117.1611 }
+    });
 
-  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
-    // this location will immediately get updated if user position is feteched sucessfully
-    center: {lat: 32.7157, lng: -117.1611}
-  });
+    infoWindow = new google.maps.InfoWindow;
 
-  infoWindow = new google.maps.InfoWindow;
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                userPosition = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
 
-  // Try HTML5 geolocation.
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      function(position) {
-        userPosition = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-
-        infoWindow.setPosition(pos);
-        infoWindow.setContent('Location found.');
-        infoWindow.open(map);
-        map.setCenter(pos);
-      },
-      function() {
-        handleLocationError(true, infoWindow, map.getCenter());
-      });
-    return userPosition;
-  }
-  else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
-    return null;
-  }
+                infoWindow.setPosition(pos);
+                infoWindow.setContent('Location found.');
+                infoWindow.open(map);
+                map.setCenter(pos);
+            },
+            function() {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        return userPosition;
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+        return null;
+    }
 }
 
 /*
@@ -102,27 +100,29 @@ REFERENCE
 https://developers.google.com/maps/documentation/geocoding/intro
 */
 function getCoorFromAddress(address) {
-  if (address == null || address.length == 0) {
-    console.log("Please enter a valid address.");
-    return null;
-  }
-  var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(address) + "&key=" + googleMapApiKey;
-  var convertedCoor = {};
-  $.ajax({
-    url: queryURL,
-    method: "GET",
-    async: false,
-    success: function(response) {
-      // deal with the case that user enters an address like "dioqjweoqweq"
-      if (response.status == "ZERO_RESULTS") {
+    if (address == null || address.length == 0) {
         console.log("Please enter a valid address.");
         return null;
-      }
-      convertedCoor.lat = response.results[0].geometry.location.lat;
-      convertedCoor.lng = response.results[0].geometry.location.lng;
     }
-  });
-  return convertedCoor;
+    var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(address) + "&key=" + googleMapApiKey;
+    var convertedCoor = {};
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+        async: false,
+        success: function(response) {
+            // deal with the case that user enters an address like "dioqjweoqweq"
+            if (response.status == "ZERO_RESULTS") {
+                console.log("Please enter a valid address.");
+                return null;
+            }
+            console.log("Converting to coordinates!");
+            convertedCoor.lat = response.results[0].geometry.location.lat;
+            convertedCoor.lng = response.results[0].geometry.location.lng;
+        }
+    });
+    console.log(convertedCoor);
+    return convertedCoor;
 }
 
 /*
@@ -135,24 +135,29 @@ an array of objects which have data fields "lat" and "lng" (subset of input)
 REFERENCE
 https://developers.google.com/maps/documentation/distance-matrix/intro
 */
-function filterByDistance(mylocation, distance, places) {
-  var newLocationArray = [];
-  for (var i = 0; i < places.length; i++) {
-    if (getDistanceFromLatLonInM(places[i], mylocation) <= distance) {
-      newLocationArray.push(places[i]);
+function filterByDistance(myLocation, distance, places) {
+    var newLocationArray = [];
+    console.log("Filtering");
+    console.log(myLocation);
+    for (var i = 0; i < places.length; i++) {
+        if (getDistanceFromLatLonInM(places[i], myLocation) <= distance) {
+            newLocationArray.push(places[i]);
+        }
     }
-  }
-  return newLocationArray;
+    console.log(newLocationArray);
+    return newLocationArray;
 }
+
 function getDistanceFromLatLonInM(pointA, pointB) {
-  var R = 6371000; // Radius of the earth in m
-  var dLat = deg2rad(pointA.lat - pointB.lat);  // deg2rad below
-  var dLng = deg2rad(pointA.lng - pointB.lng); 
-  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(pointA.lat)) * Math.cos(deg2rad(pointB.lat)) * Math.sin(dLng / 2) * Math.sin(dLng / 2); 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
-  var d = R * c; // Distance in m
-  return d;
+    var R = 6371000; // Radius of the earth in m
+    var dLat = deg2rad(pointA.lat - pointB.lat); // deg2rad below
+    var dLng = deg2rad(pointA.lng - pointB.lng);
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(pointA.lat)) * Math.cos(deg2rad(pointB.lat)) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in m
+    return d;
 }
+
 function deg2rad(deg) {
-  return deg * (Math.PI / 180);
+    return deg * (Math.PI / 180);
 }

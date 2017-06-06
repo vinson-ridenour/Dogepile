@@ -27,6 +27,14 @@ $(document).ready(function() {
 		// }, 2000);
 	});
 
+    // Search button click handler
+    $("#searchBtn").on("click", function(event){
+        console.log("Searching...");
+        let myLoc = $("#icon_prefix").val();
+        let results = searchCategory(myLoc, "restaurants", 5);
+        console.log("Results for restaurants: "+results);
+    });
+
 	$('body').removeClass('fade-out');
 //---------------------------------------modal---------------------------------------	
 	$("#addLoc").on("click", $(".modal").modal());
