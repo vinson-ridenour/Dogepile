@@ -40,7 +40,7 @@ function addUserVenueToFirebase(category, userVenue) {
     continue;
   }
   var indexForUserVenue = database.ref(Object.keys(json)[0]).length;
-  database.ref(Object.keys(json)[0]+ "/" + i).set({
+  database.ref(Object.keys(json)[0]+ "/" + indexForUserVenue).set({
     address: userVenue.address,
     imgURL:  userVenue.imgURL,
     name:    userVenue.name,
