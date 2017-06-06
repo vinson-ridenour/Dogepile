@@ -1,12 +1,13 @@
-// firebase config
+// Firebase config
 var firebaseConfig = {
-  apiKey: "AIzaSyBvUKChGjalgP1YNjJC66vq_tgbRuqa_Oc",
-  authDomain: "ah829-9c19e.firebaseapp.com",
-  databaseURL: "https://ah829-9c19e.firebaseio.com",
-  projectId: "ah829-9c19e",
-  storageBucket: "ah829-9c19e.appspot.com",
-  messagingSenderId: "608911603931"
+    apiKey: "AIzaSyBvUKChGjalgP1YNjJC66vq_tgbRuqa_Oc",
+    authDomain: "ah829-9c19e.firebaseapp.com",
+    databaseURL: "https://ah829-9c19e.firebaseio.com",
+    projectId: "ah829-9c19e",
+    storageBucket: "ah829-9c19e.appspot.com",
+    messagingSenderId: "608911603931"
 };
+
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
@@ -18,33 +19,32 @@ OUTPUT
 N/A
 
 FUNCTIONALITY
+Reads a json file and stores venues in Firebase
 store venues from pre-stored json file to firebase
 
 SAMPLE USAGE
 moveJsonToFirebase("hotels.json")
 */
 function moveJsonToFirebase(filename) {
-  $.getJSON(filename, function(json) {
-    var index = 0;
-    for (var i = 0; i < json[Object.keys(json)[0]].length; i++) {
-      if (!json[Object.keys(json)[0]][i].address || json[Object.keys(json)[0]][i].address == "") {
-        console.log("Invalid address found for " + json[Object.keys(json)[0]][i].name + " (" + Object.keys(json)[0] + ")");
-      }
-      else {
-        database.ref(Object.keys(json)[0]+ "/" + index).set({
-          address: json[Object.keys(json)[0]][i].address,
-          imgURL:  json[Object.keys(json)[0]][i].imgURL,
-          name:    json[Object.keys(json)[0]][i].name,
-          phone:   json[Object.keys(json)[0]][i].phone,
-          lat:     getCoorFromAddress(json[Object.keys(json)[0]][i].address).lat,
-          lng:     getCoorFromAddress(json[Object.keys(json)[0]][i].address).lng
-        });
-        index++;
-      }
-    }
-  });
+    $.getJSON(filename, function(json) {
+        var index = 0;
+        for (var i = 0; i < json[Object.keys(json)[0]].length; i++) {
+            if (!json[Object.keys(json)[0]][i].address || json[Object.keys(json)[0]][i].address == "") {
+                console.log("Invalid address found for " + json[Object.keys(json)[0]][i].name + " (" + Object.keys(json)[0] + ")");
+            } else {
+                database.ref(Object.keys(json)[0] + "/" + index).set({
+                    address: json[Object.keys(json)[0]][i].address,
+                    imgURL: json[Object.keys(json)[0]][i].imgURL,
+                    name: json[Object.keys(json)[0]][i].name,
+                    phone: json[Object.keys(json)[0]][i].phone,
+                    lat: getCoorFromAddress(json[Object.keys(json)[0]][i].address).lat,
+                    lng: getCoorFromAddress(json[Object.keys(json)[0]][i].address).lng
+                });
+                index++;
+            }
+        }
+    });
 }
-
 
 /*
 INPUT
@@ -66,28 +66,53 @@ addUserVenueToFirebase("hotels", {
   });
 */
 function addUserVenueToFirebase(category, userVenue) {
-  //console.log(category);
-  if (category != "hotels" && category != "restaurants" && category != "parks") {
-    console.log("Invalid category name.");
-    return;
-  }
-  if (!userVenue.address || userVenue.address == "") {
-    console.log("Empty address found in user input venue.");
-    return;
-  }
-  var indexForUserVenue;
-  if (database.ref(category).length) {
-    indexForUserVenue = database.ref(category).length;
-  }
-  else {
-    indexForUserVenue = 0;
-  }
-  database.ref(category + "/" + indexForUserVenue).set({
-    address: userVenue.address,
-    imgURL:  userVenue.imgURL,
-    name:    userVenue.name,
-    phone:   userVenue.phone,
-    lat:     getCoorFromAddress(userVenue.address).lat,
-    lng:     getCoorFromAddress(userVenue.address).lng
-  });
+    //console.log(category);
+    if (category != "hotels" && category != "restaurants" && category != "parks") {
+        console.log("Invalid category name.");
+        return;
+    }
+    if (!userVenue.address || userVenue.address == "") {
+        console.log("Empty address found in user input venue.");
+        return;
+    }
+    var indexForUserVenue;
+    if (database.ref(category).length) {
+        indexForUserVenue = database.ref(category).length;
+    } else {
+        indexForUserVenue = 0;
+    }
+    database.ref(category + "/" + indexForUserVenue).set({
+        address: userVenue.address,
+        imgURL: userVenue.imgURL,
+        name: userVenue.name,
+        phone: userVenue.phone,
+        lat: getCoorFromAddress(userVenue.address).lat,
+        lng: getCoorFromAddress(userVenue.address).lng
+    });
+}
+
+// Returns an array of locations within the radius (for given category)
+function searchCategory(address, category, radius) {
+    if (category == "restaurants" || category == "hotels" || category == "parks") {
+        console.log("Searching in " + category);
+        let categoryRef = database.ref(category);
+        let categoryArr = categoryRef.once("value", function(data) {
+            console.log("Inside searchCategory...");
+            console.log(data.val());
+            //let addr = getCoorFromAddress(address);
+            let resultArr = filterByDistance({ lat: 32.8604494, lng: -117.2205901 }, radius * 1000, data.val());
+            return resultArr;
+        });
+    }
+    // Query meetup for locations
+    else if (category == "meetups") {
+
+    } else {
+        console.log("Invalid category!");
+    }
+}
+
+// Returns an array of locations within the radius (for all categories) 
+function searchAll(address, radius) {
+
 }

@@ -5,7 +5,7 @@ $(document).ready(function() {
 		
 		event.preventDefault();
 		$("body").css("background-image", "none");
-		window.location.href = "results.html";
+		// window.location.href = "results.html";
 		
 		// $("#searchCoxntainer").css("opacity", "0");
 		// $("#mainContainer").css("visibility", "visible");
@@ -22,6 +22,14 @@ $(document).ready(function() {
 		// // 	$(".page-footer").css("opacity", "1");
 		// }, 2000);
 	});
+
+    // Search button click handler
+    $("#searchBtn").on("click", function(event){
+        console.log("Searching...");
+        let myLoc = $("#icon_prefix").val();
+        let results = searchCategory(myLoc, "restaurants", 5);
+        console.log("Results for restaurants: "+results);
+    });
 
 	$('body').removeClass('fade-out');
 	
