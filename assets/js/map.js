@@ -54,6 +54,7 @@ REFERENCE
 https://developers.google.com/maps/documentation/distance-matrix/intro
 */
 function getCoorCurrentLocation() {
+
   var userPosition = {};
 
   map = new google.maps.Map(document.getElementById('map'), {
