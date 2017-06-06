@@ -11,42 +11,19 @@ firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 function saveDataInFirebase(filename) {
   $.getJSON(filename, function(json) {
-    if (filename == "hotels.json") {
-      for (var i = 0; i < json.hotels.length; i++) {
-        database.ref(Object.keys(json)[0]+ "/" + i).set({
-          address: json.hotels[i].address,
-          imgURL:  json.hotels[i].imgURL,
-          name:    json.hotels[i].name,
-          phone:   json.hotels[i].phone,
-          lat:     getCoorFromAddress(json.hotels[i].address).lat,
-          lng:     getCoorFromAddress(json.hotels[i].address).lng
-        });
+    for (var i = 0; i < json[Object.keys(json)[0]].length; i++) {
+      if (!json[Object.keys(json)[0]][i].address || json[Object.keys(json)[0]][i].address == "") {
+        console.log("Empty address found for " + json[Object.keys(json)[0]][i].name + " (" + Object.keys(json)[0] + "), skip it.");
+        continue;
       }
-    }
-    else if (filename == "restaurants.json") {
-      for (var i = 0; i < json.restaurants.length; i++) {
-        database.ref(Object.keys(json)[0]+ "/" + i).set({
-          address: json.restaurants[i].address,
-          imgURL:  json.restaurants[i].imgURL,
-          name:    json.restaurants[i].name,
-          phone:   json.restaurants[i].phone,
-          lat:     getCoorFromAddress(json.restaurants[i].address).lat,
-          lng:     getCoorFromAddress(json.restaurants[i].address).lng
-        });
-      }
-    }
-    else if (filename == "parks.json") {
-      /*for (var i = 0; i < json.parks.length; i++) {
-        console.log("at #" + i + ", address is     " + json.parks[i].address);
-        database.ref(Object.keys(json)[0]+ "/" + i).set({
-          address: json.parks[i].address,
-          imgURL:  json.parks[i].imgURL,
-          name:    json.parks[i].name,
-          phone:   json.parks[i].phone,
-          lat:     getCoorFromAddress(json.parks[i].address).lat,
-          lng:     getCoorFromAddress(json.parks[i].address).lng
-        });
-      }*/
+      database.ref(Object.keys(json)[0]+ "/" + i).set({
+        address: json[Object.keys(json)[0]][i].address,
+        imgURL:  json[Object.keys(json)[0]][i].imgURL,
+        name:    json[Object.keys(json)[0]][i].name,
+        phone:   json[Object.keys(json)[0]][i].phone,
+        lat:     getCoorFromAddress(json[Object.keys(json)[0]][i].address).lat,
+        lng:     getCoorFromAddress(json[Object.keys(json)[0]][i].address).lng
+      });
     }
   });
 }
