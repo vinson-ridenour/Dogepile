@@ -28,10 +28,10 @@ function moveJsonToFirebase(filename) {
     var index = 0;
     for (var i = 0; i < json[Object.keys(json)[0]].length; i++) {
       if (!json[Object.keys(json)[0]][i].address || json[Object.keys(json)[0]][i].address == "") {
-        console.log("Empty address found in " + json[Object.keys(json)[0]][i].name + " (" + Object.keys(json)[0] + "), skip it.");
+        console.log("Invalid address found for " + json[Object.keys(json)[0]][i].name + " (" + Object.keys(json)[0] + ")");
       }
       else {
-        database.ref(Object.keys(json)[0]+ "/" + i).set({
+        database.ref(Object.keys(json)[0]+ "/" + index).set({
           address: json[Object.keys(json)[0]][i].address,
           imgURL:  json[Object.keys(json)[0]][i].imgURL,
           name:    json[Object.keys(json)[0]][i].name,
@@ -39,7 +39,7 @@ function moveJsonToFirebase(filename) {
           lat:     getCoorFromAddress(json[Object.keys(json)[0]][i].address).lat,
           lng:     getCoorFromAddress(json[Object.keys(json)[0]][i].address).lng
         });
-        index++
+        index++;
       }
     }
   });
