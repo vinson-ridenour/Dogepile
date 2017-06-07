@@ -4,7 +4,7 @@ $(document).ready(function() {
     var queryURL = "https://crossorigin.me/https://api.meetup.com/2/open_events?"+apiKey+"&zip=92105&and_text=False&fields=photo_url,photo_sample&offset=0&format=json&limited_events=False&photo-host=public&radius=5&category=26&desc=False&status=upcoming";
 
     $.ajax({
-            url: queryURL,
+        	url: queryURL,
             method: "GET"
     }).done(function(response) {
 
