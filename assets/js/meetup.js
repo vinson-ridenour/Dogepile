@@ -7,7 +7,7 @@ function meetupSearch (lat, lng){
     var queryURL = "https://crossorigin.me/https://api.meetup.com/2/open_events?"+apiKey+"&lat="+lat+"&lon="+lng+"&and_text=False&fields=photo_url,photo_sample&offset=0&format=json&limited_events=False&photo-host=public&radius="+radiusPicked+"&category=26&desc=False&status=upcoming";
 
     $.ajax({
-        	url: queryURL,
+            url: queryURL,
             method: "GET"
     }).done(function(response) {
 
@@ -38,20 +38,22 @@ function meetupSearch (lat, lng){
                 var locName = "No"; //location's name
                 var locSAdd = "Address"; //street address
                 var locCAdd = "Found"; //city
-                var locStAdd = ": ("; //state 
+                var locStAdd = ": ("; //state
             }
 
-            $("#tableResults").append($("<tr id=meetup"+i+">"))
-                $("#meetup"+i).append("<td class='col s1'><i class=material-icons>place</i></td>");
-                $("#meetup"+i).append("<td class='col s1'><img class=img-results src=assets/images/meetup_logo.jpg></td>");
-                $("#meetup"+i).append("<td class='col s3'><a id=muURL"+i+" href="+muURL+" target=_blank></a></td>");
+            $(".meetup-result-table").append("<div class=result-row-styling id=result-row"+i+"></div>")
+            // $("#result-row"+i).append($("<div id=meetup"+i+">"+"</div>"))
+                $("#result-row"+i).append("<div class=result-icon><i class=material-icons>place</i></div>");
+                $("#result-row"+i).append("<div class=result-image><img class=img-results src=assets/images/meetup_logo.jpg></div>");
+                $("#result-row"+i).append("<div class=result-name><a id=muURL"+i+" href="+muURL+" target=_blank></a></div>");
                 $("#muURL"+i).text(muName)
-                $("#meetup"+i).append("<td class='col s3'>"+
+                $("#result-row"+i).append("<div class=result-address>"+
                     "<p>"+locName+"</p>"+
                     "<p>"+locSAdd+"</p>"+
-                    "<p>"+locCAdd+" "+locStAdd+"</p></td>");
-                $("#meetup"+i).append("<td class='col s2'></td>");
-                $("#meetup"+i).append("<td class='col s2'><button class=btn waves-effect waves-light id=dirBtn>lead the way</button></td>");
+                    "<p>"+locCAdd+" "+locStAdd+"</p></div>");
+                // $("#meetup"+i).append("<td class='col s2'></td>");
+                $("#result-row"+i).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>lead the way"+
+                    "<i class=material-icons right>chevron_right</i></button></div>");
         }//end of for create table loop
 
     });//end of AJAX
