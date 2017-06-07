@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     //------------transition from search view to results view-------------------------------
-    
+
     $(".init").on("click", function(event) {
 
         event.preventDefault();
@@ -47,8 +47,7 @@ $(document).ready(function() {
         console.log("Searching...");
         let myLoc = $("#icon_prefix").val();
         searchCategory(myLoc, "restaurants", 5, function(results) {
-            $("body").css("background-image", "none");
-            window.location.href = "results.html";
+            // $("body").css("background-image", "none");
             displayMapOfLocations(results);
         });
     });
@@ -62,7 +61,7 @@ $(document).ready(function() {
     $(".dropdown-item-venue").on("click", function() {
         $("#venueTypeBtn").text($(this).attr("data-type"));
     });
-    
+
     //------------------------------------end of modal-----------------------------------
 
 }); // end of document ready
