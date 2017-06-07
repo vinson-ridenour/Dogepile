@@ -92,7 +92,7 @@ function addUserVenueToFirebase(category, userVenue) {
 }
 
 // Returns an array of locations within the radius (for given category)
-function searchCategory(address, category, radius) {
+function searchCategory(address, category, radius, callback) {
     if (category == "restaurants" || category == "hotels" || category == "parks") {
         console.log("Searching in " + category);
         let categoryRef = database.ref(category);
@@ -101,6 +101,7 @@ function searchCategory(address, category, radius) {
             console.log(data.val());
             //let addr = getCoorFromAddress(address);
             let resultArr = filterByDistance({ lat: 32.8604494, lng: -117.2205901 }, radius * 1000, data.val());
+            callback(resultArr);
             return resultArr;
         });
     }

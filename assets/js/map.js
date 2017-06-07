@@ -19,6 +19,8 @@ searchReslt = [
 displayMap(searchReslt);
 */
 function displayMapOfLocations(locationArray) {
+    console.log("Displaying map...");
+    console.log(locationArray);
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
         center: locationArray[0]
@@ -41,7 +43,6 @@ function displayMapOfLocations(locationArray) {
         });
     }
 }
-
 
 /*
 INPUT
