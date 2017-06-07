@@ -7,11 +7,9 @@ $(document).ready(function() {
 
 		if ($("#icon_prefix").val().length > 0) {
 
-			// $("body").css("background-image", "none");
-			// window.location.href = "results.html";
 		}
-
-		$(".search-page").css("visibility", "hidden");
+		$("body").css("background-image", "none");
+		$(".search-page").css("display", "none");
 		
 		// $("#searchContainer").css("opacity", "0");
 		// $("#mainContainer").css("visibility", "visible");
@@ -21,13 +19,15 @@ $(document).ready(function() {
 		// }, 500);
 
 		var showResultsPage = setTimeout (function(){
-			$(".results-page").css("visibility", "visible");
+
+			// $(".results-page.hidden").css("visibility", "visible");
+			$(".results-page").removeClass("hidden");
 			// $("header").css("box-shadow", "0 0 5px");
 			// $("header").css("opacity", "1");
 			// $("#headerContainer").css("opacity", "1");
 			// $("#mainContainer").css("opacity", "1");
 			// $(".page-footer").css("opacity", "1");
-		}, 2000);
+		}, 1000);
 	});
 
 	$("#logo").on("click", function() {
@@ -46,8 +46,6 @@ $(document).ready(function() {
         let results = searchCategory(myLoc, "restaurants", 5);
         console.log("Results for restaurants: "+results);
     });
-
-	// $('body').removeClass('fade-out');
 
 //---------------------------------------modal---------------------------------------
 

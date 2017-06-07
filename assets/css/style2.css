@@ -1,4 +1,4 @@
-#geoBtn, #searchBtn, #dirBtn, #addLocBtn, #shakeBtn, #venueTypeBtn {
+#geoBtn, #searchBtn, #dirBtn, #addLocBtn, #shakeBtn, #venueTypeBtn, #radiusBtn {
 	text-transform: lowercase;
 	padding: 0 15px;
 	background-color: #29b6f6;
@@ -23,8 +23,8 @@ i.left {
 }
 
 #addLocBtn {
-	margin-top: 10px;
-	margin-left: 25px;
+	margin-top: 20px;
+	margin-left: 4px;
 }
 
 #dirBtn {
@@ -37,6 +37,10 @@ i.left {
 
 #shakeBtn {
 	padding: 0 30px;
+}
+
+#radiusBtn {
+	background-color: red;
 }
 
 .addVenueText {
@@ -93,6 +97,11 @@ input[type=text]:focus:not([readonly]) {
 	display: flex;
 	flex-direction: column;
 	min-height: 100%;
+	/*visibility: hidden;*/
+}
+
+.results-page.hidden {
+	display: none;
 }
 
 .switch {
@@ -130,7 +139,12 @@ tr {
 	border-bottom: 2px solid gray;
 }
 
+.img-results {
+	height: 40px;
+}
+
 .result-row-styling {
+	font-family: "Helvetica", sans-serif;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -176,9 +190,6 @@ tr {
 	flex: 2;
 }
 
-.results-page {
-	visibility: hidden;
-}
 
 
 

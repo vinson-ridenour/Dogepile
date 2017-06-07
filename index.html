@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
  
     <script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
-    <link rel="icon" type="image/png" href="assets/images/face-of-staring-dog2.png">
+    <link rel="icon" type="image/png" href="assets/images/animal-paw-print.png">
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style2.css">
@@ -31,8 +31,7 @@
     <title>aarf!</title>
 </head>
 
-<body class="remove-background-image-fade-in">
-<!-- <script>document.body.className += ' fade-out';</script> -->
+<body>
 
 <!-- Begin Search/Add Page - Page 1 -->
         <div class="search-page" id="searchContainer">
@@ -55,12 +54,12 @@
                     </div>
 
                     <div class="row">
-                        <div class="col s5">
+                        <div class="col s6">
                             <button class="btn-large init waves-effect waves-light" type="submit" id="geoBtn">use my location
                             <i class="material-icons left">public</i>
                             </button>
                         </div>
-                        <div class="col s5">
+                        <div class="col s6">
                             <button data-target="modal1" class="btn-large waves-effect waves-light" type="submit" id="addLocBtn">add new place
                             <i class="material-icons left">add_location</i>
                             </button>
@@ -98,18 +97,18 @@
         </div>
 
 <!-- Begin Results Page - page 2 -->
-    <div class="results-page">
+    <div class="results-page hidden">
         <header>
             <div id="headerContainer">
                 <h2 id="logo">aarf!</h2>
-                <div id="addressDisplay"><button class='dropdown-button btn dropdown-item-radius' id="radiusBtn" data-radius="5" data-belowOrigin="false" href='#' data-activates='dropdown2'>5 miles</button>
+                <div id="addressDisplay"><button class='dropdown-button btn dropdown-item-radius' id="radiusBtn" data-radius="5" data-belowOrigin="false" href='#' data-activates='dropdown2'>5 mi</button>
             <!-- Dropdown Radius Structure -->
                 <ul id='dropdown2' class='dropdown-content'>
-                    <li class="dropdown-item-radius" data-radius="5" data-display="5 Miles (default)">5 Miles (default)</li>
-                    <li class="dropdown-item-radius" data-radius="10" data-display="10 Miles">10 Miles</li>
-                    <li class="dropdown-item-radius" data-radius="15" data-display="15 Miles">15 Miles</li>
-                    <li class="dropdown-item-radius" data-radius="20" data-display="20 Miles">20 Miles</li>
-                </ul>Your Current Location</div>
+                    <li class="dropdown-item-radius" data-radius="5" data-display="5 mi">5 mi</li>
+                    <li class="dropdown-item-radius" data-radius="10" data-display="10 mi">10 mi</li>
+                    <li class="dropdown-item-radius" data-radius="15" data-display="15 mi">15 mi</li>
+                    <li class="dropdown-item-radius" data-radius="20" data-display="20 mi">20 mi</li>
+                </ul>your current location</div>
             </div>
         </header>
 
@@ -127,21 +126,21 @@
                             <div class="switch filter-restaurants">
                                 <label>
                                     eat
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked>
                                     <span class="lever"></span>
                                 </label>
                             </div>
                             <div class="switch filter-parks">
                                 <label>
                                     play
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked>
                                     <span class="lever"></span>
                                 </label>
                             </div>
                             <div class="switch filter-hotels">
                                 <label>
                                     stay
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked>
                                     <span class="lever"></span>
                                 </label>
                             </div>
@@ -171,7 +170,7 @@
 
         <!-- footer -->
         <footer class="page-footer">
-                    &copy; 2017 Team TBD
+            &copy; 2017 team TBD
         </footer>
 
     </div>  <!-- end results page -->
