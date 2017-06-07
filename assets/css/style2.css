@@ -130,7 +130,55 @@ tr {
 	border-bottom: 2px solid gray;
 }
 
+.result-row-styling {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	text-transform: lowercase;
+}
 
+.result-row-styling img {
+	max-height: 100%;
+}
+
+.result-row-styling > div {
+	height: 100px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	overflow: wrap;
+	flex-direction: column;
+}
+
+.result-icon {
+	/*width: 10%;*/
+	flex: 1;
+}
+
+.result-image {
+	/*width: 10%;*/
+	flex: 1;
+}
+
+.result-name {
+	/*width: 30%;*/
+	flex: 2;
+}
+
+.result-address {
+	/*width: 25%;*/
+	flex: 2;
+}
+
+.result-btn {
+	/*width: 25%;*/
+	flex: 2;
+}
+
+.results-page {
+	visibility: hidden;
+}
 
 
 
