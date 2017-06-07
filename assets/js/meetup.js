@@ -41,7 +41,7 @@ function meetupSearch (lat, lng){
                 var locStAdd = ": ("; //state
             }
 
-            $(".meetup-result-table").append("<div class=result-row id=result-row"+i+"></div>")
+            $(".meetup-result-table").append("<div class=result-row-styling id=result-row"+i+"></div>")
             // $("#result-row"+i).append($("<div id=meetup"+i+">"+"</div>"))
                 $("#result-row"+i).append("<div class=result-icon><i class=material-icons>place</i></div>");
                 $("#result-row"+i).append("<div class=result-image><img class=img-results src=assets/images/meetup_logo.jpg></div>");

@@ -10,10 +10,10 @@ body {
 	font-family: 'Indie Flower', cursive;
 	/*display: flex;*/
 	/*flex-direction: column;*/
-	background-image: url("../images/placeholder.jpg");
+	/*background-image: url("../images/placeholder.jpg");*/
 }
 
-.remove-background-image-fade-in {
+/*.remove-background-image-fade-in {
 	background-image: none;
     opacity: 1;
     transition: 1s opacity;
@@ -22,7 +22,7 @@ body {
 .remove-background-image-fade-in.fade-out {
 	opacity: 0;
     transition: none;
-}
+}*/
 
 #searchContainer {
 	width: 80%;
