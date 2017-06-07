@@ -1,7 +1,10 @@
-$(document).ready(function() {
 
+
+function meetupSearch (lat, lng){
+
+    var radiusPicked = $(".dropdown-item-radius").attr("data-radius")
     var apiKey = "key=1364252010781583c4d761ee4f7e1b"
-    var queryURL = "https://crossorigin.me/https://api.meetup.com/2/open_events?"+apiKey+"&zip=92105&and_text=False&fields=photo_url,photo_sample&offset=0&format=json&limited_events=False&photo-host=public&radius=5&category=26&desc=False&status=upcoming";
+    var queryURL = "https://crossorigin.me/https://api.meetup.com/2/open_events?"+apiKey+"&lat="+lat+"&lon="+lng+"&and_text=False&fields=photo_url,photo_sample&offset=0&format=json&limited_events=False&photo-host=public&radius="+radiusPicked+"&category=26&desc=False&status=upcoming";
 
     $.ajax({
             url: queryURL,
@@ -14,7 +17,12 @@ $(document).ready(function() {
         for (var i = 0; i < results.length; i++) {
 
             var muName = results[i].name; //meetup's name
-            var muURL = results[i].event_url;
+            var muURL = results[i].event_url; //url link to meetup page
+
+            // Create lat/lng properties
+            results[i].lat = results[i].group.group_lat
+            results[i].lng = results[i].group.group_lon
+
             if (results[i].venue != undefined){
                 var locName = results[i].venue.name; //location's name
                 var locSAdd = results[i].venue.address_1; //street address
@@ -48,4 +56,4 @@ $(document).ready(function() {
         }//end of for create table loop
 
     });//end of AJAX
-});//end of document ready
+}//end of function
