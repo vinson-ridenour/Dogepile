@@ -1,9 +1,9 @@
-function meetupSearch(lat, lng) {
+function meetupSearch (lat, lng){
 
     var radiusPicked = $(".dropdown-item-radius").attr("data-radius")
     var apiKey = "key=1364252010781583c4d761ee4f7e1b"
-    // var queryURL = "https://crossorigin.me/https://api.meetup.com/2/open_events?"+apiKey+"&lat="+lat+"&lon="+lng+"&and_text=False&fields=photo_url,photo_sample&offset=0&format=json&limited_events=False&photo-host=public&radius="+radiusPicked+"&category=26&desc=False&status=upcoming";
-    var queryURL = "https://crossorigin.me/https://api.meetup.com/2/open_events?" + apiKey + "&zip=92105&and_text=False&fields=photo_url,photo_sample&offset=0&format=json&limited_events=False&photo-host=public&radius=" + radiusPicked + "&category=26&desc=False&status=upcoming";
+    var queryURL = "https://crossorigin.me/https://api.meetup.com/2/open_events?"+apiKey+"&lat="+lat+"&lon="+lng+"&and_text=False&fields=photo_url,photo_sample&offset=0&format=json&limited_events=False&photo-host=public&radius="+radiusPicked+"&category=26&desc=False&status=upcoming";
+    // var queryURL = "https://crossorigin.me/https://api.meetup.com/2/open_events?"+apiKey+"&zip=92105&and_text=False&fields=photo_url,photo_sample&offset=0&format=json&limited_events=False&photo-host=public&radius="+radiusPicked+"&category=26&desc=False&status=upcoming";
 
     $.ajax({
         url: queryURL,
@@ -37,12 +37,12 @@ function meetupSearch(lat, lng) {
                 var locName = "No"; //location's name
                 var locSAdd = "Address"; //street address
                 var locCAdd = "Found"; //city
-                var locStAdd = ": ("; //state
+                var locStAdd = ":("; //state
             }
 
             $(".meetup-result-table").append("<div class=result-row-styling id=result-row" + i + "></div>");
             // $("#result-row"+i).append($("<div id=meetup"+i+">"+"</div>"));
-            $("#result-row" + i).append("<div class=result-icon><i class=material-icons>place</i></div>");
+            $("#result-row" + i).append("<div class=result-icon><i class=meetupIcon><img src=assets/images/meetup-icon.png></div>");
             $("#result-row" + i).append("<div class=result-image><img class=img-results src=assets/images/meetup_logo.jpg></div>");
             $("#result-row" + i).append("<div class=result-name><a id=muURL" + i + " href=" + muURL + " target=_blank></a></div>");
             $("#muURL" + i).text(muName)

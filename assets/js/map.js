@@ -56,7 +56,7 @@ function displayMapOfLocations(locationArray) {
                     break;
                 case "meetups":
                     console.log("use meetups icon");
-                    markerIcon.url = "./assets/images/meetups-icon.jpg";
+                    markerIcon.url = "./assets/images/meetups-icon.png";
                     break;
                 default:
                     console.log("use hotel icon");
