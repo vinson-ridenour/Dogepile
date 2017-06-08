@@ -13,8 +13,9 @@ $(document).ready(function() {
         if ($("#icon_prefix").val().length > 0) {
 
         }
-        $("body").css("background-image", "none");
-        $(".search-page").css("display", "none");
+        // $("body").css("background-image", "none");
+        // $(".search-page").css("display", "none");
+        $(".results-page").removeClass("hidden");
         
         if ($(this).attr("id") == "searchBtn") {
             $("#addressDisplay").text($("#icon_prefix").val());
@@ -27,23 +28,28 @@ $(document).ready(function() {
             });
             meetupSearch();
         }
-        // $("#searchContainer").css("opacity", "0");
-        // $("#mainContainer").css("visibility", "visible");
 
-        // var showHeader = setTimeout (function(){
-        //  $("#searchContainer").css("visibility", "hidden");
-        // }, 500);
+        $("#searchPageContainer").css("opacity", "0");
+        $("#mainContainer").css("visibility", "visible");
+
+        var showHeader = setTimeout (function(){
+        	$("#searchContainer").css("visibility", "hidden");
+        	// $("body").css("background-image", "none");
+        	$(".search-page").css("display", "none");
+        }, 500);
 
         var showResultsPage = setTimeout(function() {
 
-            // $(".results-page.hidden").css("visibility", "visible");
-            $(".results-page").removeClass("hidden");
+            $(".results-page").css("visibility", "visible");
+            $(".results-page").css("opacity", "1");
+            // $(".results-page").removeClass("hidden");
             // $("header").css("box-shadow", "0 0 5px");
             // $("header").css("opacity", "1");
             // $("#headerContainer").css("opacity", "1");
-            // $("#mainContainer").css("opacity", "1");
+            $("#mainContainer").css("opacity", "1");
+            $("body").css("background-image", "none");
             // $(".page-footer").css("opacity", "1");
-        }, 1000);
+        }, 750);
     });
 
     $("#logo").on("click", function() {
