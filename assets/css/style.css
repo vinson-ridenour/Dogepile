@@ -10,7 +10,7 @@ body {
 	font-family: 'Indie Flower', cursive;
 	/*display: flex;*/
 	/*flex-direction: column;*/
-	background-image: url("../images/placeholder.jpg");
+	background-image: url("../images/placeholder.jpg")
 }
 
 #searchContainer {
