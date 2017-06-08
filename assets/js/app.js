@@ -99,18 +99,18 @@ $(document).ready(function() {
             //console.log("Printing "+venue.name);
             $(".yelp-result-table").append("<div class='result-row-styling venue-row' id=venue-row-" + i + "></div>");
             	if (venue.type == "restaurants") {
-            		$("#venue-row-" + i).append("<div class=result-icon><i class=fa fa-cutlery aria-hidden=true></i></div>");
+            		$("#venue-row-" + i).append("<div class=result-icon><i class='fa fa-cutlery' aria-hidden=true></i></div>");
             		$("#venue-row-" + i).addClass("eatVenue");
             	}
             	if (venue.type == "hotels") {
-            		$("#venue-row-" + i).append("<div class=result-icon><i class=fa fa-bed aria-hidden=true></i></div>");
+            		$("#venue-row-" + i).append("<div class=result-icon><i class='fa fa-bed' aria-hidden=true></i></div>");
             		$("#venue-row-" + i).addClass("stayVenue");
             	}
             	if (venue.type == "parks") {
-            		$("#venue-row-" + i).append("<div class=result-icon><i class=fa fa-futbol-o aria-hidden=true></i></div>");
+            		$("#venue-row-" + i).append("<div class=result-icon><i class='fa fa-futbol-o' aria-hidden=true></i></div>");
             		$("#venue-row-" + i).addClass("playVenue");
             	}
-            $("#venue-row-" + i).append("<div class=result-image><img class=img-results src="+venue.imgURL+"</div>");
+            $("#venue-row-" + i).append("<div class=result-image><img class=img-results src="+venue.imgURL+"></div>");
             $("#venue-row-" + i).append("<div class=result-name>" + venue.name + "</div>");
             $("#venue-row-" + i).append("<div class=result-address>" + venue.address + "</p></div>");
             $("#venue-row-" + i).append("<div class=result-phone>" + venue.phone + "</p></div>");
