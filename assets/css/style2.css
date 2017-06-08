@@ -19,12 +19,13 @@ i.left {
 }
 
 #geoBtn {
+	background-color: red;
 	margin-bottom: 0;
 }
 
 #addLocBtn {
 	margin-top: 20px;
-	margin-left: 4px;
+	margin-left: 75px;
 }
 
 #dirBtn {
@@ -41,6 +42,10 @@ i.left {
 
 #radiusBtn {
 	background-color: red;
+}
+
+#searchBtn {
+	min-width: 130px;
 }
 
 .addVenueText {
@@ -65,6 +70,14 @@ i.left {
 .dropdown-container {
 	position: relative;
     display: inline-block;
+}
+
+#radiusBtn {
+	background-color: #80cdf1;
+}
+
+.dropdown-item-radius {
+	background-color: #80cdf1;
 }
 
 input:not([type]):focus:not([readonly])+label, input[type=text]:focus:not([readonly])+label, input[type=password]:focus:not([readonly])+label, input[type=email]:focus:not([readonly])+label, input[type=url]:focus:not([readonly])+label, input[type=time]:focus:not([readonly])+label, input[type=date]:focus:not([readonly])+label, input[type=datetime]:focus:not([readonly])+label, input[type=datetime-local]:focus:not([readonly])+label, input[type=tel]:focus:not([readonly])+label, input[type=number]:focus:not([readonly])+label, input[type=search]:focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
@@ -105,9 +118,9 @@ input[type=text]:focus:not([readonly]) {
 }
 
 .switch {
-	width: 30%;
+	width: 45%;
 	font-size: 20px;
-	margin-bottom: 30px;
+	margin-bottom: 50px;
 }
 
 .lever {
@@ -120,7 +133,7 @@ input[type=text]:focus:not([readonly]) {
 
 .switch label .lever {
 	/*margin-top: 3px;*/
-	margin: 3px 0 0 0;
+	margin: 7px 0 0 0;
 }
 
 .switch label input[type=checkbox]:checked+.lever:after {
@@ -129,6 +142,7 @@ input[type=text]:focus:not([readonly]) {
 
 .switch label input[type=checkbox]:checked+.lever {
 	background-color: #80cdf1;
+	margin-top: 7px;
 }
 
 tr, td {
@@ -189,6 +203,7 @@ tr {
 .result-btn {
 	/*width: 25%;*/
 	flex: 2;
+	font-family: 'Indie Flower', cursive;
 }
 
 
