@@ -3,6 +3,7 @@ $(document).ready(function() {
     var hotelResults = [];
     var parkResults = [];
     var meetupResults = [];
+    $(".results-page").hide(0);
 
     //------------transition from search view to results view-------------------------------
     $(".init").on("click", function(event) {
@@ -37,7 +38,8 @@ $(document).ready(function() {
         var showResultsPage = setTimeout(function() {
 
             // $(".results-page.hidden").css("visibility", "visible");
-            $(".results-page").removeClass("hidden");
+            //$(".results-page").removeClass("hidden");
+            $(".results-page").show(0);
             // $("header").css("box-shadow", "0 0 5px");
             // $("header").css("opacity", "1");
             // $("#headerContainer").css("opacity", "1");
