@@ -21,35 +21,39 @@ displayMap(searchReslt);
 function displayMapOfLocations(locationArray) {
     console.log("Displaying map...");
     // console.log(locationArray);
-    console.log("Map center: ("+locationArray[0].lat+", "+locationArray[0].lng+")");
-    var myOptions = {
-        zoom: 13,
-        center: new google.maps.LatLng(locationArray[0].lat, locationArray[0].lng)
-    };
+    if (locationArray.length > 0) {
+        console.log("Map center: (" + locationArray[0].lat + ", " + locationArray[0].lng + ")");
+        var myOptions = {
+            zoom: 13,
+            center: new google.maps.LatLng(locationArray[0].lat, locationArray[0].lng)
+        };
 
-    var map = new google.maps.Map(document.getElementById('map'), myOptions);
+        var map = new google.maps.Map(document.getElementById('map'), myOptions);
 
-    google.maps.event.addListenerOnce(map, 'idle', function() {
-        google.maps.event.trigger(map, 'resize');
-    });
-
-    for (var i = 0; i < locationArray.length; i++) {
-        console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ")");
-
-        /*var markerIcon = "";
-        switch (locationArray[i].type) {
-          case "restaurant":
-          markerIcon = "1.png";
-          break;
-          case "park":
-          markerIcon = "2.png";
-          break;
-        }*/
-        var marker = new google.maps.Marker({
-            position: locationArray[i],
-            //icon: markerIcon,
-            map: map
+        google.maps.event.addListenerOnce(map, 'idle', function() {
+            google.maps.event.trigger(map, 'resize');
         });
+
+        for (var i = 0; i < locationArray.length; i++) {
+            console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ")");
+
+            /*var markerIcon = "";
+            switch (locationArray[i].type) {
+              case "restaurant":
+              markerIcon = "1.png";
+              break;
+              case "park":
+              markerIcon = "2.png";
+              break;
+            }*/
+            var marker = new google.maps.Marker({
+                position: locationArray[i],
+                //icon: markerIcon,
+                map: map
+            });
+        }
+    } else {
+        console.log("No locations in range!");
     }
 }
 
@@ -124,14 +128,15 @@ function getCoorFromAddress(address, callback) {
             if (response.status == "ZERO_RESULTS") {
                 console.log("Please enter a valid address.");
                 return null;
-            }
-            console.log("Converting to coordinates!");
-            convertedCoor.lat = response.results[0].geometry.location.lat;
-            convertedCoor.lng = response.results[0].geometry.location.lng;
+            } else {
+                console.log("Converting to coordinates!");
+                convertedCoor.lat = response.results[0].geometry.location.lat;
+                convertedCoor.lng = response.results[0].geometry.location.lng;
 
-            console.log(convertedCoor);
-            callback(convertedCoor);
-            return convertedCoor;
+                console.log(convertedCoor);
+                callback(convertedCoor);
+                return convertedCoor;
+            }
         }
     });
 }
@@ -150,8 +155,11 @@ function filterByDistance(myLocation, distance, places) {
     var newLocationArray = [];
     console.log("Filtering");
     for (var i = 0; i < places.length; i++) {
+        console.log("Distance: " + getDistanceFromLatLonInM(places[i], myLocation));
         if (getDistanceFromLatLonInM(places[i], myLocation) <= distance) {
             newLocationArray.push(places[i]);
+        } else {
+            console.log(i + ": Out of range");
         }
     }
     console.log(newLocationArray);
