@@ -1,5 +1,3 @@
-$(".init").on("click", meetupSearch())
-
 function meetupSearch (lat, lng){
 
     var radiusPicked = $(".dropdown-item-radius").attr("data-radius")
