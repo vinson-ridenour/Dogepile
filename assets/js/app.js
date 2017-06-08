@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     //------------transition from search view to results view-------------------------------
     $(".init").on("click", function(event) {
-
+    	
         console.log($(this).attr("id"))
         event.preventDefault();
 
@@ -11,7 +11,7 @@ $(document).ready(function() {
         }
         $("body").css("background-image", "none");
         $(".search-page").css("display", "none");
-
+        
         if ($(this).attr("id") == "searchBtn") {
             $("#addressDisplay").text($("#icon_prefix").val());
             console.log("Searching...");
