@@ -82,19 +82,31 @@
                     <input id="new-address" type="text" placeholder="street address">
                     <!-- <label for="new-address">street address</label> -->
                 </div>
-                <div class="dropdown-container">
-                <!-- Dropdown Trigger -->
-                    <button class='dropdown-button btn' data-belowOrigin="true" href='#' data-activates='dropdown1' id=venueTypeBtn>type</button>
-                <!-- Dropdown Structure -->
-                    <ul id='dropdown1' class='dropdown-content'>
-                        <li class="dropdown-item-venue" data-type="eat">eat</li>
-                        <li class="dropdown-item-venue" data-type="play">play</li>
-                        <li class="dropdown-item-venue" data-type="stay">stay</li>
-                    </ul>
+
+                <div id="btnRow">
+
+                    <!-- <div class="dropdown-container"> -->
+                    <!-- Dropdown Trigger -->
+                        <!-- <button class='dropdown-button btn' data-belowOrigin="true" href='#' data-activates='dropdown1' id=venueTypeBtn>type</button> -->
+                    <!-- Dropdown Structure -->
+                        <!-- ul id='dropdown1' class='dropdown-content'>
+                            <li class="dropdown-item-venue" data-type="eat">eat</li>
+                            <li class="dropdown-item-venue" data-type="play">play</li>
+                            <li class="dropdown-item-venue" data-type="stay">stay</li>
+                        </ul>
+                    </div> -->
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large disabled" id="shakeBtn"><i class="material-icons prefix">pets</i> shake</a>
+
+                    <div class="fixed-action-btn horizontal left-align">
+                        <a class="btn-floating btn-large red" id="venueTypeBtn">type
+                        </a>
+                        <ul>
+                          <li><a class="btn-floating btn-large yellow darken-1 dropdown-item-venue" data-color="#fdd835" data-type="play">play</a></li>
+                          <li><a class="btn-floating btn-large green dropdown-item-venue" data-color="#4CAF50" data-type="stay">stay</a></li>
+                          <li><a class="btn-floating btn-large blue dropdown-item-venue" data-color="#2196F3" data-type="eat">eat</a></li>
+                        </ul>
+                      </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large" id="shakeBtn">shake</a>
             </div>
         </div>
 

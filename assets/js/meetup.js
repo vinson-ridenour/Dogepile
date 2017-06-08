@@ -1,10 +1,11 @@
-
+$(".init").on("click", meetupSearch())
 
 function meetupSearch (lat, lng){
 
     var radiusPicked = $(".dropdown-item-radius").attr("data-radius")
     var apiKey = "key=1364252010781583c4d761ee4f7e1b"
-    var queryURL = "https://crossorigin.me/https://api.meetup.com/2/open_events?"+apiKey+"&lat="+lat+"&lon="+lng+"&and_text=False&fields=photo_url,photo_sample&offset=0&format=json&limited_events=False&photo-host=public&radius="+radiusPicked+"&category=26&desc=False&status=upcoming";
+    // var queryURL = "https://crossorigin.me/https://api.meetup.com/2/open_events?"+apiKey+"&lat="+lat+"&lon="+lng+"&and_text=False&fields=photo_url,photo_sample&offset=0&format=json&limited_events=False&photo-host=public&radius="+radiusPicked+"&category=26&desc=False&status=upcoming";
+    var queryURL = "https://crossorigin.me/https://api.meetup.com/2/open_events?"+apiKey+"&zip=92105&and_text=False&fields=photo_url,photo_sample&offset=0&format=json&limited_events=False&photo-host=public&radius="+radiusPicked+"&category=26&desc=False&status=upcoming";
 
     $.ajax({
             url: queryURL,

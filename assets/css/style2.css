@@ -6,7 +6,10 @@
 }
 
 #venueTypeBtn {
-	padding: 0 45px;
+	padding: 0;
+	text-align: center;
+	width: 70px;
+	height: 70px;
 }
 
 i.right {
@@ -36,7 +39,7 @@ i.left {
 }
 
 #shakeBtn {
-	padding: 0 30px;
+	padding: 0 10px;
 }
 
 #radiusBtn {

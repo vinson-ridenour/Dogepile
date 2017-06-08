@@ -60,10 +60,28 @@ $(document).ready(function() {
 
     $("#addLoc").on("click", $(".modal").modal());
 
+    console.log($("#venueTypeBtn").text())
+
     $(".dropdown-item-venue").on("click", function() {
         $("#venueTypeBtn").text($(this).attr("data-type"));
+        $("#venueTypeBtn").removeClass("red");
+        $("#venueTypeBtn").css("background-color", $(this).attr("data-color"));
+        console.log($("#venueTypeBtn").text())
+        enableShake();
     });
 
+    $("#new-name").keyup(enableShake)
+    $("#new-address").keyup(enableShake)
+
+    function enableShake(){
+	    if($("#new-name").val().length > 0 && $("#new-address").val().length > 0 && $("#venueTypeBtn").text() != "type") {
+	    	$("#shakeBtn").removeClass("disabled");
+	    } else {
+	    	if (!$("#shakeBtn").hasClass("disabled")){
+	    		$("#shakeBtn").addClass("disabled")
+	    	}
+	    }
+	};
     //------------------------------------end of modal-----------------------------------
 
 }); // end of document ready
