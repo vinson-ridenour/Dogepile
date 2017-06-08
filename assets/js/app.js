@@ -13,38 +13,38 @@ $(document).ready(function() {
 
         if ($("#icon_prefix").val().length > 0) {
 
-        }
-        // $("body").css("background-image", "none");
-        // $(".search-page").css("display", "none");
-        // $(".results-page").removeClass("hidden");
-        
-        if ($(this).attr("id") == "searchBtn") {
-            $("#addressDisplay").text($("#icon_prefix").val());
-            console.log("Searching...");
-            let myLoc = $("#icon_prefix").val();
-            searchCategory(myLoc, "restaurants", 5, function(results) {
-                // $("body").css("background-image", "none");
-                displayMapOfLocations(results);
-                displayVenue(results);
-            });
-            meetupSearch();
-        }
+	        // $("body").css("background-image", "none");
+	        // $(".search-page").css("display", "none");
+	        // $(".results-page").removeClass("hidden");
+	        
+	        if ($(this).attr("id") == "searchBtn") {
+	            $("#addressDisplay").text($("#icon_prefix").val());
+	            console.log("Searching...");
+	            let myLoc = $("#icon_prefix").val();
+	            searchCategory(myLoc, "restaurants", 5, function(results) {
+	                // $("body").css("background-image", "none");
+	                displayMapOfLocations(results);
+	                displayVenue(results);
+	            });
+	            meetupSearch();
+	        }
 
-        $("#searchPageContainer").css("opacity", "0");
-        $("#mainContainer").css("visibility", "visible");
+	        $("#searchPageContainer").css("opacity", "0");
+	        $("#mainContainer").css("visibility", "visible");
 
-        var showHeader = setTimeout (function(){
-        	$("#searchContainer").css("visibility", "hidden");
-        	$(".search-page").css("display", "none");
-        }, 500);
+	        var showHeader = setTimeout (function(){
+	        	$("#searchContainer").css("visibility", "hidden");
+	        	$(".search-page").css("display", "none");
+	        }, 500);
 
-        var showResultsPage = setTimeout(function() {
+	        var showResultsPage = setTimeout(function() {
 
-            $(".results-page").show(0);
-            $(".results-page").css("opacity", "1");
-            $("#mainContainer").css("opacity", "1");
-            $("body").css("background-image", "none");
-        }, 750);
+	            $(".results-page").show(0);
+	            $(".results-page").css("opacity", "1");
+	            $("#mainContainer").css("opacity", "1");
+	            $("body").css("background-image", "none");
+	        }, 750);
+    	}
     });
 
     $("#logo").on("click", function() {
