@@ -72,6 +72,14 @@ i.left {
     display: inline-block;
 }
 
+#radiusBtn {
+	background-color: #80cdf1;
+}
+
+.dropdown-item-radius {
+	background-color: #80cdf1;
+}
+
 input:not([type]):focus:not([readonly])+label, input[type=text]:focus:not([readonly])+label, input[type=password]:focus:not([readonly])+label, input[type=email]:focus:not([readonly])+label, input[type=url]:focus:not([readonly])+label, input[type=time]:focus:not([readonly])+label, input[type=date]:focus:not([readonly])+label, input[type=datetime]:focus:not([readonly])+label, input[type=datetime-local]:focus:not([readonly])+label, input[type=tel]:focus:not([readonly])+label, input[type=number]:focus:not([readonly])+label, input[type=search]:focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
 	color: #000;
 }
@@ -125,7 +133,7 @@ input[type=text]:focus:not([readonly]) {
 
 .switch label .lever {
 	/*margin-top: 3px;*/
-	margin: 3px 0 0 0;
+	margin: 7px 0 0 0;
 }
 
 .switch label input[type=checkbox]:checked+.lever:after {
@@ -134,6 +142,7 @@ input[type=text]:focus:not([readonly]) {
 
 .switch label input[type=checkbox]:checked+.lever {
 	background-color: #80cdf1;
+	margin-top: 7px;
 }
 
 tr, td {

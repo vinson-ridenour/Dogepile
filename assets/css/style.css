@@ -13,7 +13,7 @@ body {
 	background-image: url("../images/placeholder.jpg")
 }
 
-#whatever{
+#searchPageContainer {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -103,6 +103,7 @@ header {
 
 #filter-results {
 	margin-top: 30px;
+	width: 65%;
 }
 
 i {
