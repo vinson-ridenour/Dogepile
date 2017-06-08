@@ -18,7 +18,10 @@ searchReslt = [
 ];
 displayMap(searchReslt);
 */
+var markers = [];
+
 function displayMapOfLocations(locationArray) {
+    markers = []; // clean markers
     console.log("Displaying map...");
     // console.log(locationArray);
     if (locationArray.length > 0) {
@@ -35,21 +38,44 @@ function displayMapOfLocations(locationArray) {
         });
 
         for (var i = 0; i < locationArray.length; i++) {
-            console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ")");
+            console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
 
-            /*var markerIcon = "";
+            var markerIcon = {};
             switch (locationArray[i].type) {
-              case "restaurant":
-              markerIcon = "1.png";
-              break;
-              case "park":
-              markerIcon = "2.png";
-              break;
-            }*/
-            var marker = new google.maps.Marker({
+                case "restaurants":
+                    console.log("use restaurant icon");
+                    markerIcon.url = "./assets/images/restaurant-icon.png";
+                    break;
+                case "parks":
+                    console.log("use park icon");
+                    markerIcon.url = "./assets/images/park-icon.png";
+                    break;
+                case "hotels":
+                    console.log("use hotel icon");
+                    markerIcon.url = "./assets/images/hotel-icon.png";
+                    break;
+                case "meetups":
+                    console.log("use meetups icon");
+                    markerIcon.url = "./assets/images/meetups-icon.jpg";
+                    break;
+                default:
+                    console.log("use hotel icon");
+                    markerIcon.url = "./assets/images/hotel-icon.png";
+                    break;
+            }
+            markerIcon.size = new google.maps.Size(30, 30);
+            markers[i] = new google.maps.Marker({
                 position: locationArray[i],
-                //icon: markerIcon,
+                icon: markerIcon,
                 map: map
+            });
+            markers[i].addListener('mouseover', function() {
+                console.log("mouseover called for marker!");
+                // change css of the result list
+            });
+            markers[i].addListener('mouseout', function() {
+                console.log("mouseout called for marker!");
+                // change css of the result list
             });
         }
     } else {
@@ -179,3 +205,14 @@ function getDistanceFromLatLonInM(pointA, pointB) {
 function deg2rad(deg) {
     return deg * (Math.PI / 180);
 }
+
+$("body").on("mouseover", ".venue-row", function(event) {
+    console.log("mouseover handler called for item in result list.");
+    // change icon size of marker[?] according to id of the hovered venue
+    markers[0].markerIcon.size = new google.maps.Size(60, 60);
+});
+$("body").on("mouseover", ".venue-row", function(event) {
+    console.log("mouseout handler called for item in result list.");
+    // change icon size of marker[?] according to id of the hovered venue
+    markers[0].markerIcon.size = new google.maps.Size(30, 30);
+});
