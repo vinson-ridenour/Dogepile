@@ -113,7 +113,6 @@ input[type=text]:focus:not([readonly]) {
 	display: flex;
 	flex-direction: column;
 	min-height: 100%;
-	visibility: hidden;
 	opacity: 0;
 	transition: 1s;
 }

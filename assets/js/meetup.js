@@ -37,7 +37,7 @@ function meetupSearch (lat, lng){
                 var locName = "No"; //location's name
                 var locSAdd = "Address"; //street address
                 var locCAdd = "Found"; //city
-                var locStAdd = ": ("; //state
+                var locStAdd = ":("; //state
             }
 
             $(".meetup-result-table").append("<div class=result-row-styling id=result-row" + i + "></div>");

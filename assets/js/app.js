@@ -16,7 +16,7 @@ $(document).ready(function() {
         }
         // $("body").css("background-image", "none");
         // $(".search-page").css("display", "none");
-        $(".results-page").removeClass("hidden");
+        // $(".results-page").removeClass("hidden");
         
         if ($(this).attr("id") == "searchBtn") {
             $("#addressDisplay").text($("#icon_prefix").val());
@@ -35,21 +35,15 @@ $(document).ready(function() {
 
         var showHeader = setTimeout (function(){
         	$("#searchContainer").css("visibility", "hidden");
-        	// $("body").css("background-image", "none");
         	$(".search-page").css("display", "none");
         }, 500);
 
         var showResultsPage = setTimeout(function() {
 
-            $(".results-page").css("visibility", "visible");
+            $(".results-page").show(0);
             $(".results-page").css("opacity", "1");
-            // $(".results-page").removeClass("hidden");
-            // $("header").css("box-shadow", "0 0 5px");
-            // $("header").css("opacity", "1");
-            // $("#headerContainer").css("opacity", "1");
             $("#mainContainer").css("opacity", "1");
             $("body").css("background-image", "none");
-            // $(".page-footer").css("opacity", "1");
         }, 750);
     });
 
@@ -112,4 +106,21 @@ $(document).ready(function() {
                 "<i class=material-icons right>chevron_right</i></button></div>");
         }
     }
+
+    //-----------------------filter functions------------------------------
+
+    $(".lever").on("click", function(){
+    	console.log($(this).attr("class"));
+    	if ($(this).attr("data-check") == "checked"){
+    		$(this).attr("data-check", "unchecked");
+    	} else {
+    		$(this).attr("data-check", "checked");
+    	}
+
+    	if ($(".meetup").attr("data-check") == "unchecked"){
+    		$(".meetup-result-table").hide(0)
+    	} else {
+    		$(".meetup-result-table").show(0)
+    	}
+    })
 }); // end of document ready
