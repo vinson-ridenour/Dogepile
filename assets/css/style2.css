@@ -6,7 +6,10 @@
 }
 
 #venueTypeBtn {
-	padding: 0 45px;
+	padding: 0;
+	text-align: center;
+	width: 70px;
+	height: 70px;
 }
 
 i.right {
@@ -37,7 +40,7 @@ i.left {
 }
 
 #shakeBtn {
-	padding: 0 30px;
+	padding: 0 10px;
 }
 
 #radiusBtn {
@@ -111,10 +114,16 @@ input[type=text]:focus:not([readonly]) {
 	display: flex;
 	flex-direction: column;
 	min-height: 100%;
-	/*visibility: hidden;*/
+	opacity: 0;
+	transition: 1s;
 }
 
-.results-page.hidden {
+.results-tables {
+	height: 350px;
+	overflow: auto;
+}
+
+.hidden{
 	display: none;
 }
 
@@ -197,6 +206,11 @@ tr {
 }
 
 .result-address {
+	/*width: 25%;*/
+	flex: 2;
+}
+
+.result-phone {
 	/*width: 25%;*/
 	flex: 2;
 }

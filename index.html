@@ -16,7 +16,7 @@
     
     <!-- Materialize icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
 
@@ -82,19 +82,20 @@
                     <input id="new-address" type="text" placeholder="street address">
                     <!-- <label for="new-address">street address</label> -->
                 </div>
-                <div class="dropdown-container">
-                <!-- Dropdown Trigger -->
-                    <button class='dropdown-button btn' data-belowOrigin="true" href='#' data-activates='dropdown1' id=venueTypeBtn>type</button>
-                <!-- Dropdown Structure -->
-                    <ul id='dropdown1' class='dropdown-content'>
-                        <li class="dropdown-item-venue" data-type="eat">eat</li>
-                        <li class="dropdown-item-venue" data-type="play">play</li>
-                        <li class="dropdown-item-venue" data-type="stay">stay</li>
-                    </ul>
+
+                <div id="btnRow">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large disabled" id="shakeBtn"><i class="material-icons prefix">pets</i> shake</a>
+
+                    <div class="fixed-action-btn horizontal left-align">
+                        <a class="btn-floating btn-large red" id="venueTypeBtn">type
+                        </a>
+                        <ul>
+                          <li><a class="btn-floating btn-large yellow darken-1 dropdown-item-venue" data-color="#fdd835" data-type="play">play</a></li>
+                          <li><a class="btn-floating btn-large green dropdown-item-venue" data-color="#4CAF50" data-type="stay">stay</a></li>
+                          <li><a class="btn-floating btn-large blue dropdown-item-venue" data-color="#2196F3" data-type="eat">eat</a></li>
+                        </ul>
+                      </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large" id="shakeBtn">shake</a>
             </div>
         </div>
 
@@ -123,29 +124,30 @@
                             <div class="switch filter-restaurants">
                                 <label>
                                     eat
+                                    <!-- first checked to default to checked check attr is to follow filter -->
                                     <input type="checkbox" checked>
-                                    <span class="lever"></span>
+                                    <span class="lever eat" data-check="checked"></span>
                                 </label>
                             </div>
                             <div class="switch filter-parks">
                                 <label>
                                     play
                                     <input type="checkbox" checked>
-                                    <span class="lever"></span>
+                                    <span class="lever play" data-check="checked"></span>
                                 </label>
                             </div>
                             <div class="switch filter-hotels">
                                 <label>
                                     stay
                                     <input type="checkbox" checked>
-                                    <span class="lever"></span>
+                                    <span class="lever stay" data-check="checked"></span>
                                 </label>
                             </div>
                             <div class="switch filter-meetup">
                                 <label>
                                     meetup
                                     <input type="checkbox" checked>
-                                    <span class="lever"></span>
+                                    <span class="lever meetup" data-check="checked"></span>
                                 </label>
                             </div>
                         </div>
@@ -165,21 +167,21 @@
         </div> <!-- end map/filter switches wrapper -->
         
     <!-- Results Tables -->
-        <div class="results-tables">
+        <div class="container results-tables">
 
             <!-- yelp results table -->
 
-            <div class="container">
+            <!-- <div class="container"> -->
                 <div class="yelp-result-table">
                 </div>
-            </div>
+            <!-- </div> -->
             
             <!-- meetup results table -->
 
-            <div class="container">
+            <!-- <div class="container"> -->
                 <div class="meetup-result-table">
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
 
         <!-- footer -->
