@@ -98,12 +98,24 @@ $(document).ready(function() {
             let venue = venueArr[i];
             //console.log("Printing "+venue.name);
             $(".yelp-result-table").append("<div class='result-row-styling venue-row' id=venue-row-" + i + "></div>");
-            $("#venue-row-" + i).append("<div class=result-icon><i class=material-icons>place</i></div>");
-            $("#venue-row-" + i).append("<div class=result-image><img class=img-results src=assets/images/meetup_logo.jpg></div>");
+            	if (venue.type == "restaurants") {
+            		$("#venue-row-" + i).append("<div class=result-icon><i class=fa fa-cutlery aria-hidden=true></i></div>");
+            		$("#venue-row-" + i).addClass("eatVenue");
+            	}
+            	if (venue.type == "hotels") {
+            		$("#venue-row-" + i).append("<div class=result-icon><i class=fa fa-bed aria-hidden=true></i></div>");
+            		$("#venue-row-" + i).addClass("stayVenue");
+            	}
+            	if (venue.type == "parks") {
+            		$("#venue-row-" + i).append("<div class=result-icon><i class=fa fa-futbol-o aria-hidden=true></i></div>");
+            		$("#venue-row-" + i).addClass("playVenue");
+            	}
+            $("#venue-row-" + i).append("<div class=result-image><img class=img-results src="+venue.imgURL+"</div>");
             $("#venue-row-" + i).append("<div class=result-name>" + venue.name + "</div>");
             $("#venue-row-" + i).append("<div class=result-address>" + venue.address + "</p></div>");
-            $("#venue-row-" + i).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>lead the way" +
-                "<i class=material-icons right>chevron_right</i></button></div>");
+            $("#venue-row-" + i).append("<div class=result-phone>" + venue.phone + "</p></div>");
+            // $("#venue-row-" + i).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>lead the way" +
+                // "<i class=material-icons right>chevron_right</i></button></div>");
         }
     }
 
@@ -121,6 +133,24 @@ $(document).ready(function() {
     		$(".meetup-result-table").hide(0)
     	} else {
     		$(".meetup-result-table").show(0)
+    	}
+
+    	if ($(".eat").attr("data-check") == "unchecked"){
+    		$(".eatVenue").hide(0)
+    	} else {
+    		$(".eatVenue").show(0)
+    	}
+
+    	if ($(".stay").attr("data-check") == "unchecked"){
+    		$(".stayVenue").hide(0)
+    	} else {
+    		$(".stayVenue").show(0)
+    	}
+
+    	if ($(".play").attr("data-check") == "unchecked"){
+    		$(".playVenue").hide(0)
+    	} else {
+    		$(".playVenue").show(0)
     	}
     })
 }); // end of document ready

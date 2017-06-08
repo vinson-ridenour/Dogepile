@@ -204,6 +204,11 @@ tr {
 	flex: 2;
 }
 
+.result-phone {
+	/*width: 25%;*/
+	flex: 2;
+}
+
 .result-btn {
 	/*width: 25%;*/
 	flex: 2;
