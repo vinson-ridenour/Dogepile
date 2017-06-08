@@ -13,6 +13,14 @@ body {
 	background-image: url("../images/placeholder.jpg");
 }
 
+#whatever{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
 #searchContainer {
 	width: 75%;
 	height: 70%;
