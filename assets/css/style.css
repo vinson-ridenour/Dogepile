@@ -13,6 +13,14 @@ body {
 	background-image: url("../images/placeholder.jpg")
 }
 
+#whatever{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
 #searchContainer {
 	width: 75%;
 	height: 70%;
@@ -46,7 +54,7 @@ body {
 header {
 	display: flex;
 	justify-content: center;
-	height: 50px;
+	height: 60px;
 	box-shadow: 0 0 5px;
 	/*transition: .1s;*/
 	/*opacity: 0;*/

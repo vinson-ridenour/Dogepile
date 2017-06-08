@@ -19,12 +19,13 @@ i.left {
 }
 
 #geoBtn {
+	background-color: red;
 	margin-bottom: 0;
 }
 
 #addLocBtn {
 	margin-top: 20px;
-	margin-left: 4px;
+	margin-left: 75px;
 }
 
 #dirBtn {
@@ -41,6 +42,10 @@ i.left {
 
 #radiusBtn {
 	background-color: red;
+}
+
+#searchBtn {
+	min-width: 130px;
 }
 
 .addVenueText {
@@ -105,9 +110,9 @@ input[type=text]:focus:not([readonly]) {
 }
 
 .switch {
-	width: 30%;
+	width: 45%;
 	font-size: 20px;
-	margin-bottom: 30px;
+	margin-bottom: 50px;
 }
 
 .lever {
@@ -189,6 +194,7 @@ tr {
 .result-btn {
 	/*width: 25%;*/
 	flex: 2;
+	font-family: 'Indie Flower', cursive;
 }
 
 
