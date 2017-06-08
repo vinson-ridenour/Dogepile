@@ -89,12 +89,12 @@ header {
 }
 
 #map {
-	margin-top: 10%;
+	margin-top: 30px;
 	height: 435px;
 }
 
 #filter-results {
-	margin-top: 10%;
+	margin-top: 30px;
 }
 
 i {
@@ -107,4 +107,9 @@ i {
 
 #logo:hover {
 	cursor: pointer;
+}
+
+#radDiv {
+	margin-top: 30px;
+	height: 100%;
 }
