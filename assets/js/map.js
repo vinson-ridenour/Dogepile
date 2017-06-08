@@ -21,10 +21,13 @@ displayMap(searchReslt);
 function displayMapOfLocations(locationArray) {
     console.log("Displaying map...");
     // console.log(locationArray);
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
-        center: locationArray[0]
-    });
+    console.log("Map center: ("+locationArray[0].lat+", "+locationArray[0].lng+")");
+    var myOptions = {
+        zoom: 13,
+        center: new google.maps.LatLng(locationArray[0].lat, locationArray[0].lng)
+    };
+
+    var map = new google.maps.Map(document.getElementById('map'), myOptions);
 
     google.maps.event.addListenerOnce(map, 'idle', function() {
         google.maps.event.trigger(map, 'resize');
