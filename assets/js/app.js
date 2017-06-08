@@ -3,6 +3,7 @@ $(document).ready(function() {
     var hotelResults = [];
     var parkResults = [];
     var meetupResults = [];
+    $(".results-page").hide(0);
 
     //------------transition from search view to results view-------------------------------
     $(".init").on("click", function(event) {
