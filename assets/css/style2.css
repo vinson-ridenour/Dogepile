@@ -117,6 +117,11 @@ input[type=text]:focus:not([readonly]) {
 	transition: 1s;
 }
 
+.results-tables {
+	height: 350px;
+	overflow: auto;
+}
+
 .hidden{
 	display: none;
 }
