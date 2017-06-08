@@ -20,13 +20,15 @@ displayMap(searchReslt);
 */
 function displayMapOfLocations(locationArray) {
     console.log("Displaying map...");
-    console.log(locationArray);
+    // console.log(locationArray);
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
         center: locationArray[0]
     });
 
     for (var i = 0; i < locationArray.length; i++) {
+        console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ")");
+
         /*var markerIcon = "";
         switch (locationArray[i].type) {
           case "restaurant":
@@ -59,7 +61,7 @@ function getCoorCurrentLocation() {
 
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
-        // this location will immediately get updated if user position is feteched sucessfully
+        // this location will immediately get updated if user position is feteched successfully
         center: { lat: 32.7157, lng: -117.1611 }
     });
 
@@ -100,7 +102,7 @@ a single object which has data fields "lat" and "lng"
 REFERENCE
 https://developers.google.com/maps/documentation/geocoding/intro
 */
-function getCoorFromAddress(address) {
+function getCoorFromAddress(address, callback) {
     if (address == null || address.length == 0) {
         console.log("Please enter a valid address.");
         return null;
@@ -110,7 +112,6 @@ function getCoorFromAddress(address) {
     $.ajax({
         url: queryURL,
         method: "GET",
-        async: false,
         success: function(response) {
             // deal with the case that user enters an address like "dioqjweoqweq"
             if (response.status == "ZERO_RESULTS") {
@@ -120,10 +121,12 @@ function getCoorFromAddress(address) {
             console.log("Converting to coordinates!");
             convertedCoor.lat = response.results[0].geometry.location.lat;
             convertedCoor.lng = response.results[0].geometry.location.lng;
+
+            console.log(convertedCoor);
+            callback(convertedCoor);
+            return convertedCoor;
         }
     });
-    console.log(convertedCoor);
-    return convertedCoor;
 }
 
 /*
@@ -139,7 +142,6 @@ https://developers.google.com/maps/documentation/distance-matrix/intro
 function filterByDistance(myLocation, distance, places) {
     var newLocationArray = [];
     console.log("Filtering");
-    console.log(myLocation);
     for (var i = 0; i < places.length; i++) {
         if (getDistanceFromLatLonInM(places[i], myLocation) <= distance) {
             newLocationArray.push(places[i]);

@@ -80,12 +80,15 @@ $(document).ready(function() {
     // Search button click handler
     $("#searchBtn").on("click", function(event) {
         event.preventDefault();
-        console.log("Searching...");
-        let myLoc = $("#icon_prefix").val();
-        searchCategory(myLoc, "restaurants", 5, function(results) {
-            // $("body").css("background-image", "none");
-            displayMapOfLocations(results);
-        });
+        // Don't trigger unless input field is populated
+        if ($("#icon_prefix").val().length > 0) {
+            console.log("Searching...");
+            let myLoc = $("#icon_prefix").val();
+            searchCategory(myLoc, "restaurants", 1, function(results) {
+                // $("body").css("background-image", "none");
+                displayMapOfLocations(results);
+            });
+        }
     });
 
     //---------------------------------------modal---------------------------------------
