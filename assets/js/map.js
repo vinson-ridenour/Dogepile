@@ -214,7 +214,7 @@ $("body").on("mouseenter", ".venue-row", function(event) {
     let id = $(this).attr('id');
     let i = parseInt(id.split("-")[2]);
     // console.log("i: " + i);
-    toggleBounce(markers[i]);
+    markers[i].setAnimation(google.maps.Animation.BOUNCE);
 });
 
 // Handler when leaving row
@@ -224,14 +224,5 @@ $("body").on("mouseleave", ".venue-row", function(event) {
     let id = $(this).attr('id');
     let i = parseInt(id.split("-")[2]);
     // console.log("i: " + i);
-    toggleBounce(markers[i]);
+    markers[i].setAnimation(null);
 });
-
-// Toggle marker bounce
-function toggleBounce(marker) {
-    if (marker.getAnimation() !== null) {
-        marker.setAnimation(null);
-    } else {
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-    }
-}
