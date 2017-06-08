@@ -2,7 +2,8 @@ $(document).ready(function() {
 
 //------------transition from search view to results view-------------------------------
 	$(".init").on("click", function (event){
-		
+
+		console.log($(this).attr("id"))
 		event.preventDefault();
 
 		if ($("#icon_prefix").val().length > 0) {
@@ -11,6 +12,9 @@ $(document).ready(function() {
 		$("body").css("background-image", "none");
 		$(".search-page").css("display", "none");
 		
+		if ($(this).attr("id") == "searchBtn"){
+			$("#addressDisplay").text($("#icon_prefix").val())
+		}
 		// $("#searchContainer").css("opacity", "0");
 		// $("#mainContainer").css("visibility", "visible");
 

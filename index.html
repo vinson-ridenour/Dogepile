@@ -47,7 +47,7 @@
                         </div>
                     
                         <div class="col s3">
-                            <button id="searchBtn" class="btn-large init waves-effect waves-light" type="submit" name="action">retrieve
+                            <button id="searchBtn" class="btn-large init waves-effect waves-light" type="submit" name="action" data-btnType="address">retrieve
                                 <i class="material-icons left">search</i>
                             </button>
                         </div>
@@ -55,7 +55,7 @@
 
                     <div class="row">
                         <div class="col s6">
-                            <button class="btn-large init waves-effect waves-light" type="submit" id="geoBtn">use my location
+                            <button class="btn-large init waves-effect waves-light" type="submit" id="geoBtn" data-btnType="geo">use my location
                             <i class="material-icons left">public</i>
                             </button>
                         </div>
@@ -101,14 +101,17 @@
         <header>
             <div id="headerContainer">
                 <h2 id="logo">aarf!</h2>
-                <div id="addressDisplay"><button class='dropdown-button btn dropdown-item-radius' id="radiusBtn" data-radius="5" data-belowOrigin="false" href='#' data-activates='dropdown2'>5 mi</button>
-            <!-- Dropdown Radius Structure -->
-                <ul id='dropdown2' class='dropdown-content'>
-                    <li class="dropdown-item-radius" data-radius="5" data-display="5 mi">5 mi</li>
-                    <li class="dropdown-item-radius" data-radius="10" data-display="10 mi">10 mi</li>
-                    <li class="dropdown-item-radius" data-radius="15" data-display="15 mi">15 mi</li>
-                    <li class="dropdown-item-radius" data-radius="20" data-display="20 mi">20 mi</li>
-                </ul>your current location</div>
+                <div id="radiusDisplay"><button class='dropdown-button btn dropdown-item-radius' id="radiusBtn" data-radius="5" data-belowOrigin="false" href='#' data-activates='dropdown2'>5 mi</button>
+                <!-- Dropdown Radius Structure -->
+                    <ul id='dropdown2' class='dropdown-content'>
+                        <li class="dropdown-item-radius" data-radius="5" data-display="5 mi">5 mi</li>
+                        <li class="dropdown-item-radius" data-radius="10" data-display="10 mi">10 mi</li>
+                        <li class="dropdown-item-radius" data-radius="15" data-display="15 mi">15 mi</li>
+                        <li class="dropdown-item-radius" data-radius="20" data-display="20 mi">20 mi</li>
+                    </ul>from
+                    <div id="addressDisplay">your current location</div>
+                    
+                </div>
             </div>
         </header>
 

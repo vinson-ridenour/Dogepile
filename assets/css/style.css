@@ -55,13 +55,17 @@ header {
 
 /*assume new page*/
 #headerContainer {
-	display: inline-flex;
+	display: flex;
 	width: 960px;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
 	/*transition: .2s;*/
 	/*opacity: 0;*/
+}
+
+#radiusDisplay {
+	flex-direction: row;
 }
 
 #logo {
