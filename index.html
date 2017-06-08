@@ -101,16 +101,8 @@
         <header>
             <div id="headerContainer">
                 <h2 id="logo">aarf!</h2>
-                <div id="radiusDisplay"><button class='dropdown-button btn dropdown-item-radius' id="radiusBtn" data-radius="5" data-belowOrigin="false" href='#' data-activates='dropdown2'>5 mi</button>
-                <!-- Dropdown Radius Structure -->
-                    <ul id='dropdown2' class='dropdown-content'>
-                        <li class="dropdown-item-radius" data-radius="5" data-display="5 mi">5 mi</li>
-                        <li class="dropdown-item-radius" data-radius="10" data-display="10 mi">10 mi</li>
-                        <li class="dropdown-item-radius" data-radius="15" data-display="15 mi">15 mi</li>
-                        <li class="dropdown-item-radius" data-radius="20" data-display="20 mi">20 mi</li>
-                    </ul>from
-                    <div id="addressDisplay">your current location</div>
-                    
+                <div id="addressDisplay">
+                    your current location
                 </div>
             </div>
         </header>
@@ -124,7 +116,7 @@
                             map
                         </div>
                     </div>
-                    <div class="col s6">
+                    <div class="col s3">
                         <div id="filter-results">
                             <div class="switch filter-restaurants">
                                 <label>
@@ -148,7 +140,18 @@
                                 </label>
                             </div>
                         </div>
+
                     </div>  
+                    <div class="col s3">
+                        <button class='dropdown-button btn dropdown-item-radius' id="radiusBtn" data-radius="5" data-belowOrigin="false" href='#' data-activates='dropdown2'>5 mi</button>
+                    <!-- Dropdown Radius Structure -->
+                            <ul id='dropdown2' class='dropdown-content'>
+                                <li class="dropdown-item-radius" data-radius="5" data-display="5 mi">5 mi</li>
+                                <li class="dropdown-item-radius" data-radius="10" data-display="10 mi">10 mi</li>
+                                <li class="dropdown-item-radius" data-radius="15" data-display="15 mi">15 mi</li>
+                                <li class="dropdown-item-radius" data-radius="20" data-display="20 mi">20 mi</li>
+                            </ul>
+                    </div>
                 </div>
             </div>
         </div> <!-- end map/filter switches wrapper -->

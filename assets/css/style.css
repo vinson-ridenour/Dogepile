@@ -64,15 +64,16 @@ header {
 	/*opacity: 0;*/
 }
 
-#radiusDisplay {
-	flex-direction: row;
-}
+/*#radiusDisplay {
+	justify-content: flex;
+}*/
 
 #logo {
 	margin: 10px;
 	font-size: 50px;
 	cursor: pointer;
 }
+
 
 #addressDisplay {
 	margin: 10px;
