@@ -26,6 +26,10 @@ function displayMapOfLocations(locationArray) {
         center: locationArray[0]
     });
 
+    google.maps.event.addListenerOnce(map, 'idle', function() {
+        google.maps.event.trigger(map, 'resize');
+    });
+
     for (var i = 0; i < locationArray.length; i++) {
         console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ")");
 
