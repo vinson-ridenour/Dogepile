@@ -55,7 +55,7 @@ header {
 
 /*assume new page*/
 #headerContainer {
-	display: inline-flex;
+	display: flex;
 	width: 960px;
 	flex-direction: row;
 	align-items: center;
@@ -64,11 +64,16 @@ header {
 	/*opacity: 0;*/
 }
 
+/*#radiusDisplay {
+	justify-content: flex;
+}*/
+
 #logo {
 	margin: 10px;
 	font-size: 50px;
 	cursor: pointer;
 }
+
 
 #addressDisplay {
 	margin: 10px;
@@ -84,12 +89,12 @@ header {
 }
 
 #map {
-	margin-top: 10%;
+	margin-top: 30px;
 	height: 435px;
 }
 
 #filter-results {
-	margin-top: 10%;
+	margin-top: 30px;
 }
 
 i {
@@ -102,4 +107,9 @@ i {
 
 #logo:hover {
 	cursor: pointer;
+}
+
+#radDiv {
+	margin-top: 30px;
+	height: 100%;
 }
