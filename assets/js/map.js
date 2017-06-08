@@ -19,62 +19,68 @@ searchReslt = [
 displayMap(searchReslt);
 */
 var markers = [];
+
 function displayMapOfLocations(locationArray) {
     markers = []; // clean markers
     console.log("Displaying map...");
     // console.log(locationArray);
-    console.log("Map center: ("+locationArray[0].lat+", "+locationArray[0].lng+")");
-    var myOptions = {
-        zoom: 13,
-        center: new google.maps.LatLng(locationArray[0].lat, locationArray[0].lng)
-    };
+    if (locationArray.length > 0) {
+        // console.log("Map center: (" + locationArray[0].lat + ", " + locationArray[0].lng + ")");
+        var myOptions = {
+            zoom: 13,
+            center: new google.maps.LatLng(locationArray[0].lat, locationArray[0].lng)
+        };
 
-    var map = new google.maps.Map(document.getElementById('map'), myOptions);
+        var map = new google.maps.Map(document.getElementById('map'), myOptions);
 
-    google.maps.event.addListenerOnce(map, 'idle', function() {
-        google.maps.event.trigger(map, 'resize');
-    });
+        google.maps.event.addListenerOnce(map, 'idle', function() {
+            google.maps.event.trigger(map, 'resize');
+        });
 
-    for (var i = 0; i < locationArray.length; i++) {
-        console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
+        for (var i = 0; i < locationArray.length; i++) {
+            //console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
 
-        var markerIcon = {};
-        switch (locationArray[i].type) {
-          case "restaurants":
-          console.log("use restaurant icon");
-          markerIcon.url = "./assets/images/restaurant-icon.png";
-          break;
-          case "parks":
-          console.log("use park icon");
-          markerIcon.url = "./assets/images/park-icon.png";
-          break;
-          case "hotels":
-          console.log("use hotel icon");
-          markerIcon.url = "./assets/images/hotel-icon.png";
-          break;
-          case "meetups":
-          console.log("use meetups icon");
-          markerIcon.url = "./assets/images/meetups-icon.jpg";
-          break;
-          default:
-          console.log("use hotel icon");
-          markerIcon.url = "./assets/images/hotel-icon.png";
-          break;
+            var markerIcon = {};
+            switch (locationArray[i].type) {
+                case "restaurants":
+                    console.log("use restaurant icon");
+                    markerIcon.url = "./assets/images/restaurant-icon.png";
+                    break;
+                case "parks":
+                    console.log("use park icon");
+                    markerIcon.url = "./assets/images/park-icon.png";
+                    break;
+                case "hotels":
+                    console.log("use hotel icon");
+                    markerIcon.url = "./assets/images/hotel-icon.png";
+                    break;
+                case "meetups":
+                    console.log("use meetups icon");
+                    markerIcon.url = "./assets/images/meetups-icon.jpg";
+                    break;
+                default:
+                    console.log("use hotel icon");
+                    markerIcon.url = "./assets/images/hotel-icon.png";
+                    break;
+            }
+            markerIcon.size = new google.maps.Size(30, 30);
+            markers[i] = new google.maps.Marker({
+                position: locationArray[i],
+                icon: markerIcon,
+                animation: null,
+                map: map
+            });
+            markers[i].addListener('mouseover', function() {
+                console.log("mouseover called for marker!");
+                // change css of the result list
+            });
+            markers[i].addListener('mouseout', function() {
+                console.log("mouseout called for marker!");
+                // change css of the result list
+            });
         }
-        markerIcon.size = new google.maps.Size(30, 30);
-        markers[i] = new google.maps.Marker({
-            position: locationArray[i],
-            icon: markerIcon,
-            map: map
-        });
-        markers[i].addListener('mouseover', function() {
-            console.log("mouseover called for marker!");
-            // change css of the result list
-        });
-        markers[i].addListener('mouseout', function() {
-            console.log("mouseout called for marker!");
-            // change css of the result list
-        });
+    } else {
+        console.log("No locations in range!");
     }
 }
 
@@ -149,14 +155,15 @@ function getCoorFromAddress(address, callback) {
             if (response.status == "ZERO_RESULTS") {
                 console.log("Please enter a valid address.");
                 return null;
-            }
-            console.log("Converting to coordinates!");
-            convertedCoor.lat = response.results[0].geometry.location.lat;
-            convertedCoor.lng = response.results[0].geometry.location.lng;
+            } else {
+                console.log("Converting to coordinates!");
+                convertedCoor.lat = response.results[0].geometry.location.lat;
+                convertedCoor.lng = response.results[0].geometry.location.lng;
 
-            console.log(convertedCoor);
-            callback(convertedCoor);
-            return convertedCoor;
+                console.log(convertedCoor);
+                callback(convertedCoor);
+                return convertedCoor;
+            }
         }
     });
 }
@@ -175,8 +182,11 @@ function filterByDistance(myLocation, distance, places) {
     var newLocationArray = [];
     console.log("Filtering");
     for (var i = 0; i < places.length; i++) {
+        // console.log("Distance: " + getDistanceFromLatLonInM(places[i], myLocation));
         if (getDistanceFromLatLonInM(places[i], myLocation) <= distance) {
             newLocationArray.push(places[i]);
+        } else {
+            // console.log(i + ": Out of range");
         }
     }
     console.log(newLocationArray);
@@ -197,13 +207,31 @@ function deg2rad(deg) {
     return deg * (Math.PI / 180);
 }
 
-$("body").on("mouseover", ".venue-row", function( event ) {
-    console.log("mouseover handler called for item in result list.");
+// Handler when hovering over row
+$("body").on("mouseenter", ".venue-row", function(event) {
+    console.log("Mouse enter");
     // change icon size of marker[?] according to id of the hovered venue
-    markers[0].markerIcon.size = new google.maps.Size(60, 60);
+    let id = $(this).attr('id');
+    let i = parseInt(id.split("-")[2]);
+    // console.log("i: " + i);
+    toggleBounce(markers[i]);
 });
-$("body").on("mouseover", ".venue-row", function( event ) {
-    console.log("mouseout handler called for item in result list.");
+
+// Handler when leaving row
+$("body").on("mouseleave", ".venue-row", function(event) {
+    console.log("Mouse leave")
     // change icon size of marker[?] according to id of the hovered venue
-    markers[0].markerIcon.size = new google.maps.Size(30, 30);
+    let id = $(this).attr('id');
+    let i = parseInt(id.split("-")[2]);
+    // console.log("i: " + i);
+    toggleBounce(markers[i]);
 });
+
+// Toggle marker bounce
+function toggleBounce(marker) {
+    if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+    } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+}

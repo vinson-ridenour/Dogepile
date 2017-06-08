@@ -101,6 +101,10 @@ function searchCategory(address, category, radius, callback) {
             console.log(data.val());
             getCoorFromAddress(address, function(addr) {
                 let resultArr = filterByDistance(addr, milesToMeters(radius), data.val());
+                // Set category type of results
+                for (let i in resultArr){
+                    resultArr[i].type = category;
+                }
                 callback(resultArr);
                 return resultArr;
             });

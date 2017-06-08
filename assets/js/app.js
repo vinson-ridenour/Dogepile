@@ -1,4 +1,8 @@
 $(document).ready(function() {
+    var restaurantResults = [];
+    var hotelResults = [];
+    var parkResults = [];
+    var meetupResults = [];
 
     //------------transition from search view to results view-------------------------------
     $(".init").on("click", function(event) {
@@ -16,10 +20,12 @@ $(document).ready(function() {
             $("#addressDisplay").text($("#icon_prefix").val());
             console.log("Searching...");
             let myLoc = $("#icon_prefix").val();
-            searchCategory(myLoc, "restaurants", 1, function(results) {
+            searchCategory(myLoc, "restaurants", 5, function(results) {
                 // $("body").css("background-image", "none");
                 displayMapOfLocations(results);
+                displayVenue(results);
             });
+            meetupSearch();
         }
         // $("#searchContainer").css("opacity", "0");
         // $("#mainContainer").css("visibility", "visible");
@@ -48,20 +54,6 @@ $(document).ready(function() {
         $("#radiusBtn").text($(this).attr("data-display"));
     });
 
-    // Search button click handler
-    // $("#searchBtn").on("click", function(event) {
-    //     event.preventDefault();
-    //     // Don't trigger unless input field is populated
-    //     if ($("#icon_prefix").val().length > 0) {
-    //         console.log("Searching...");
-    //         let myLoc = $("#icon_prefix").val();
-    //         searchCategory(myLoc, "restaurants", 1, function(results) {
-    //             // $("body").css("background-image", "none");
-    //             displayMapOfLocations(results);
-    //         });
-    //     }
-    // });
-
     //---------------------------------------modal---------------------------------------
 
     $("#addLoc").on("click", $(".modal").modal());
@@ -72,4 +64,27 @@ $(document).ready(function() {
 
     //------------------------------------end of modal-----------------------------------
 
+    // Displays an array of venue objects in the table
+    // The objects have the following properties
+    // {
+    //      name: String,
+    //      address: String,
+    //      phone: String
+    //      imgURL: String
+    //      type: "restaurants"|"hotels"|"parks"
+    // }
+    function displayVenue(venueArr) {
+        console.log("Printing " + venueArr.length + " venues in table");
+        for (let i in venueArr) {
+            let venue = venueArr[i];
+            //console.log("Printing "+venue.name);
+            $(".yelp-result-table").append("<div class='result-row-styling venue-row' id=venue-row-" + i + "></div>");
+            $("#venue-row-" + i).append("<div class=result-icon><i class=material-icons>place</i></div>");
+            $("#venue-row-" + i).append("<div class=result-image><img class=img-results src=assets/images/meetup_logo.jpg></div>");
+            $("#venue-row-" + i).append("<div class=result-name>" + venue.name + "</div>");
+            $("#venue-row-" + i).append("<div class=result-address>" + venue.address + "</p></div>");
+            $("#venue-row-" + i).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>lead the way" +
+                "<i class=material-icons right>chevron_right</i></button></div>");
+        }
+    }
 }); // end of document ready
