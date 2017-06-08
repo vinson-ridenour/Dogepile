@@ -25,7 +25,7 @@ function displayMapOfLocations(locationArray) {
     console.log("Displaying map...");
     // console.log(locationArray);
     if (locationArray.length > 0) {
-        console.log("Map center: (" + locationArray[0].lat + ", " + locationArray[0].lng + ")");
+        // console.log("Map center: (" + locationArray[0].lat + ", " + locationArray[0].lng + ")");
         var myOptions = {
             zoom: 13,
             center: new google.maps.LatLng(locationArray[0].lat, locationArray[0].lng)
@@ -38,7 +38,7 @@ function displayMapOfLocations(locationArray) {
         });
 
         for (var i = 0; i < locationArray.length; i++) {
-            console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
+            //console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
 
             var markerIcon = {};
             switch (locationArray[i].type) {
@@ -67,6 +67,7 @@ function displayMapOfLocations(locationArray) {
             markers[i] = new google.maps.Marker({
                 position: locationArray[i],
                 icon: markerIcon,
+                animation: null,
                 map: map
             });
             markers[i].addListener('mouseover', function() {
@@ -181,11 +182,11 @@ function filterByDistance(myLocation, distance, places) {
     var newLocationArray = [];
     console.log("Filtering");
     for (var i = 0; i < places.length; i++) {
-        console.log("Distance: " + getDistanceFromLatLonInM(places[i], myLocation));
+        // console.log("Distance: " + getDistanceFromLatLonInM(places[i], myLocation));
         if (getDistanceFromLatLonInM(places[i], myLocation) <= distance) {
             newLocationArray.push(places[i]);
         } else {
-            console.log(i + ": Out of range");
+            // console.log(i + ": Out of range");
         }
     }
     console.log(newLocationArray);
@@ -206,13 +207,31 @@ function deg2rad(deg) {
     return deg * (Math.PI / 180);
 }
 
-$("body").on("mouseover", ".venue-row", function(event) {
-    console.log("mouseover handler called for item in result list.");
+// Handler when hovering over row
+$("body").on("mouseenter", ".venue-row", function(event) {
+    console.log("Mouse enter");
     // change icon size of marker[?] according to id of the hovered venue
-    markers[0].markerIcon.size = new google.maps.Size(60, 60);
+    let id = $(this).attr('id');
+    let i = parseInt(id.split("-")[2]);
+    console.log("i: " + i);
+    toggleBounce(markers[i]);
 });
-$("body").on("mouseover", ".venue-row", function(event) {
-    console.log("mouseout handler called for item in result list.");
-    // change icon size of marker[?] according to id of the hovered venue
-    markers[0].markerIcon.size = new google.maps.Size(30, 30);
+
+// Handler when leaving row
+$("body").on("mouseleave", ".venue-row", function(event) {
+    console.log("Mouse leave")
+        // change icon size of marker[?] according to id of the hovered venue
+    let id = $(this).attr('id');
+    let i = parseInt(id.split("-")[2]);
+    // console.log("i: " + i);
+    toggleBounce(markers[i]);
 });
+
+// Toggle marker bounce
+function toggleBounce(marker) {
+    if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+    } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+}

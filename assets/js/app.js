@@ -65,15 +65,25 @@ $(document).ready(function() {
     //------------------------------------end of modal-----------------------------------
 
     // Displays an array of venue objects in the table
+    // The objects have the following properties
+    // {
+    //      name: String,
+    //      address: String,
+    //      phone: String
+    //      imgURL: String
+    //      type: "restaurants"|"hotels"|"parks"
+    // }
     function displayVenue(venueArr) {
+        console.log("Printing " + venueArr.length + " venues in table");
         for (let i in venueArr) {
             let venue = venueArr[i];
-            $(".yelp-result-table").append("<div class='result-row-styling venue-row' id=venue-row" + i + "></div>");
-            $("#venue-row" + i).append("<div class=result-icon><i class=material-icons>place</i></div>");
-            $("#venue-row" + i).append("<div class=result-image><img class=img-results src=assets/images/meetup_logo.jpg></div>");
-            $("#venue-row" + i).append("<div class=result-name>" + venue.name + "</div>");
-            $("#venue-row" + i).append("<div class=result-address>" + venue.address + "</p></div>");
-            $("#venue-row" + i).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>lead the way" +
+            //console.log("Printing "+venue.name);
+            $(".yelp-result-table").append("<div class='result-row-styling venue-row' id=venue-row-" + i + "></div>");
+            $("#venue-row-" + i).append("<div class=result-icon><i class=material-icons>place</i></div>");
+            $("#venue-row-" + i).append("<div class=result-image><img class=img-results src=assets/images/meetup_logo.jpg></div>");
+            $("#venue-row-" + i).append("<div class=result-name>" + venue.name + "</div>");
+            $("#venue-row-" + i).append("<div class=result-address>" + venue.address + "</p></div>");
+            $("#venue-row-" + i).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>lead the way" +
                 "<i class=material-icons right>chevron_right</i></button></div>");
         }
     }
