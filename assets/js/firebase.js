@@ -127,12 +127,12 @@ function searchCategory(address, category, radius, callback) {
                     displayMeetups(resultArr);
                 });
             });
-        } 
+        }
 
         // Reuse meetupResults if already exists
         else {
             console.log("Reusing meetup results");
-            getCoorFromAddress(address, function(addr){
+            getCoorFromAddress(address, function(addr) {
                 let resultArr = filterByDistance(addr, milesToMeters(radius), meetupResults);
                 displayMeetups(resultArr);
             });
@@ -145,6 +145,9 @@ function searchCategory(address, category, radius, callback) {
 
 // Returns an array of locations within the radius (for all categories) 
 function searchAll(address, radius) {
+    // Clear results array
+    resultArray = [];
+
     searchCategory(address, "restaurants", radius, function(results) {
         resultArray = resultArray.concat(results);
 
@@ -181,6 +184,9 @@ function milesToMeters(miles) {
 // }
 function displayVenue(venueArr) {
     console.log("Printing " + venueArr.length + " venues in table");
+    // Clear div
+    $(".yelp-result-table").empty();
+
     for (let i in venueArr) {
         let venue = venueArr[i];
         //console.log("Printing "+venue.name);

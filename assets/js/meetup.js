@@ -28,6 +28,9 @@ function meetupSearch(addr, callback) {
 function displayMeetups(results) {
     let j = markers.length;
 
+    // Clear div
+    $(".meetup-result-table").empty();
+
     for (var i = 0; i < results.length; i++) {
 
         var muName = results[i].name; //meetup's name
