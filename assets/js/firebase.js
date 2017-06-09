@@ -91,6 +91,8 @@ function addUserVenueToFirebase(category, userVenue) {
     });
 }
 
+var meetupResults = [];
+
 // Returns an array of locations within the radius (for given category)
 function searchCategory(address, category, radius, callback) {
     if (category == "restaurants" || category == "hotels" || category == "parks") {
@@ -114,6 +116,28 @@ function searchCategory(address, category, radius, callback) {
     }
     // Query meetup for locations
     else if (category == "meetups") {
+        // Check if we already have a meetups array from a previous query
+        // and reuse it if it exists
+        if (meetupResults.length === 0) {
+            console.log("Getting new meetup results");
+            getCoorFromAddress(address, function(addr) {
+                meetupSearch(addr, function(results) {
+                    // Copy results to meetupResults to be used later without having to query meetup API again
+                    meetupResults = results.slice();
+                    let resultArr = filterByDistance(addr, milesToMeters(radius), results);
+                    displayMeetups(resultArr);
+                });
+            });
+        }
+
+        // Reuse meetupResults if already exists
+        else {
+            console.log("Reusing meetup results");
+            getCoorFromAddress(address, function(addr) {
+                let resultArr = filterByDistance(addr, milesToMeters(radius), meetupResults);
+                displayMeetups(resultArr);
+            });
+        }
 
     } else {
         console.log("Invalid category!");
@@ -122,6 +146,9 @@ function searchCategory(address, category, radius, callback) {
 
 // Returns an array of locations within the radius (for all categories) 
 function searchAll(address, radius) {
+    // Clear results array
+    resultArray = [];
+
     searchCategory(address, "restaurants", radius, function(results) {
         resultArray = resultArray.concat(results);
 
@@ -131,9 +158,11 @@ function searchAll(address, radius) {
             resultArray = resultArray.concat(results);
 
             searchCategory(address, "hotels", radius, function(results) {
+                console.log("Prepare to display MAP!");
                 resultArray = resultArray.concat(results);
                 displayMapOfLocations(resultArray);
                 displayVenue(resultArray);
+                searchCategory(address, "meetups", radius);
             });
         });
 
@@ -156,6 +185,9 @@ function milesToMeters(miles) {
 // }
 function displayVenue(venueArr) {
     console.log("Printing " + venueArr.length + " venues in table");
+    // Clear div
+    $(".yelp-result-table").empty();
+
     for (let i in venueArr) {
         let venue = venueArr[i];
         //console.log("Printing "+venue.name);
