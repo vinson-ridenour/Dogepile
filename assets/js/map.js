@@ -235,7 +235,6 @@ $("body").on("mouseenter", ".venue-row", function(event) {
 // Handler when leaving row
 $("body").on("mouseleave", ".venue-row", function(event) {
     console.log("Mouse leave")
-        // change icon size of marker[?] according to id of the hovered venue
     let id = $(this).attr('id');
     let i = parseInt(id.split("-")[2]);
     // console.log("i: " + i);
