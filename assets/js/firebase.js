@@ -137,6 +137,7 @@ function searchAll(address, radius) {
             resultArray = resultArray.concat(results);
 
             searchCategory(address, "hotels", radius, function(results) {
+                console.log("Prepare to display MAP!");
                 resultArray = resultArray.concat(results);
                 displayMapOfLocations(resultArray);
                 displayVenue(resultArray);
