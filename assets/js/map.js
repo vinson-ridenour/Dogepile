@@ -36,6 +36,7 @@ function displayMapOfLocations(locationArray) {
     markerGroups.meetups = [];
 
     console.log("Displaying map...");
+    console.log("Map center: (" + startLoc.lat + ", " + startLoc.lng + ")");
 
     var myOptions = {
         zoom: 13,
@@ -43,24 +44,24 @@ function displayMapOfLocations(locationArray) {
         center: new google.maps.LatLng(startLoc.lat, startLoc.lng)
     };
 
-    map = new google.maps.Map(document.getElementById('map'), myOptions);
+    setTimeout(function() {
+        map = new google.maps.Map(document.getElementById('map'), myOptions);
 
-    // This listener fixes the problem of map not displaying until window is resized
-    google.maps.event.addListenerOnce(map, 'idle', function() {
-        google.maps.event.trigger(map, 'resize');
-    });
+        // Listener to fix issue where map doesn't display until window is resized
+        google.maps.event.addListenerOnce(map, 'idle', function() {
+            google.maps.event.trigger(map, 'resize');
+        });
 
-    // Create a marker for starting point
-    let homeMarker = new google.maps.Marker({
-        position: startLoc,
-        animation: null,
-        map: map
-    });
-
+        // Create a marker for starting point
+        let homeMarker = new google.maps.Marker({
+            position: startLoc,
+            animation: null,
+            map: map
+        });
+    }, 500);
 
     // console.log(locationArray);
     if (locationArray.length > 0) {
-        // console.log("Map center: (" + locationArray[0].lat + ", " + locationArray[0].lng + ")");
 
         for (var i = 0; i < locationArray.length; i++) {
             //console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
@@ -103,6 +104,7 @@ function displayMapOfLocations(locationArray) {
                 console.log("mouseover called for marker!");
                 // change css of the result list
             });
+
             markers[i].addListener('mouseout', function() {
                 console.log("mouseout called for marker!");
                 // change css of the result list

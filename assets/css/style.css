@@ -79,7 +79,7 @@ header {
 
 #logo {
 	margin: 10px;
-	font-size: 50px;
+	font-size: 45px;
 	cursor: pointer;
 }
 
@@ -111,7 +111,7 @@ i {
 	margin-left: 0;
 }
 
-#btnRow{
+#btnRow {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 10px;
