@@ -26,6 +26,12 @@ var markerGroups = {
     meetups: []
 }
 var map;
+var showVenues = {
+    restaurants: true,
+    hotels: true,
+    parks: true,
+    meetups: true
+}
 
 function displayMapOfLocations(locationArray) {
     // Clear markers
@@ -36,8 +42,8 @@ function displayMapOfLocations(locationArray) {
     markerGroups.meetups = [];
 
     console.log("Displaying map...");
-
     console.log("Map center: (" + startLoc.lat + ", " + startLoc.lng + ")");
+
     var myOptions = {
         zoom: 13,
         // Set center to start location (user address or location)
@@ -46,6 +52,8 @@ function displayMapOfLocations(locationArray) {
 
     setTimeout(function() {
         map = new google.maps.Map(document.getElementById('map'), myOptions);
+
+        // Listener to fix issue where map doesn't display until window is resized
         google.maps.event.addListenerOnce(map, 'idle', function() {
             google.maps.event.trigger(map, 'resize');
         });
@@ -56,62 +64,73 @@ function displayMapOfLocations(locationArray) {
             animation: null,
             map: map
         });
-    }, 500);
 
-    // console.log(locationArray);
-    if (locationArray.length > 0) {
+        // console.log(locationArray);
+        if (locationArray.length > 0) {
 
-        for (var i = 0; i < locationArray.length; i++) {
-            //console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
+            for (let i = 0; i < locationArray.length; i++) {
+                //console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
 
-            var markerIcon = {};
-            switch (locationArray[i].type) {
-                case "restaurants":
-                    console.log("use restaurant icon");
-                    markerIcon.url = "./assets/images/restaurant-icon.png";
-                    break;
-                case "parks":
-                    console.log("use park icon");
-                    markerIcon.url = "./assets/images/park-icon.png";
-                    break;
-                case "hotels":
-                    console.log("use hotel icon");
-                    markerIcon.url = "./assets/images/hotel-icon.png";
-                    break;
-                case "meetups":
-                    console.log("use meetups icon");
-                    markerIcon.url = "./assets/images/meetups-icon.png";
-                    break;
-                default:
-                    console.log("use hotel icon");
-                    markerIcon.url = "./assets/images/hotel-icon.png";
-                    break;
+                var markerIcon = {};
+                switch (locationArray[i].type) {
+                    case "restaurants":
+                        // console.log("use restaurant icon");
+                        markerIcon.url = "./assets/images/restaurant-icon.png";
+                        break;
+                    case "parks":
+                        // console.log("use park icon");
+                        markerIcon.url = "./assets/images/park-icon.png";
+                        break;
+                    case "hotels":
+                        // console.log("use hotel icon");
+                        markerIcon.url = "./assets/images/hotel-icon.png";
+                        break;
+                    case "meetups":
+                        // console.log("use meetups icon");
+                        markerIcon.url = "./assets/images/meetups-icon.png";
+                        break;
+                    default:
+                        // console.log("use hotel icon");
+                        markerIcon.url = "./assets/images/hotel-icon.png";
+                        break;
+                }
+                markerIcon.size = new google.maps.Size(40, 40);
+                markers[i] = new google.maps.Marker({
+                    position: locationArray[i],
+                    icon: markerIcon,
+                    animation: null,
+                    map: map
+                });
+
+                // Add marker to its corresponding category group
+                markerGroups[locationArray[i].type].push(markers[i]);
+
+                if (!showVenues[locationArray[i].type]) {
+                    markers[i].setVisible(false);
+                }
+
+                // Handler for mouse hover over marker
+                markers[i].addListener('mouseover', function() {
+                    // console.log("mouseover called for marker!");
+                    // Turn on bounce animation
+                    markers[i].setAnimation(google.maps.Animation.BOUNCE);
+                    // Highlight corresponding row
+                    $("#venue-row-" + i).css("background-color", "lightgray");
+                });
+
+                markers[i].addListener('mouseout', function() {
+                    // console.log("mouseout called for marker!");
+                    // Turn off bounce animation
+                    markers[i].setAnimation(null);
+                    // Reset corresponding row color
+                    $("#venue-row-" + i).css("background-color", "white");
+                });
+
             }
-            markerIcon.size = new google.maps.Size(40, 40);
-            markers[i] = new google.maps.Marker({
-                position: locationArray[i],
-                icon: markerIcon,
-                animation: null,
-                map: map
-            });
-
-            // Add marker to its corresponding category group
-            markerGroups[locationArray[i].type].push(markers[i]);
-
-            markers[i].addListener('mouseover', function() {
-                console.log("mouseover called for marker!");
-                // change css of the result list
-            });
-
-            markers[i].addListener('mouseout', function() {
-                console.log("mouseout called for marker!");
-                // change css of the result list
-            });
+        } else {
+            console.log("No locations in range!");
         }
-    }
-    else {
-        console.log("No locations in range!");
-    }
+    }, 500);
 }
 
 // Shows/hides all markers of the given type ("restaurants"|"hotels"|"parks"|"meetups")
@@ -137,11 +156,11 @@ a single object which has data fields "lat" and "lng"
 REFERENCE
 https://developers.google.com/maps/documentation/distance-matrix/intro
 */
-function getCoorCurrentLocation() {
+function getCoorCurrentLocation(callback) {
     var userPosition = {};
 
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
+        zoom: 13,
         // this location will immediately get updated if user position is feteched successfully
         center: { lat: 32.7157, lng: -117.1611 }
     });
@@ -157,15 +176,16 @@ function getCoorCurrentLocation() {
                     lng: position.coords.longitude
                 };
 
-                infoWindow.setPosition(pos);
+                infoWindow.setPosition(userPosition);
                 infoWindow.setContent('Location found.');
                 infoWindow.open(map);
-                map.setCenter(pos);
+                map.setCenter(userPosition);
+                callback(userPosition);
+                return userPosition;
             },
             function() {
                 handleLocationError(true, infoWindow, map.getCenter());
             });
-        return userPosition;
     } else {
         // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
