@@ -56,62 +56,61 @@ function displayMapOfLocations(locationArray) {
             animation: null,
             map: map
         });
-    }, 500);
+        // console.log(locationArray);
+        if (locationArray.length > 0) {
 
-    // console.log(locationArray);
-    if (locationArray.length > 0) {
+            for (var i = 0; i < locationArray.length; i++) {
+                //console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
 
-        for (var i = 0; i < locationArray.length; i++) {
-            //console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
+                var markerIcon = {};
+                switch (locationArray[i].type) {
+                    case "restaurants":
+                        console.log("use restaurant icon");
+                        markerIcon.url = "./assets/images/restaurant-icon.png";
+                        break;
+                    case "parks":
+                        console.log("use park icon");
+                        markerIcon.url = "./assets/images/park-icon.png";
+                        break;
+                    case "hotels":
+                        console.log("use hotel icon");
+                        markerIcon.url = "./assets/images/hotel-icon.png";
+                        break;
+                    case "meetups":
+                        console.log("use meetups icon");
+                        markerIcon.url = "./assets/images/meetups-icon.png";
+                        break;
+                    default:
+                        console.log("use hotel icon");
+                        markerIcon.url = "./assets/images/hotel-icon.png";
+                        break;
+                }
+                markerIcon.size = new google.maps.Size(40, 40);
+                markers[i] = new google.maps.Marker({
+                    position: locationArray[i],
+                    icon: markerIcon,
+                    animation: null,
+                    map: map
+                });
 
-            var markerIcon = {};
-            switch (locationArray[i].type) {
-                case "restaurants":
-                    console.log("use restaurant icon");
-                    markerIcon.url = "./assets/images/restaurant-icon.png";
-                    break;
-                case "parks":
-                    console.log("use park icon");
-                    markerIcon.url = "./assets/images/park-icon.png";
-                    break;
-                case "hotels":
-                    console.log("use hotel icon");
-                    markerIcon.url = "./assets/images/hotel-icon.png";
-                    break;
-                case "meetups":
-                    console.log("use meetups icon");
-                    markerIcon.url = "./assets/images/meetups-icon.png";
-                    break;
-                default:
-                    console.log("use hotel icon");
-                    markerIcon.url = "./assets/images/hotel-icon.png";
-                    break;
+                // Add marker to its corresponding category group
+                markerGroups[locationArray[i].type].push(markers[i]);
+
+                markers[i].addListener('mouseover', function() {
+                    console.log("mouseover called for marker!");
+                    // change css of the result list
+                });
+
+                markers[i].addListener('mouseout', function() {
+                    console.log("mouseout called for marker!");
+                    // change css of the result list
+                });
             }
-            markerIcon.size = new google.maps.Size(40, 40);
-            markers[i] = new google.maps.Marker({
-                position: locationArray[i],
-                icon: markerIcon,
-                animation: null,
-                map: map
-            });
-
-            // Add marker to its corresponding category group
-            markerGroups[locationArray[i].type].push(markers[i]);
-
-            markers[i].addListener('mouseover', function() {
-                console.log("mouseover called for marker!");
-                // change css of the result list
-            });
-
-            markers[i].addListener('mouseout', function() {
-                console.log("mouseout called for marker!");
-                // change css of the result list
-            });
         }
-    }
-    else {
-        console.log("No locations in range!");
-    }
+        else {
+            console.log("No locations in range!");
+        }
+    }, 500);
 }
 
 // Shows/hides all markers of the given type ("restaurants"|"hotels"|"parks"|"meetups")
