@@ -165,7 +165,7 @@ tr {
 }
 
 .img-results {
-	height: 40px;
+	height: 50px;
 }
 
 .result-row-styling {
@@ -188,6 +188,7 @@ tr {
 	justify-content: center;
 	overflow: wrap;
 	flex-direction: column;
+	border-bottom: 1px solid black;
 }
 
 .result-icon {
@@ -202,7 +203,7 @@ tr {
 
 .result-name {
 	/*width: 30%;*/
-	flex: 2;
+	flex: 1;
 }
 
 .result-address {
@@ -212,7 +213,7 @@ tr {
 
 .result-phone {
 	/*width: 25%;*/
-	flex: 2;
+	flex: 1;
 }
 
 .result-btn {
