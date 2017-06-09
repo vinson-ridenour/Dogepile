@@ -119,6 +119,7 @@ function searchCategory(address, category, radius, callback) {
         // Check if we already have a meetups array from a previous query
         // and reuse it if it exists
         if (meetupResults.length === 0) {
+            console.log("Getting new meetup results");
             getCoorFromAddress(address, function(addr) {
                 meetupSearch(addr, function(results) {
                     // Copy results to meetupResults to be used later without having to query meetup API again
