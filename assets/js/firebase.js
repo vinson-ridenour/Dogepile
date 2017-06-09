@@ -114,7 +114,13 @@ function searchCategory(address, category, radius, callback) {
     }
     // Query meetup for locations
     else if (category == "meetups") {
-
+        getCoorFromAddress(address, function(addr){
+            meetupSearch(addr, function(results){
+                let resultArr = filterByDistance(addr, milesToMeters(radius), results);
+                displayMeetups(resultArr);
+            });
+        });
+        
     } else {
         console.log("Invalid category!");
     }
@@ -134,6 +140,7 @@ function searchAll(address, radius) {
                 resultArray = resultArray.concat(results);
                 displayMapOfLocations(resultArray);
                 displayVenue(resultArray);
+                searchCategory(address, "meetups", radius);
             });
         });
 
