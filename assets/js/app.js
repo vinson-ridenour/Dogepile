@@ -15,19 +15,10 @@ $(document).ready(function() {
 
         if ($(this).attr("id") === "searchBtn" && $("#icon_prefix").val().length > 0) {
 
-<<<<<<< HEAD
-            if ($(this).attr("id") == "searchBtn") {
-                $("#locationEntered").text($("#icon_prefix").val());
-                console.log("Searching...");
-                let myLoc = $("#icon_prefix").val();
-                searchAll(myLoc, 5);
-            }
-=======
             $("#addressDisplay").text($("#icon_prefix").val());
             console.log("Searching...");
             startAddr = $("#icon_prefix").val();
             searchAll(startAddr, 2);
->>>>>>> 2f0662118d02c8499932605c3ca379acfd441151
 
             $("#searchPageContainer").css("opacity", "0");
             $("#mainContainer").css("visibility", "visible");
