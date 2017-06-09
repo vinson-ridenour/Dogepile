@@ -36,28 +36,30 @@ function displayMapOfLocations(locationArray) {
     markerGroups.meetups = [];
 
     console.log("Displaying map...");
+
+    console.log("Map center: (" + startLoc.lat + ", " + startLoc.lng + ")");
+    var myOptions = {
+        zoom: 13,
+        // Set center to start location (user address or location)
+        center: new google.maps.LatLng(startLoc.lat, startLoc.lng)
+    };
+
+    map = new google.maps.Map(document.getElementById('map'), myOptions);
+
+    google.maps.event.addListenerOnce(map, 'idle', function() {
+        google.maps.event.trigger(map, 'resize');
+    });
+
+    // Create a marker for starting point
+    let homeMarker = new google.maps.Marker({
+        position: startLoc,
+        animation: null,
+        map: map
+    });
+
     // console.log(locationArray);
     if (locationArray.length > 0) {
-        // console.log("Map center: (" + locationArray[0].lat + ", " + locationArray[0].lng + ")");
-        var myOptions = {
-            zoom: 13,
-            // Set center to start location (user address or location)
-            center: new google.maps.LatLng(startLoc.lat, startLoc.lng)
-        };
-
-        map = new google.maps.Map(document.getElementById('map'), myOptions);
-
-        google.maps.event.addListenerOnce(map, 'idle', function() {
-            google.maps.event.trigger(map, 'resize');
-        });
-
-        // Create a marker for starting point
-        let homeMarker = new google.maps.Marker({
-            position: startLoc,
-            animation: null,
-            map: map
-        });
-
+        
         for (var i = 0; i < locationArray.length; i++) {
             //console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
 
@@ -99,12 +101,14 @@ function displayMapOfLocations(locationArray) {
                 console.log("mouseover called for marker!");
                 // change css of the result list
             });
+
             markers[i].addListener('mouseout', function() {
                 console.log("mouseout called for marker!");
                 // change css of the result list
             });
         }
-    } else {
+    }
+    else {
         console.log("No locations in range!");
     }
 }
