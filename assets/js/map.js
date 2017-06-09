@@ -19,9 +19,21 @@ searchReslt = [
 displayMap(searchReslt);
 */
 var markers = [];
+var markerGroups = {
+    restaurants: [],
+    hotels: [],
+    parks: [],
+    meetups: []
+}
 
 function displayMapOfLocations(locationArray) {
-    markers = []; // clean markers
+    // Clear markers
+    markers = [];
+    markerGroups.restaurants = [];
+    markerGroups.hotels = [];
+    markerGroups.parks = [];
+    markerGroups.meetups = [];
+
     console.log("Displaying map...");
     // console.log(locationArray);
     if (locationArray.length > 0) {
@@ -78,6 +90,10 @@ function displayMapOfLocations(locationArray) {
                 animation: null,
                 map: map
             });
+
+            // Add marker to it's corresponding category group
+            markerGroups[locationArray[i].type].push(markers[i]);
+
             markers[i].addListener('mouseover', function() {
                 console.log("mouseover called for marker!");
                 // change css of the result list
@@ -92,9 +108,17 @@ function displayMapOfLocations(locationArray) {
     }
 }
 
-// Shows/hides all markers of the given type ("restaurants"|"hotels"|)
-function toggleMarkerGroup(type) {
-
+// Shows/hides all markers of the given type ("restaurants"|"hotels"|"parks"|"meetups")
+function toggleMarkerGroup(type, on) {
+    let groupArr = markerGroups[type];
+    for (let i in groupArr) {
+        var marker = groupArr[i];
+        if (on) {
+            marker.setVisible(true);
+        } else {
+            marker.setVisible(false);
+        }
+    }
 }
 
 /*
@@ -224,7 +248,7 @@ function deg2rad(deg) {
 
 // Handler when hovering over row
 $("body").on("mouseenter", ".venue-row", function(event) {
-    console.log("Mouse enter");
+    // console.log("Mouse enter");
     let id = $(this).attr('id');
     let i = parseInt(id.split("-")[2]);
     // console.log("i: " + i);
@@ -234,7 +258,7 @@ $("body").on("mouseenter", ".venue-row", function(event) {
 
 // Handler when leaving row
 $("body").on("mouseleave", ".venue-row", function(event) {
-    console.log("Mouse leave")
+    // console.log("Mouse leave")
     let id = $(this).attr('id');
     let i = parseInt(id.split("-")[2]);
     // console.log("i: " + i);

@@ -84,36 +84,45 @@ $(document).ready(function() {
 
     //-----------------------filter functions------------------------------
 
+    // Handler for when user flips a filter
     $(".lever").on("click", function() {
         console.log($(this).attr("class"));
         if ($(this).attr("data-check") == "checked") {
-            $(this).attr("data-check", "unchecked");
+            $(this).attr("data-check", "unchecked");            
         } else {
             $(this).attr("data-check", "checked");
         }
 
         if ($(".meetup").attr("data-check") == "unchecked") {
-            $(".meetup-result-table").hide(0)
+            $(".meetup-result-table").hide(0);
+            toggleMarkerGroup("meetups", false);
         } else {
-            $(".meetup-result-table").show(0)
+            $(".meetup-result-table").show(0);
+            toggleMarkerGroup("meetups", true);
         }
 
         if ($(".eat").attr("data-check") == "unchecked") {
-            $(".eatVenue").hide(0)
+            $(".eatVenue").hide(0);
+            toggleMarkerGroup("restaurants", false);
         } else {
-            $(".eatVenue").show(0)
+            $(".eatVenue").show(0);
+            toggleMarkerGroup("restaurants", true);
         }
 
         if ($(".stay").attr("data-check") == "unchecked") {
-            $(".stayVenue").hide(0)
+            $(".stayVenue").hide(0);
+            toggleMarkerGroup("hotels", false);
         } else {
-            $(".stayVenue").show(0)
+            $(".stayVenue").show(0);
+            toggleMarkerGroup("hotels", true);
         }
 
         if ($(".play").attr("data-check") == "unchecked") {
-            $(".playVenue").hide(0)
+            $(".playVenue").hide(0);
+            toggleMarkerGroup("parks", false);   
         } else {
-            $(".playVenue").show(0)
+            $(".playVenue").show(0);
+            toggleMarkerGroup("parks", true);
         }
     })
 }); // end of document ready
