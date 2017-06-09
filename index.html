@@ -16,7 +16,7 @@
     
     <!-- Materialize icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
 
@@ -44,7 +44,7 @@
                     <div class="input-field col s10">
                         <i class="material-icons prefix">pets</i>
                         <input id="icon_prefix" type="text">
-                        <label for="icon_prefix">enter address or location</label>
+                        <label class="input-label" for="icon_prefix">enter address or location</label>
                     </div>
                 
                     <div class="col s2">
@@ -73,7 +73,7 @@
     <!-- Modal Structure -->
         <div id="modal1" class="modal">
             <div class="modal-content">
-                <h4 class="addVenueText">add a new dog-friendly venue:</h4>
+                <h4 class="addVenueText">add a new pet-friendly venue:</h4>
                 <div class="input field">
                     <input id="new-name" type="text" placeholder="place name">
                     <!-- <label for="new-name">place name</label> -->
@@ -82,21 +82,33 @@
                     <input id="new-address" type="text" placeholder="street address">
                     <!-- <label for="new-address">street address</label> -->
                 </div>
-                <div class="dropdown-container">
-                <!-- Dropdown Trigger -->
-                    <button class='dropdown-button btn' data-belowOrigin="true" href='#' data-activates='dropdown1' id=venueTypeBtn>type</button>
-                <!-- Dropdown Structure -->
-                    <ul id='dropdown1' class='dropdown-content'>
-                        <li class="dropdown-item-venue" data-type="eat">eat</li>
-                        <li class="dropdown-item-venue" data-type="play">play</li>
-                        <li class="dropdown-item-venue" data-type="stay">stay</li>
-                    </ul>
+
+                <div id="btnRow">
+                    <!-- <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large disabled" id="shakeBtn"><i class="material-icons prefix">pets</i> shake</a> -->
+
+                    <!-- <div class="fixed-action-btn horizontal left-align">
+                        <a class="btn-floating btn-large red" id="venueTypeBtn">type
+                        </a>
+                        <ul>
+                          <li><a class="btn-floating btn-large yellow darken-3 dropdown-item-venue" data-color="#f9a825" data-type="play">play</a></li>
+                          <li><a class="btn-floating btn-large green dropdown-item-venue" data-color="#4CAF50" data-type="stay">stay</a></li>
+                          <li><a class="btn-floating btn-large blue dropdown-item-venue" data-color="#2196F3" data-type="eat">eat</a></li>
+                        </ul>
+                      </div> -->
+                    <div class="fixed-action-btn horizontal left-align">
+                        <a class="btn-floating btn-large red" id="venueTypeBtn">type
+                        </a>
+                        <ul>
+                          <li><a class="btn-floating btn-large yellow darken-3 dropdown-item-venue" data-color="#f9a825" data-type="play">play</a></li>
+                          <li><a class="btn-floating btn-large green dropdown-item-venue" data-color="#4CAF50" data-type="stay">stay</a></li>
+                          <li><a class="btn-floating btn-large blue dropdown-item-venue" data-color="#2196F3" data-type="eat">eat</a></li>
+                        </ul>
+                    </div>
+
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large disabled" id="shakeBtn"><i class="material-icons prefix">pets</i> shake</a>
                 </div>
             </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large" id="shakeBtn">shake</a>
-            </div>
-        </div>
+        </div> <!-- end modal structure -->
 
 <!-- Begin Results Page - page 2 -->
     <div class="results-page">
@@ -123,41 +135,41 @@
                             <div class="switch filter-restaurants">
                                 <label>
                                     eat
+                                    <!-- first checked to default to checked check attr is to follow filter -->
                                     <input type="checkbox" checked>
-                                    <span class="lever"></span>
+                                    <span class="lever eat" data-check="checked"></span>
                                 </label>
                             </div>
                             <div class="switch filter-parks">
                                 <label>
                                     play
                                     <input type="checkbox" checked>
-                                    <span class="lever"></span>
+                                    <span class="lever play" data-check="checked"></span>
                                 </label>
                             </div>
                             <div class="switch filter-hotels">
                                 <label>
                                     stay
                                     <input type="checkbox" checked>
-                                    <span class="lever"></span>
+                                    <span class="lever stay" data-check="checked"></span>
                                 </label>
                             </div>
                             <div class="switch filter-meetup">
                                 <label>
                                     meetup
                                     <input type="checkbox" checked>
-                                    <span class="lever"></span>
+                                    <span class="lever meetup" data-check="checked"></span>
                                 </label>
                             </div>
                         </div>
                     </div>  
                     <div class="col s2" id="radDiv">
-                        <button class='dropdown-button btn dropdown-item-radius' id="radiusBtn" data-radius="5" data-belowOrigin="false" href='#' data-activates='dropdown2'>5 mi</button>
+                        <button class='dropdown-button btn dropdown-item-radius' id="radiusBtn" data-radius="2" data-belowOrigin="false" href='#' data-activates='dropdown2'>2 miles</button>
                     <!-- Dropdown Radius Structure -->
                             <ul id='dropdown2' class='dropdown-content'>
-                                <li class="dropdown-item-radius" data-radius="5" data-display="5 mi">5 mi</li>
-                                <li class="dropdown-item-radius" data-radius="10" data-display="10 mi">10 mi</li>
-                                <li class="dropdown-item-radius" data-radius="15" data-display="15 mi">15 mi</li>
-                                <li class="dropdown-item-radius" data-radius="20" data-display="20 mi">20 mi</li>
+                                <li class="dropdown-item-radius" data-radius="2" data-display="2 miles">2 miles</li>
+                                <li class="dropdown-item-radius" data-radius="5" data-display="5 miles">5 miles</li>
+                                <li class="dropdown-item-radius" data-radius="10" data-display="10 miles">10 miles</li>
                             </ul>
                     </div>
                 </div>
@@ -165,21 +177,21 @@
         </div> <!-- end map/filter switches wrapper -->
         
     <!-- Results Tables -->
-        <div class="results-tables">
+        <div class="container results-tables">
 
             <!-- yelp results table -->
 
-            <div class="container">
+            <!-- <div class="container"> -->
                 <div class="yelp-result-table">
                 </div>
-            </div>
+            <!-- </div> -->
             
             <!-- meetup results table -->
 
-            <div class="container">
+            <!-- <div class="container"> -->
                 <div class="meetup-result-table">
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
 
         <!-- footer -->
@@ -192,8 +204,8 @@
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvUKChGjalgP1YNjJC66vq_tgbRuqa_Oc"></script>
 <script type="text/javascript" src="assets/js/map.js"></script>
-<script type="text/javascript" src="assets/js/meetup.js"></script>
 <script type="text/javascript" src="assets/js/firebase.js"></script>
+<script type="text/javascript" src="assets/js/meetup.js"></script>
 <script type="text/javascript" src="assets/js/app.js"></script>
 
 </body>

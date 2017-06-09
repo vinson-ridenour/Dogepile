@@ -6,7 +6,21 @@
 }
 
 #venueTypeBtn {
-	padding: 0 45px;
+	padding: 0;
+	text-align: center;
+	width: 70px;
+	height: 70px;
+	line-height: 70px;
+}
+
+.dropdown-item-venue {
+	text-transform: lowercase;
+	font-size: 20px;
+
+}
+
+.input-label {
+	font-family: "Helvetica", sans-serif;
 }
 
 i.right {
@@ -37,10 +51,11 @@ i.left {
 }
 
 #shakeBtn {
-	padding: 0 30px;
+	padding: 0 10px;
 }
 
 #radiusBtn {
+	color: #000;
 	background-color: red;
 }
 
@@ -110,10 +125,17 @@ input[type=text]:focus:not([readonly]) {
 	display: flex;
 	flex-direction: column;
 	min-height: 100%;
-	/*visibility: hidden;*/
+	opacity: 0;
+	transition: 1s;
 }
 
-.results-page.hidden {
+.results-tables {
+	height: 350px;
+	overflow: auto;
+	/*width: 70%;*/
+}
+
+.hidden{
 	display: none;
 }
 
@@ -145,17 +167,12 @@ input[type=text]:focus:not([readonly]) {
 	margin-top: 7px;
 }
 
-tr, td {
-	color: #000;
-	font-size: 16px;
-}
-
-tr {
-	border-bottom: 2px solid gray;
+#icon_prefix, #new-name, #new-address {
+	font-family: "Helvetica", sans-serif;
 }
 
 .img-results {
-	height: 40px;
+	height: 50px;
 }
 
 .result-row-styling {
@@ -165,6 +182,10 @@ tr {
 	align-items: center;
 	justify-content: space-between;
 	text-transform: lowercase;
+}
+
+.result-row-styling:hover {
+	background-color: lightgray;
 }
 
 .result-row-styling img {
@@ -178,6 +199,7 @@ tr {
 	justify-content: center;
 	overflow: wrap;
 	flex-direction: column;
+	border-bottom: 1px solid black;
 }
 
 .result-icon {
@@ -200,9 +222,14 @@ tr {
 	flex: 2;
 }
 
+.result-phone {
+	/*width: 25%;*/
+	flex: 1;
+}
+
 .result-btn {
 	/*width: 25%;*/
-	flex: 2;
+	flex: 1;
 	font-family: 'Indie Flower', cursive;
 }
 

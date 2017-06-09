@@ -91,6 +91,8 @@ function addUserVenueToFirebase(category, userVenue) {
     });
 }
 
+var meetupResults = [];
+
 // Returns an array of locations within the radius (for given category)
 function searchCategory(address, category, radius, callback) {
     if (category == "restaurants" || category == "hotels" || category == "parks") {
@@ -100,9 +102,11 @@ function searchCategory(address, category, radius, callback) {
             console.log("Inside searchCategory...");
             console.log(data.val());
             getCoorFromAddress(address, function(addr) {
+                // Set the start location
+                startLoc = addr;
                 let resultArr = filterByDistance(addr, milesToMeters(radius), data.val());
                 // Set category type of results
-                for (let i in resultArr){
+                for (let i in resultArr) {
                     resultArr[i].type = category;
                 }
                 callback(resultArr);
@@ -112,6 +116,28 @@ function searchCategory(address, category, radius, callback) {
     }
     // Query meetup for locations
     else if (category == "meetups") {
+        // Check if we already have a meetups array from a previous query
+        // and reuse it if it exists
+        if (meetupResults.length === 0) {
+            console.log("Getting new meetup results");
+            getCoorFromAddress(address, function(addr) {
+                meetupSearch(addr, function(results) {
+                    // Copy results to meetupResults to be used later without having to query meetup API again
+                    meetupResults = results.slice();
+                    let resultArr = filterByDistance(addr, milesToMeters(radius), results);
+                    displayMeetups(resultArr);
+                });
+            });
+        }
+
+        // Reuse meetupResults if already exists
+        else {
+            console.log("Reusing meetup results");
+            getCoorFromAddress(address, function(addr) {
+                let resultArr = filterByDistance(addr, milesToMeters(radius), meetupResults);
+                displayMeetups(resultArr);
+            });
+        }
 
     } else {
         console.log("Invalid category!");
@@ -120,10 +146,69 @@ function searchCategory(address, category, radius, callback) {
 
 // Returns an array of locations within the radius (for all categories) 
 function searchAll(address, radius) {
+    // Clear results array
+    resultArray = [];
 
+    searchCategory(address, "restaurants", radius, function(results) {
+        resultArray = resultArray.concat(results);
+
+        meetupSearch(startLoc.lat, startLoc.lng);
+
+        searchCategory(address, "parks", radius, function(results) {
+            resultArray = resultArray.concat(results);
+
+            searchCategory(address, "hotels", radius, function(results) {
+                console.log("Prepare to display MAP!");
+                resultArray = resultArray.concat(results);
+                displayMapOfLocations(resultArray);
+                displayVenue(resultArray);
+                searchCategory(address, "meetups", radius);
+            });
+        });
+
+    });
 }
 
 // Converts miles to meters
 function milesToMeters(miles) {
     return (miles * 1609.34);
+}
+
+// Displays an array of venue objects in the table
+// The objects have the following properties
+// {
+//      name: String,
+//      address: String,
+//      phone: String
+//      imgURL: String
+//      type: "restaurants"|"hotels"|"parks"
+// }
+function displayVenue(venueArr) {
+    console.log("Printing " + venueArr.length + " venues in table");
+    // Clear div
+    $(".yelp-result-table").empty();
+
+    for (let i in venueArr) {
+        let venue = venueArr[i];
+        //console.log("Printing "+venue.name);
+        $(".yelp-result-table").append("<div class='result-row-styling venue-row' id=venue-row-" + i + "></div>");
+        if (venue.type == "restaurants") {
+            $("#venue-row-" + i).append("<div class=result-icon><i class=cutlery><img src=assets/images/restaurant-icon.png></i></div>");
+            $("#venue-row-" + i).addClass("eatVenue");
+        }
+        if (venue.type == "hotels") {
+            $("#venue-row-" + i).append("<div class=result-icon><i class=bed><img src=assets/images/hotel-icon.png></i></div>");
+            $("#venue-row-" + i).addClass("stayVenue");
+        }
+        if (venue.type == "parks") {
+            $("#venue-row-" + i).append("<div class=result-icon><i class=tree><img src=assets/images/park-icon.png></i></div>");
+            $("#venue-row-" + i).addClass("playVenue");
+        }
+        $("#venue-row-" + i).append("<div class=result-image><img class=img-results src=" + venue.imgURL + "></div>");
+        $("#venue-row-" + i).append("<div class=result-name>" + venue.name + "</div>");
+        $("#venue-row-" + i).append("<div class=result-address>" + venue.address + "</p></div>");
+        $("#venue-row-" + i).append("<div class=result-phone>" + venue.phone + "</p></div>");
+        // $("#venue-row-" + i).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>lead the way" +
+        // "<i class=material-icons right>chevron_right</i></button></div>");
+    }
 }
