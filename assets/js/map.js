@@ -156,11 +156,11 @@ a single object which has data fields "lat" and "lng"
 REFERENCE
 https://developers.google.com/maps/documentation/distance-matrix/intro
 */
-function getCoorCurrentLocation() {
+function getCoorCurrentLocation(callback) {
     var userPosition = {};
 
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
+        zoom: 13,
         // this location will immediately get updated if user position is feteched successfully
         center: { lat: 32.7157, lng: -117.1611 }
     });
@@ -176,15 +176,16 @@ function getCoorCurrentLocation() {
                     lng: position.coords.longitude
                 };
 
-                infoWindow.setPosition(pos);
+                infoWindow.setPosition(userPosition);
                 infoWindow.setContent('Location found.');
                 infoWindow.open(map);
-                map.setCenter(pos);
+                map.setCenter(userPosition);
+                callback(userPosition);
+                return userPosition;
             },
             function() {
                 handleLocationError(true, infoWindow, map.getCenter());
             });
-        return userPosition;
     } else {
         // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
