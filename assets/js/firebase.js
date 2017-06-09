@@ -160,6 +160,12 @@ function searchAll(address, radius) {
             searchCategory(address, "hotels", radius, function(results) {
                 console.log("Prepare to display MAP!");
                 resultArray = resultArray.concat(results);
+
+                // Sort array by distance
+                resultArray.sort(function(a, b) {
+                    return (parseFloat(a.distance) - parseFloat(b.distance));
+                });
+
                 displayMapOfLocations(resultArray);
                 displayVenue(resultArray);
                 searchCategory(address, "meetups", radius);
