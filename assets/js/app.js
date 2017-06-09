@@ -75,12 +75,23 @@ $(document).ready(function() {
     function enableShake() {
         if ($("#new-name").val().length > 0 && $("#new-address").val().length > 0 && $("#venueTypeBtn").text() != "type") {
             $("#shakeBtn").removeClass("disabled");
+            
+            // Handler for when user adds a venue
+            $("#shakeBtn").on("click", function(){
+                let name = $("#new-name").val();
+                let address = $("#new-address").val();
+            });
         } else {
             if (!$("#shakeBtn").hasClass("disabled")) {
                 $("#shakeBtn").addClass("disabled")
+                // Remove any handlers
+                $("#shakeBtn").off();
             }
         }
     };
+
+
+
     //------------------------------------end of modal-----------------------------------
 
     //-----------------------filter functions------------------------------
