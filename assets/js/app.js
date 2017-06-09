@@ -15,7 +15,7 @@ $(document).ready(function() {
 
         if ($(this).attr("id") === "searchBtn" && $("#icon_prefix").val().length > 0) {
 
-            $("#addressDisplay").text($("#icon_prefix").val());
+            $("#locationEntered").text($("#icon_prefix").val());
             console.log("Searching...");
             startAddr = $("#icon_prefix").val();
             searchAll(startAddr, 2);
@@ -63,7 +63,7 @@ $(document).ready(function() {
 
     $(".dropdown-item-venue").on("click", function() {
         $("#venueTypeBtn").text($(this).attr("data-type"));
-        $("#venueTypeBtn").removeClass("red");
+        $("#venueTypeBtn").removeClass("blue");
         $("#venueTypeBtn").css("background-color", $(this).attr("data-color"));
         console.log($("#venueTypeBtn").text())
         enableShake();
