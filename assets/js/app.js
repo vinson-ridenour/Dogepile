@@ -25,7 +25,7 @@ $(document).ready(function() {
                 $("#addressDisplay").text($("#icon_prefix").val());
                 console.log("Searching...");
                 let myLoc = $("#icon_prefix").val();
-                searchAll(myLoc, 2);
+                searchAll(myLoc, 5);
             }
 
             $("#searchPageContainer").css("opacity", "0");

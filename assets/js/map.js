@@ -25,6 +25,7 @@ var markerGroups = {
     parks: [],
     meetups: []
 }
+var map;
 
 function displayMapOfLocations(locationArray) {
     // Clear markers
@@ -44,7 +45,7 @@ function displayMapOfLocations(locationArray) {
             center: new google.maps.LatLng(startLoc.lat, startLoc.lng)
         };
 
-        var map = new google.maps.Map(document.getElementById('map'), myOptions);
+        map = new google.maps.Map(document.getElementById('map'), myOptions);
 
         google.maps.event.addListenerOnce(map, 'idle', function() {
             google.maps.event.trigger(map, 'resize');
@@ -91,7 +92,7 @@ function displayMapOfLocations(locationArray) {
                 map: map
             });
 
-            // Add marker to it's corresponding category group
+            // Add marker to its corresponding category group
             markerGroups[locationArray[i].type].push(markers[i]);
 
             markers[i].addListener('mouseover', function() {
@@ -247,7 +248,7 @@ function deg2rad(deg) {
 }
 
 // Handler when hovering over row
-$("body").on("mouseenter", ".venue-row", function(event) {
+$("body").on("mouseenter", ".venue-row, .meetupVenue", function(event) {
     // console.log("Mouse enter");
     let id = $(this).attr('id');
     let i = parseInt(id.split("-")[2]);
@@ -257,7 +258,7 @@ $("body").on("mouseenter", ".venue-row", function(event) {
 });
 
 // Handler when leaving row
-$("body").on("mouseleave", ".venue-row", function(event) {
+$("body").on("mouseleave", ".venue-row, .meetupVenue", function(event) {
     // console.log("Mouse leave")
     let id = $(this).attr('id');
     let i = parseInt(id.split("-")[2]);
