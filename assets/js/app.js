@@ -22,7 +22,7 @@ $(document).ready(function() {
             // $(".results-page").removeClass("hidden");
 
             if ($(this).attr("id") == "searchBtn") {
-                $("#addressDisplay").text($("#icon_prefix").val());
+                $("#locationEntered").text($("#icon_prefix").val());
                 console.log("Searching...");
                 let myLoc = $("#icon_prefix").val();
                 searchAll(myLoc, 5);
@@ -62,7 +62,7 @@ $(document).ready(function() {
 
     $(".dropdown-item-venue").on("click", function() {
         $("#venueTypeBtn").text($(this).attr("data-type"));
-        $("#venueTypeBtn").removeClass("red");
+        $("#venueTypeBtn").removeClass("blue");
         $("#venueTypeBtn").css("background-color", $(this).attr("data-color"));
         console.log($("#venueTypeBtn").text())
         enableShake();

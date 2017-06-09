@@ -96,12 +96,12 @@
                         </ul>
                       </div> -->
                     <div class="fixed-action-btn horizontal left-align">
-                        <a class="btn-floating btn-large red" id="venueTypeBtn">type
+                        <a class="btn-floating btn-large blue" id="venueTypeBtn">type
                         </a>
                         <ul>
-                          <li><a class="btn-floating btn-large yellow darken-3 dropdown-item-venue" data-color="#f9a825" data-type="play">play</a></li>
-                          <li><a class="btn-floating btn-large green dropdown-item-venue" data-color="#4CAF50" data-type="stay">stay</a></li>
-                          <li><a class="btn-floating btn-large blue dropdown-item-venue" data-color="#2196F3" data-type="eat">eat</a></li>
+                          <li><a class="btn-floating btn-large yellow darken-3 dropdown-item-venue" data-color="#f9a825" data-type="eat">eat</a></li>
+                          <li><a class="btn-floating btn-large green dropdown-item-venue" data-color="#4CAF50" data-type="play">play</a></li>
+                          <li><a class="btn-floating btn-large red dropdown-item-venue" data-color="red" data-type="stay">stay</a></li>
                         </ul>
                     </div>
 
@@ -116,12 +116,12 @@
             <div id="headerContainer">
                 <h2 id="logo">dogepile!</h2>
                 <div id="addressDisplay">
-                    your current location
+                    <span id="locationsNear">showing locations near: </span><span id="locationEntered">your current location</span>
                 </div>
             </div>
         </header>
 
-    <!-- wrapper for map and filter switches -->
+    <!-- wrapper for map, filter switches, and radius button -->
         <div class="container">
             <div id="mainContainer">
                 <div class="row">

@@ -16,7 +16,13 @@
 .dropdown-item-venue {
 	text-transform: lowercase;
 	font-size: 20px;
+}
 
+#locationsNear {
+	font-family: 'Indie Flower', cursive;
+}
+#locationEntered {
+	font-family: "Helvetica", sans-serif;
 }
 
 .input-label {
@@ -200,27 +206,27 @@ input[type=text]:focus:not([readonly]) {
 
 .result-icon {
 	/*width: 10%;*/
-	flex: 1;
+	flex: 0.5;
 }
 
 .result-image {
 	/*width: 10%;*/
-	flex: 1;
+	flex: 0.5;
 }
 
 .result-name {
 	/*width: 30%;*/
-	flex: 1;
+	flex: 0.75;
 }
 
 .result-address {
 	/*width: 25%;*/
-	flex: 2;
+	flex: 1.5;
 }
 
 .result-phone {
 	/*width: 25%;*/
-	flex: 1;
+	flex: 0.75;
 }
 
 .result-btn {
