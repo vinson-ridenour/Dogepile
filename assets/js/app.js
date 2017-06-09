@@ -1,8 +1,9 @@
 var resultArray = []
 var startLoc = {};
+var startAddr = "";
 
 $(document).ready(function() {
-    
+
     // Hide results page on load
     $(".results-page").hide(0);
 
@@ -11,6 +12,7 @@ $(document).ready(function() {
         // Initialize globar vars
         resultArray = [];
         startLoc = {};
+        startAddr = "";
 
         console.log($(this).attr("id"))
         event.preventDefault();
@@ -24,8 +26,8 @@ $(document).ready(function() {
             if ($(this).attr("id") == "searchBtn") {
                 $("#addressDisplay").text($("#icon_prefix").val());
                 console.log("Searching...");
-                let myLoc = $("#icon_prefix").val();
-                searchAll(myLoc, 5);
+                startAddr = $("#icon_prefix").val();
+                searchAll(startAddr, 2);
             }
 
             $("#searchPageContainer").css("opacity", "0");
@@ -37,7 +39,7 @@ $(document).ready(function() {
             }, 500);
 
             var showResultsPage = setTimeout(function() {
-                
+
                 $(".results-page").css("opacity", "1");
                 $("#mainContainer").css("opacity", "1");
                 $("body").css("background-image", "none");
@@ -88,7 +90,7 @@ $(document).ready(function() {
     $(".lever").on("click", function() {
         console.log($(this).attr("class"));
         if ($(this).attr("data-check") == "checked") {
-            $(this).attr("data-check", "unchecked");            
+            $(this).attr("data-check", "unchecked");
         } else {
             $(this).attr("data-check", "checked");
         }
@@ -96,33 +98,49 @@ $(document).ready(function() {
         if ($(".meetup").attr("data-check") == "unchecked") {
             $(".meetup-result-table").hide(0);
             toggleMarkerGroup("meetups", false);
+            showVenues.meetups = false;
         } else {
             $(".meetup-result-table").show(0);
             toggleMarkerGroup("meetups", true);
+            showVenues.meetups = true;
         }
 
         if ($(".eat").attr("data-check") == "unchecked") {
             $(".eatVenue").hide(0);
             toggleMarkerGroup("restaurants", false);
+            showVenues.restaurants = false;
         } else {
             $(".eatVenue").show(0);
             toggleMarkerGroup("restaurants", true);
+            showVenues.restaurants = true;
         }
 
         if ($(".stay").attr("data-check") == "unchecked") {
             $(".stayVenue").hide(0);
             toggleMarkerGroup("hotels", false);
+            showVenues.hotels = false;
         } else {
             $(".stayVenue").show(0);
             toggleMarkerGroup("hotels", true);
+            showVenues.hotels = true;
         }
 
         if ($(".play").attr("data-check") == "unchecked") {
             $(".playVenue").hide(0);
-            toggleMarkerGroup("parks", false);   
+            toggleMarkerGroup("parks", false);
+            showVenues.parks = false;
         } else {
             $(".playVenue").show(0);
             toggleMarkerGroup("parks", true);
+            showVenues.parks = true;
         }
     })
+
+    // Handler for when user changes search radius
+    $("#dropdown2 > li").on("click", function() {
+        let radius = $(this).attr("data-radius").split(" ")[0];
+        console.log("Changed radius to " + radius);
+        searchAll(startAddr, radius);
+    });
+
 }); // end of document ready
