@@ -8,7 +8,8 @@ html, body {
 
 body {
 	font-family: 'Indie Flower', cursive;
-	background-image: url("../images/Doge.jpg");
+	background-image: url("../images/dogpark.jpg");
+	background-size: 100% 100%;
 }
 
 #searchPageContainer {
