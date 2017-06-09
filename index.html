@@ -44,7 +44,7 @@
                     <div class="input-field col s10">
                         <i class="material-icons prefix">pets</i>
                         <input id="icon_prefix" type="text">
-                        <label for="icon_prefix">enter address or location</label>
+                        <label class="input-label" for="icon_prefix">enter address or location</label>
                     </div>
                 
                     <div class="col s2">
@@ -73,7 +73,7 @@
     <!-- Modal Structure -->
         <div id="modal1" class="modal">
             <div class="modal-content">
-                <h4 class="addVenueText">add a new dog-friendly venue:</h4>
+                <h4 class="addVenueText">add a new pet-friendly venue:</h4>
                 <div class="input field">
                     <input id="new-name" type="text" placeholder="place name">
                     <!-- <label for="new-name">place name</label> -->
@@ -84,20 +84,31 @@
                 </div>
 
                 <div id="btnRow">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large disabled" id="shakeBtn"><i class="material-icons prefix">pets</i> shake</a>
+                    <!-- <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large disabled" id="shakeBtn"><i class="material-icons prefix">pets</i> shake</a> -->
 
+                    <!-- <div class="fixed-action-btn horizontal left-align">
+                        <a class="btn-floating btn-large red" id="venueTypeBtn">type
+                        </a>
+                        <ul>
+                          <li><a class="btn-floating btn-large yellow darken-3 dropdown-item-venue" data-color="#f9a825" data-type="play">play</a></li>
+                          <li><a class="btn-floating btn-large green dropdown-item-venue" data-color="#4CAF50" data-type="stay">stay</a></li>
+                          <li><a class="btn-floating btn-large blue dropdown-item-venue" data-color="#2196F3" data-type="eat">eat</a></li>
+                        </ul>
+                      </div> -->
                     <div class="fixed-action-btn horizontal left-align">
                         <a class="btn-floating btn-large red" id="venueTypeBtn">type
                         </a>
                         <ul>
-                          <li><a class="btn-floating btn-large yellow darken-1 dropdown-item-venue" data-color="#fdd835" data-type="play">play</a></li>
+                          <li><a class="btn-floating btn-large yellow darken-3 dropdown-item-venue" data-color="#f9a825" data-type="play">play</a></li>
                           <li><a class="btn-floating btn-large green dropdown-item-venue" data-color="#4CAF50" data-type="stay">stay</a></li>
                           <li><a class="btn-floating btn-large blue dropdown-item-venue" data-color="#2196F3" data-type="eat">eat</a></li>
                         </ul>
-                      </div>
+                    </div>
+
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large disabled" id="shakeBtn"><i class="material-icons prefix">pets</i> shake</a>
                 </div>
             </div>
-        </div>
+        </div> <!-- end modal structure -->
 
 <!-- Begin Results Page - page 2 -->
     <div class="results-page">
