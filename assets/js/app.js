@@ -43,6 +43,8 @@ $(document).ready(function() {
                 startLoc = Object.assign({}, coord);
                 console.log("Current user pos: (" + coord.lat + ", " + coord.lng + ")");
                 $("#icon_prefix").val(coord.lat + ", " + coord.lng);
+                $(".input-label").addClass("active");
+                $(".prefix").addClass("active");
             });
         }
     });
