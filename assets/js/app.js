@@ -9,26 +9,16 @@ $(document).ready(function() {
 
     //------------transition from search view to results view-------------------------------
     $(".init").on("click", function(event) {
-        // Initialize globar vars
-        resultArray = [];
-        startLoc = {};
-        startAddr = "";
 
         console.log($(this).attr("id"))
         event.preventDefault();
 
-        if ($("#icon_prefix").val().length > 0) {
+        if ($(this).attr("id") === "searchBtn" && $("#icon_prefix").val().length > 0) {
 
-            // $("body").css("background-image", "none");
-            // $(".search-page").css("display", "none");
-            // $(".results-page").removeClass("hidden");
-
-            if ($(this).attr("id") == "searchBtn") {
-                $("#addressDisplay").text($("#icon_prefix").val());
-                console.log("Searching...");
-                startAddr = $("#icon_prefix").val();
-                searchAll(startAddr, 2);
-            }
+            $("#addressDisplay").text($("#icon_prefix").val());
+            console.log("Searching...");
+            startAddr = $("#icon_prefix").val();
+            searchAll(startAddr, 2);
 
             $("#searchPageContainer").css("opacity", "0");
             $("#mainContainer").css("visibility", "visible");
@@ -45,6 +35,15 @@ $(document).ready(function() {
                 $("body").css("background-image", "none");
                 $(".results-page").show(0);
             }, 750);
+        }
+
+        // Populate field with user coordinates
+        else if ($(this).attr("id") === "geoBtn") {
+            getCoorCurrentLocation(function(coord) {
+                startLoc = Object.assign({}, coord);
+                console.log("Current user pos: (" + coord.lat + ", " + coord.lng + ")");
+                $("#icon_prefix").val(coord.lat + ", " + coord.lng);
+            });
         }
     });
 
