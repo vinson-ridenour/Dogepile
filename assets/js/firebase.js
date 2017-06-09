@@ -131,6 +131,7 @@ function searchCategory(address, category, radius, callback) {
 
         // Reuse meetupResults if already exists
         else {
+            console.log("Reusing meetup results");
             getCoorFromAddress(address, function(addr){
                 let resultArr = filterByDistance(addr, milesToMeters(radius), meetupResults);
                 displayMeetups(resultArr);

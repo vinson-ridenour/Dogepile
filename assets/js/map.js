@@ -44,21 +44,19 @@ function displayMapOfLocations(locationArray) {
         center: new google.maps.LatLng(startLoc.lat, startLoc.lng)
     };
 
-    setTimeout(function() {
-        map = new google.maps.Map(document.getElementById('map'), myOptions);
+    map = new google.maps.Map(document.getElementById('map'), myOptions);
 
-        // Listener to fix issue where map doesn't display until window is resized
-        google.maps.event.addListenerOnce(map, 'idle', function() {
-            google.maps.event.trigger(map, 'resize');
-        });
+    // Listener to fix issue where map doesn't display until window is resized
+    google.maps.event.addListenerOnce(map, 'idle', function() {
+        google.maps.event.trigger(map, 'resize');
+    });
 
-        // Create a marker for starting point
-        let homeMarker = new google.maps.Marker({
-            position: startLoc,
-            animation: null,
-            map: map
-        });
-    }, 500);
+    // Create a marker for starting point
+    let homeMarker = new google.maps.Marker({
+        position: startLoc,
+        animation: null,
+        map: map
+    });
 
     // console.log(locationArray);
     if (locationArray.length > 0) {
