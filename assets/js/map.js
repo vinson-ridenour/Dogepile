@@ -68,7 +68,7 @@ function displayMapOfLocations(locationArray) {
         // console.log(locationArray);
         if (locationArray.length > 0) {
 
-            for (var i = 0; i < locationArray.length; i++) {
+            for (let i = 0; i < locationArray.length; i++) {
                 //console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
 
                 var markerIcon = {};
@@ -110,14 +110,20 @@ function displayMapOfLocations(locationArray) {
                 }
 
                 // Handler for mouse hover over marker
-                markers[i].addListener('mouseenter', function() {
-                    console.log("mouseover called for marker!");
-                    // change css of the result list
+                markers[i].addListener('mouseover', function() {
+                    // console.log("mouseover called for marker!");
+                    // Turn on bounce animation
+                    markers[i].setAnimation(google.maps.Animation.BOUNCE);
+                    // Highlight corresponding row
+                    $("#venue-row-" + i).css("background-color", "lightgray");
                 });
 
-                markers[i].addListener('mouseleave', function() {
-                    console.log("mouseout called for marker!");
-                    // change css of the result list
+                markers[i].addListener('mouseout', function() {
+                    // console.log("mouseout called for marker!");
+                    // Turn off bounce animation
+                    markers[i].setAnimation(null);
+                    // Reset corresponding row color
+                    $("#venue-row-" + i).css("background-color", "white");
                 });
 
             }
