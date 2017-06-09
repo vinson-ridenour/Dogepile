@@ -37,11 +37,11 @@ $(document).ready(function() {
             }, 500);
 
             var showResultsPage = setTimeout(function() {
-
-                $(".results-page").show(0);
+                
                 $(".results-page").css("opacity", "1");
                 $("#mainContainer").css("opacity", "1");
                 $("body").css("background-image", "none");
+                $(".results-page").show(0);
             }, 750);
         }
     });
