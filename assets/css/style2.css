@@ -184,6 +184,10 @@ input[type=text]:focus:not([readonly]) {
 	text-transform: lowercase;
 }
 
+.result-row-styling:hover {
+	background-color: lightgray;
+}
+
 .result-row-styling img {
 	max-height: 100%;
 }
@@ -210,7 +214,7 @@ input[type=text]:focus:not([readonly]) {
 
 .result-name {
 	/*width: 30%;*/
-	flex: 1;
+	flex: 2;
 }
 
 .result-address {
@@ -225,7 +229,7 @@ input[type=text]:focus:not([readonly]) {
 
 .result-btn {
 	/*width: 25%;*/
-	flex: 2;
+	flex: 1;
 	font-family: 'Indie Flower', cursive;
 }
 
