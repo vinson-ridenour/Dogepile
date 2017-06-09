@@ -122,10 +122,61 @@ function searchCategory(address, category, radius, callback) {
 
 // Returns an array of locations within the radius (for all categories) 
 function searchAll(address, radius) {
+    searchCategory(address, "restaurants", radius, function(results) {
+        resultArray = resultArray.concat(results);
 
+        meetupSearch(startLoc.lat, startLoc.lng);
+
+        searchCategory(address, "parks", radius, function(results) {
+            resultArray = resultArray.concat(results);
+
+            searchCategory(address, "hotels", radius, function(results) {
+                resultArray = resultArray.concat(results);
+                displayMapOfLocations(resultArray);
+                displayVenue(resultArray);
+            });
+        });
+
+    });
 }
 
 // Converts miles to meters
 function milesToMeters(miles) {
     return (miles * 1609.34);
+}
+
+// Displays an array of venue objects in the table
+// The objects have the following properties
+// {
+//      name: String,
+//      address: String,
+//      phone: String
+//      imgURL: String
+//      type: "restaurants"|"hotels"|"parks"
+// }
+function displayVenue(venueArr) {
+    console.log("Printing " + venueArr.length + " venues in table");
+    for (let i in venueArr) {
+        let venue = venueArr[i];
+        //console.log("Printing "+venue.name);
+        $(".yelp-result-table").append("<div class='result-row-styling venue-row' id=venue-row-" + i + "></div>");
+        if (venue.type == "restaurants") {
+            $("#venue-row-" + i).append("<div class=result-icon><i class=cutlery><img src=assets/images/restaurant-icon.png></i></div>");
+            $("#venue-row-" + i).addClass("eatVenue");
+        }
+        if (venue.type == "hotels") {
+            $("#venue-row-" + i).append("<div class=result-icon><i class=bed><img src=assets/images/hotel-icon.png></i></div>");
+            $("#venue-row-" + i).addClass("stayVenue");
+        }
+        if (venue.type == "parks") {
+            $("#venue-row-" + i).append("<div class=result-icon><i class=tree><img src=assets/images/park-icon.png></i></div>");
+            $("#venue-row-" + i).addClass("playVenue");
+        }
+        $("#venue-row-" + i).append("<div class=result-image><img class=img-results src=" + venue.imgURL + "></div>");
+        $("#venue-row-" + i).append("<div class=result-name>" + venue.name + "</div>");
+        $("#venue-row-" + i).append("<div class=result-address>" + venue.address + "</p></div>");
+        $("#venue-row-" + i).append("<div class=result-phone>" + venue.phone + "</p></div>");
+        // $("#venue-row-" + i).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>lead the way" +
+        // "<i class=material-icons right>chevron_right</i></button></div>");
+    }
 }

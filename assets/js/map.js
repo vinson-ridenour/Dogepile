@@ -71,7 +71,7 @@ function displayMapOfLocations(locationArray) {
                     markerIcon.url = "./assets/images/hotel-icon.png";
                     break;
             }
-            markerIcon.size = new google.maps.Size(30, 30);
+            markerIcon.size = new google.maps.Size(40, 40);
             markers[i] = new google.maps.Marker({
                 position: locationArray[i],
                 icon: markerIcon,
@@ -90,6 +90,11 @@ function displayMapOfLocations(locationArray) {
     } else {
         console.log("No locations in range!");
     }
+}
+
+// Shows/hides all markers of the given type ("restaurants"|"hotels"|)
+function toggleMarkerGroup(type) {
+
 }
 
 /*

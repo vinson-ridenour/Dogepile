@@ -1,13 +1,16 @@
+var resultArray = []
+var startLoc = {};
+
 $(document).ready(function() {
-    var restaurantResults = [];
-    var hotelResults = [];
-    var parkResults = [];
-    var meetupResults = [];
-    var startLoc = {};
+    
+    // Hide results page on load
     $(".results-page").hide(0);
 
     //------------transition from search view to results view-------------------------------
     $(".init").on("click", function(event) {
+        // Initialize globar vars
+        resultArray = [];
+        startLoc = {};
 
         console.log($(this).attr("id"))
         event.preventDefault();
@@ -22,12 +25,7 @@ $(document).ready(function() {
                 $("#addressDisplay").text($("#icon_prefix").val());
                 console.log("Searching...");
                 let myLoc = $("#icon_prefix").val();
-                searchCategory(myLoc, "restaurants", 5, function(results) {
-                    // $("body").css("background-image", "none");
-                    displayMapOfLocations(results);
-                    displayVenue(results);
-                });
-                meetupSearch();
+                searchAll(myLoc, 2);
             }
 
             $("#searchPageContainer").css("opacity", "0");
@@ -83,42 +81,6 @@ $(document).ready(function() {
         }
     };
     //------------------------------------end of modal-----------------------------------
-
-    // Displays an array of venue objects in the table
-    // The objects have the following properties
-    // {
-    //      name: String,
-    //      address: String,
-    //      phone: String
-    //      imgURL: String
-    //      type: "restaurants"|"hotels"|"parks"
-    // }
-    function displayVenue(venueArr) {
-        console.log("Printing " + venueArr.length + " venues in table");
-        for (let i in venueArr) {
-            let venue = venueArr[i];
-            //console.log("Printing "+venue.name);
-            $(".yelp-result-table").append("<div class='result-row-styling venue-row' id=venue-row-" + i + "></div>");
-            if (venue.type == "restaurants") {
-                $("#venue-row-" + i).append("<div class=result-icon><i class=cutlery><img src=assets/images/restaurant-icon.png></i></div>");
-                $("#venue-row-" + i).addClass("eatVenue");
-            }
-            if (venue.type == "hotels") {
-                $("#venue-row-" + i).append("<div class=result-icon><i class=bed><img src=assets/images/hotel-icon.png></i></div>");
-                $("#venue-row-" + i).addClass("stayVenue");
-            }
-            if (venue.type == "parks") {
-                $("#venue-row-" + i).append("<div class=result-icon><i class=tree><img src=assets/images/park-icon.png></i></div>");
-                $("#venue-row-" + i).addClass("playVenue");
-            }
-            $("#venue-row-" + i).append("<div class=result-image><img class=img-results src=" + venue.imgURL + "></div>");
-            $("#venue-row-" + i).append("<div class=result-name>" + venue.name + "</div>");
-            $("#venue-row-" + i).append("<div class=result-address>" + venue.address + "</p></div>");
-            $("#venue-row-" + i).append("<div class=result-phone>" + venue.phone + "</p></div>");
-            // $("#venue-row-" + i).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>lead the way" +
-            // "<i class=material-icons right>chevron_right</i></button></div>");
-        }
-    }
 
     //-----------------------filter functions------------------------------
 
