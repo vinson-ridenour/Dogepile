@@ -91,6 +91,8 @@ function addUserVenueToFirebase(category, userVenue) {
     });
 }
 
+var meetupResults = [];
+
 // Returns an array of locations within the radius (for given category)
 function searchCategory(address, category, radius, callback) {
     if (category == "restaurants" || category == "hotels" || category == "parks") {
@@ -114,13 +116,27 @@ function searchCategory(address, category, radius, callback) {
     }
     // Query meetup for locations
     else if (category == "meetups") {
-        getCoorFromAddress(address, function(addr){
-            meetupSearch(addr, function(results){
-                let resultArr = filterByDistance(addr, milesToMeters(radius), results);
+        // Check if we already have a meetups array from a previous query
+        // and reuse it if it exists
+        if (meetupResults.length === 0) {
+            getCoorFromAddress(address, function(addr) {
+                meetupSearch(addr, function(results) {
+                    // Copy results to meetupResults to be used later without having to query meetup API again
+                    meetupResults = results.slice();
+                    let resultArr = filterByDistance(addr, milesToMeters(radius), results);
+                    displayMeetups(resultArr);
+                });
+            });
+        } 
+
+        // Reuse meetupResults if already exists
+        else {
+            getCoorFromAddress(address, function(addr){
+                let resultArr = filterByDistance(addr, milesToMeters(radius), meetupResults);
                 displayMeetups(resultArr);
             });
-        });
-        
+        }
+
     } else {
         console.log("Invalid category!");
     }

@@ -36,27 +36,31 @@ function displayMapOfLocations(locationArray) {
     markerGroups.meetups = [];
 
     console.log("Displaying map...");
+
+    var myOptions = {
+        zoom: 13,
+        // Set center to start location (user address or location)
+        center: new google.maps.LatLng(startLoc.lat, startLoc.lng)
+    };
+
+    map = new google.maps.Map(document.getElementById('map'), myOptions);
+
+    // This listener fixes the problem of map not displaying until window is resized
+    google.maps.event.addListenerOnce(map, 'idle', function() {
+        google.maps.event.trigger(map, 'resize');
+    });
+
+    // Create a marker for starting point
+    let homeMarker = new google.maps.Marker({
+        position: startLoc,
+        animation: null,
+        map: map
+    });
+
+
     // console.log(locationArray);
     if (locationArray.length > 0) {
         // console.log("Map center: (" + locationArray[0].lat + ", " + locationArray[0].lng + ")");
-        var myOptions = {
-            zoom: 13,
-            // Set center to start location (user address or location)
-            center: new google.maps.LatLng(startLoc.lat, startLoc.lng)
-        };
-
-        map = new google.maps.Map(document.getElementById('map'), myOptions);
-
-        google.maps.event.addListenerOnce(map, 'idle', function() {
-            google.maps.event.trigger(map, 'resize');
-        });
-
-        // Create a marker for starting point
-        let homeMarker = new google.maps.Marker({
-            position: startLoc,
-            animation: null,
-            map: map
-        });
 
         for (var i = 0; i < locationArray.length; i++) {
             //console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
