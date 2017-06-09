@@ -59,18 +59,18 @@ $(document).ready(function() {
 
     $("#addLoc").on("click", $(".modal").modal());
 
-    console.log($("#venueTypeBtn").text())
+    console.log($("#venueTypeBtn").text());
 
     $(".dropdown-item-venue").on("click", function() {
         $("#venueTypeBtn").text($(this).attr("data-type"));
         $("#venueTypeBtn").removeClass("blue");
         $("#venueTypeBtn").css("background-color", $(this).attr("data-color"));
-        console.log($("#venueTypeBtn").text())
+        console.log($("#venueTypeBtn").text());
         enableShake();
     });
 
-    $("#new-name").keyup(enableShake)
-    $("#new-address").keyup(enableShake)
+    $("#new-name").keyup(enableShake);
+    $("#new-address").keyup(enableShake);
 
     function enableShake() {
         if ($("#new-name").val().length > 0 && $("#new-address").val().length > 0 && $("#venueTypeBtn").text() != "type") {
@@ -80,17 +80,25 @@ $(document).ready(function() {
             $("#shakeBtn").on("click", function(){
                 let name = $("#new-name").val();
                 let address = $("#new-address").val();
+                let category = $("#venueTypeBtn").val();
+
+                // Get and verify coordinates of address
+                getCoordFromAddress(address, function(addr){
+                    if (addr===null){
+                        console.log("Invalid address. Venue not added!")
+                    } else {
+
+                    }
+                });
             });
         } else {
             if (!$("#shakeBtn").hasClass("disabled")) {
-                $("#shakeBtn").addClass("disabled")
+                $("#shakeBtn").addClass("disabled");
                 // Remove any handlers
                 $("#shakeBtn").off();
             }
         }
     };
-
-
 
     //------------------------------------end of modal-----------------------------------
 

@@ -217,7 +217,7 @@ function getCoorFromAddress(address, callback) {
             // deal with the case that user enters an address like "dioqjweoqweq"
             if (response.status == "ZERO_RESULTS") {
                 console.log("Please enter a valid address.");
-                return null;
+                callback(null);
             } else {
                 console.log("Converting to coordinates!");
                 convertedCoor.lat = response.results[0].geometry.location.lat;
@@ -225,7 +225,6 @@ function getCoorFromAddress(address, callback) {
 
                 console.log(convertedCoor);
                 callback(convertedCoor);
-                return convertedCoor;
             }
         }
     });
