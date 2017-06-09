@@ -10,6 +10,17 @@
 	text-align: center;
 	width: 70px;
 	height: 70px;
+	line-height: 70px;
+}
+
+.dropdown-item-venue {
+	text-transform: lowercase;
+	font-size: 20px;
+
+}
+
+.input-label {
+	font-family: "Helvetica", sans-serif;
 }
 
 i.right {
@@ -156,13 +167,8 @@ input[type=text]:focus:not([readonly]) {
 	margin-top: 7px;
 }
 
-tr, td {
-	color: #000;
-	font-size: 16px;
-}
-
-tr {
-	border-bottom: 2px solid gray;
+#icon_prefix, #new-name, #new-address {
+	font-family: "Helvetica", sans-serif;
 }
 
 .img-results {
