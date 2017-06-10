@@ -161,8 +161,8 @@ function getCoorCurrentLocation(callback) {
 
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
-        // this location will immediately get updated if user position is fetched successfully
-        center: { lat: 32.7157, lng: -117.1611 }
+        // this location will immediately get updated if user position is feteched successfully
+        center: { lat: startLoc.lat, lng: startLoc.lng}
     });
 
     infoWindow = new google.maps.InfoWindow;

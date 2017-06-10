@@ -107,6 +107,9 @@ $(document).ready(function() {
                             lat: addr.lat,
                             lng: addr.lng
                         }
+                        startLoc = {
+                            lat: addr.lat,
+                            lng: addr.lng};
                         addUserVenueToFirebase(category, venue);
                         console.log("Added new venue to firebase: ");
                         console.log(venue);
