@@ -237,18 +237,17 @@ function displayVenue(venueArr) {
 
 // Handler when user clicks on Go! button
 $(document.body).on("click", "#dirBtn, .yelpDirBtn", function() {
-    var destinationCoor;
-    var sourceCoor;
-    getCoorFromAddress($(this)[0].id, function(coor) {
-        destinationCoor = coor;
-        sourceCoor = startLoc;
-        console.log("Dest is ");
-        console.log(destinationCoor);
-        console.log("Source is ");
-        console.log(sourceCoor);
-        var googleDirectionUrl = "https://maps.google.com/?saddr=" + sourceCoor.lat + "," + sourceCoor.lng + "&daddr=" + destinationCoor.lat + "," + destinationCoor.lng;
-        console.log("Google direction url: " + googleDirectionUrl);
-        //window.open(googleDirectionUrl);
-        window.location.href = googleDirectionUrl;
-    });
+    let addr;
+
+    if ($(this).attr("id") === "dirBtn") {
+        addr = $(this).attr("addr");
+    } else {
+        addr = $(this)[0].id;
+    }
+
+    sourceCoor = startLoc;
+    var googleDirectionUrl = "https://maps.google.com/?saddr=" + sourceCoor.lat + "," + sourceCoor.lng + "&daddr=" + addr;
+    console.log("Google direction url: " + googleDirectionUrl);
+    //window.open(googleDirectionUrl);
+    window.location.href = googleDirectionUrl;
 });
