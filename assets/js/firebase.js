@@ -63,6 +63,8 @@ addUserVenueToFirebase("hotels", {
     "address": "199 N El Camino Real Encinitas, CA 92024",
     "phone": "(760) 487-5429",
     "name": "Hammeru2019s NY Pizza"
+    "lat":
+    "lng":
   });
 */
 function addUserVenueToFirebase(category, userVenue) {
@@ -75,19 +77,21 @@ function addUserVenueToFirebase(category, userVenue) {
         console.log("Empty address found in user input venue.");
         return;
     }
-    var indexForUserVenue;
-    if (database.ref(category).length) {
-        indexForUserVenue = database.ref(category).length;
-    } else {
-        indexForUserVenue = 0;
-    }
-    database.ref(category + "/" + indexForUserVenue).set({
-        address: userVenue.address,
-        imgURL: userVenue.imgURL,
-        name: userVenue.name,
-        phone: userVenue.phone,
-        lat: getCoorFromAddress(userVenue.address).lat,
-        lng: getCoorFromAddress(userVenue.address).lng
+
+    // Insert into category list in firebase
+    database.ref(category).once("value", function(data) {
+        // Get length of current list
+        let indexForUserVenue = data.val().length;
+
+        console.log("Inserting new venue to '" + category + "' at index " + indexForUserVenue);
+        database.ref(category + "/" + indexForUserVenue).set({
+            address: userVenue.address,
+            imgURL: userVenue.imgURL || "",
+            name: userVenue.name,
+            phone: userVenue.phone || "",
+            lat: userVenue.lat,
+            lng: userVenue.lng
+        });
     });
 }
 
@@ -99,8 +103,8 @@ function searchCategory(address, category, radius, callback) {
         console.log("Searching in " + category);
         let categoryRef = database.ref(category);
         let categoryArr = categoryRef.once("value", function(data) {
-            console.log("Inside searchCategory...");
-            console.log(data.val());
+            //console.log("Inside searchCategory...");
+            //console.log(data.val());
             getCoorFromAddress(address, function(addr) {
                 // Set the start location
                 startLoc = addr;
@@ -125,6 +129,11 @@ function searchCategory(address, category, radius, callback) {
                     // Copy results to meetupResults to be used later without having to query meetup API again
                     meetupResults = results.slice();
                     let resultArr = filterByDistance(addr, milesToMeters(radius), results);
+
+                    // Sort meetups
+                    resultArr.sort(function(a, b) {
+                        return (parseFloat(a.distance) - parseFloat(b.distance));
+                    });
                     displayMeetups(resultArr);
                 });
             });
@@ -135,6 +144,10 @@ function searchCategory(address, category, radius, callback) {
             console.log("Reusing meetup results");
             getCoorFromAddress(address, function(addr) {
                 let resultArr = filterByDistance(addr, milesToMeters(radius), meetupResults);
+                // Sort meetups
+                resultArr.sort(function(a, b) {
+                    return (parseFloat(a.distance) - parseFloat(b.distance));
+                });
                 displayMeetups(resultArr);
             });
         }
@@ -152,14 +165,18 @@ function searchAll(address, radius) {
     searchCategory(address, "restaurants", radius, function(results) {
         resultArray = resultArray.concat(results);
 
-        meetupSearch(startLoc.lat, startLoc.lng);
-
         searchCategory(address, "parks", radius, function(results) {
             resultArray = resultArray.concat(results);
 
             searchCategory(address, "hotels", radius, function(results) {
-                console.log("Prepare to display MAP!");
+                // console.log("Prepare to display MAP!");
                 resultArray = resultArray.concat(results);
+
+                // Sort array by distance
+                resultArray.sort(function(a, b) {
+                    return (parseFloat(a.distance) - parseFloat(b.distance));
+                });
+
                 displayMapOfLocations(resultArray);
                 displayVenue(resultArray);
                 searchCategory(address, "meetups", radius);
@@ -205,10 +222,41 @@ function displayVenue(venueArr) {
             $("#venue-row-" + i).addClass("playVenue");
         }
         $("#venue-row-" + i).append("<div class=result-image><img class=img-results src=" + venue.imgURL + "></div>");
-        $("#venue-row-" + i).append("<div class=result-name>" + venue.name + "</div>");
+        $("#venue-row-" + i).append("<div class=result-name><a href='" + venue.URL + "'>" + venue.name + "</a></div>");
         $("#venue-row-" + i).append("<div class=result-address>" + venue.address + "</p></div>");
         $("#venue-row-" + i).append("<div class=result-phone>" + venue.phone + "</p></div>");
-        // $("#venue-row-" + i).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>lead the way" +
-        // "<i class=material-icons right>chevron_right</i></button></div>");
+        $("#venue-row-" + i).append("<div class=result-btn><button class=\"btn waves-effect waves-light yelpDirBtn\" id=\"" +
+            venue.address + "\">Go!</button></div>");
+    }
+
+    // Hide results if filter switches are flipped
+    if (!showVenues.restaurants) {
+        // console.log("Eat venues hidden");
+        $(".eatVenue").hide();
+    }
+    if (!showVenues.parks) {
+        // console.log("Play venues hidden");
+        $(".playVenue").hide();
+    }
+    if (!showVenues.hotels) {
+        // console.log("Stay venues hidden");
+        $(".stayVenue").hide();
     }
 }
+
+// Handler when user clicks on Go! button
+$(document.body).on("click", "#dirBtn, .yelpDirBtn", function() {
+    let addr;
+
+    if ($(this).attr("id") === "dirBtn") {
+        addr = $(this).attr("addr");
+    } else {
+        addr = $(this)[0].id;
+    }
+
+    sourceCoor = startLoc;
+    var googleDirectionUrl = "https://maps.google.com/?saddr=" + sourceCoor.lat + "," + sourceCoor.lng + "&daddr=" + addr;
+    // console.log("Google direction url: " + googleDirectionUrl);
+    //window.open(googleDirectionUrl);
+    window.location.href = googleDirectionUrl;
+});

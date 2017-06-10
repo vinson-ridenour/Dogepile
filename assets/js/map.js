@@ -19,11 +19,11 @@ searchReslt = [
 displayMap(searchReslt);
 */
 var markers = [];
+var meetupMarkers = [];
 var markerGroups = {
     restaurants: [],
     hotels: [],
     parks: [],
-    meetups: []
 }
 var map;
 var showVenues = {
@@ -68,7 +68,7 @@ function displayMapOfLocations(locationArray) {
         // console.log(locationArray);
         if (locationArray.length > 0) {
 
-            for (var i = 0; i < locationArray.length; i++) {
+            for (let i = 0; i < locationArray.length; i++) {
                 //console.log("New marker @ (" + locationArray[i].lat + ", " + locationArray[i].lng + ", " + locationArray[i].type + ")");
 
                 var markerIcon = {};
@@ -110,26 +110,35 @@ function displayMapOfLocations(locationArray) {
                 }
 
                 // Handler for mouse hover over marker
-                markers[i].addListener('mouseenter', function() {
-                    console.log("mouseover called for marker!");
-                    // change css of the result list
+                markers[i].addListener('mouseover', function() {
+                    // console.log("mouseover called for marker!");
+                    // Turn on bounce animation
+                    markers[i].setAnimation(google.maps.Animation.BOUNCE);
+                    // Highlight corresponding row
+                    $("#venue-row-" + i).css("background-color", "lightgray");
                 });
 
-                markers[i].addListener('mouseleave', function() {
-                    console.log("mouseout called for marker!");
-                    // change css of the result list
+                markers[i].addListener('mouseout', function() {
+                    // console.log("mouseout called for marker!");
+                    // Turn off bounce animation
+                    markers[i].setAnimation(null);
+                    // Reset corresponding row color
+                    $("#venue-row-" + i).css("background-color", "white");
                 });
 
             }
         } else {
             console.log("No locations in range!");
         }
-    }, 500);
+    }, 250);
 }
 
 // Shows/hides all markers of the given type ("restaurants"|"hotels"|"parks"|"meetups")
 function toggleMarkerGroup(type, on) {
     let groupArr = markerGroups[type];
+    if (type==="meetups"){
+        groupArr = meetupMarkers;
+    }
     for (let i in groupArr) {
         var marker = groupArr[i];
         if (on) {
@@ -150,13 +159,13 @@ a single object which has data fields "lat" and "lng"
 REFERENCE
 https://developers.google.com/maps/documentation/distance-matrix/intro
 */
-function getCoorCurrentLocation() {
+function getCoorCurrentLocation(callback) {
     var userPosition = {};
 
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
+        zoom: 13,
         // this location will immediately get updated if user position is feteched successfully
-        center: { lat: 32.7157, lng: -117.1611 }
+        center: { lat: startLoc.lat, lng: startLoc.lng }
     });
 
     infoWindow = new google.maps.InfoWindow;
@@ -170,15 +179,16 @@ function getCoorCurrentLocation() {
                     lng: position.coords.longitude
                 };
 
-                infoWindow.setPosition(pos);
+                infoWindow.setPosition(userPosition);
                 infoWindow.setContent('Location found.');
                 infoWindow.open(map);
-                map.setCenter(pos);
+                map.setCenter(userPosition);
+                callback(userPosition);
+                return userPosition;
             },
             function() {
                 handleLocationError(true, infoWindow, map.getCenter());
             });
-        return userPosition;
     } else {
         // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
@@ -210,7 +220,7 @@ function getCoorFromAddress(address, callback) {
             // deal with the case that user enters an address like "dioqjweoqweq"
             if (response.status == "ZERO_RESULTS") {
                 console.log("Please enter a valid address.");
-                return null;
+                callback(null);
             } else {
                 console.log("Converting to coordinates!");
                 convertedCoor.lat = response.results[0].geometry.location.lat;
@@ -218,7 +228,6 @@ function getCoorFromAddress(address, callback) {
 
                 console.log(convertedCoor);
                 callback(convertedCoor);
-                return convertedCoor;
             }
         }
     });
@@ -236,7 +245,7 @@ https://developers.google.com/maps/documentation/distance-matrix/intro
 */
 function filterByDistance(myLocation, radius, places) {
     var newLocationArray = [];
-    console.log("Filtering");
+    console.log("Filtering by distance");
     for (var i = 0; i < places.length; i++) {
         // console.log("Distance: " + getDistanceFromLatLonInM(places[i], myLocation));
         let distance = getDistanceFromLatLonInM(places[i], myLocation);
@@ -271,8 +280,12 @@ $("body").on("mouseenter", ".venue-row, .meetupVenue", function(event) {
     let id = $(this).attr('id');
     let i = parseInt(id.split("-")[2]);
     // console.log("i: " + i);
-    // Turn on bounce animation
-    markers[i].setAnimation(google.maps.Animation.BOUNCE);
+    if ($(this).hasClass("venue-row")) {
+        // Turn on bounce animation
+        markers[i].setAnimation(google.maps.Animation.BOUNCE);
+    } else {
+        meetupMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
+    }
 });
 
 // Handler when leaving row
@@ -281,6 +294,10 @@ $("body").on("mouseleave", ".venue-row, .meetupVenue", function(event) {
     let id = $(this).attr('id');
     let i = parseInt(id.split("-")[2]);
     // console.log("i: " + i);
-    // Turn off bounce animation
-    markers[i].setAnimation(null);
+    if ($(this).hasClass("venue-row")) {
+        // Turn off bounce animation
+        markers[i].setAnimation(null);
+    } else {
+        meetupMarkers[i].setAnimation(null);
+    }
 });

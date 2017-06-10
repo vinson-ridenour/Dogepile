@@ -5,30 +5,21 @@ var startAddr = "";
 $(document).ready(function() {
 
     // Hide results page on load
-    $(".results-page").hide(0);
+    $(".results-page").hide();
 
     //------------transition from search view to results view-------------------------------
     $(".init").on("click", function(event) {
-        // Initialize globar vars
-        resultArray = [];
-        startLoc = {};
-        startAddr = "";
 
         console.log($(this).attr("id"))
         event.preventDefault();
 
-        if ($("#icon_prefix").val().length > 0) {
+        if ($(this).attr("id") === "searchBtn" && $("#icon_prefix").val().length > 0) {
 
-            // $("body").css("background-image", "none");
-            // $(".search-page").css("display", "none");
-            // $(".results-page").removeClass("hidden");
+            $("#locationEntered").text($("#icon_prefix").val().trim());
+            console.log("Searching...");
+            startAddr = $("#icon_prefix").val().trim();
 
-            if ($(this).attr("id") == "searchBtn") {
-                $("#addressDisplay").text($("#icon_prefix").val());
-                console.log("Searching...");
-                startAddr = $("#icon_prefix").val();
-                searchAll(startAddr, 2);
-            }
+            searchAll(startAddr, 2);
 
             $("#searchPageContainer").css("opacity", "0");
             $("#mainContainer").css("visibility", "visible");
@@ -43,8 +34,20 @@ $(document).ready(function() {
                 $(".results-page").css("opacity", "1");
                 $("#mainContainer").css("opacity", "1");
                 $("body").css("background-image", "none");
+                $(".page-footer").css("display", "none");
                 $(".results-page").show(0);
             }, 750);
+        }
+
+        // Populate field with user coordinates
+        else if ($(this).attr("id") === "geoBtn") {
+            getCoorCurrentLocation(function(coord) {
+                startLoc = Object.assign({}, coord);
+                // console.log("Current user pos: (" + coord.lat + ", " + coord.lng + ")");
+                $("#icon_prefix").val(coord.lat + ", " + coord.lng);
+                $(".input-label").addClass("active");
+                $(".prefix").addClass("active");
+            });
         }
     });
 
@@ -60,81 +63,126 @@ $(document).ready(function() {
 
     $("#addLoc").on("click", $(".modal").modal());
 
-    console.log($("#venueTypeBtn").text())
+    // console.log($("#venueTypeBtn").text());
 
     $(".dropdown-item-venue").on("click", function() {
         $("#venueTypeBtn").text($(this).attr("data-type"));
-        $("#venueTypeBtn").removeClass("red");
+        $("#venueTypeBtn").removeClass("blue");
         $("#venueTypeBtn").css("background-color", $(this).attr("data-color"));
-        console.log($("#venueTypeBtn").text())
+        // console.log($("#venueTypeBtn").text());
         enableShake();
     });
 
-    $("#new-name").keyup(enableShake)
-    $("#new-address").keyup(enableShake)
+    $("#new-name").keyup(enableShake);
+    $("#new-address").keyup(enableShake);
 
     function enableShake() {
         if ($("#new-name").val().length > 0 && $("#new-address").val().length > 0 && $("#venueTypeBtn").text() != "type") {
             $("#shakeBtn").removeClass("disabled");
+
+            // Handler for when user adds a venue
+            $("#shakeBtn").on("click", function() {
+                let name = $("#new-name").val().trim();
+                let address = $("#new-address").val().trim();
+                let category = $("#venueTypeBtn").text();
+
+                if (category === "eat") {
+                    category = "restaurants";
+                } else if (category === "play") {
+                    category = "parks";
+                } else if (category === "stay") {
+                    category = "hotels";
+                } else {
+                    console.log("Invalid category. Venue not added");
+                    return;
+                }
+
+                // Get and verify coordinates of address                
+                getCoorFromAddress(address, function(addr) {
+                    if (addr === null) {
+                        console.log("Invalid address. Venue not added!")
+                    } else {
+                        let venue = {
+                            name: name,
+                            address: address,
+                            lat: addr.lat,
+                            lng: addr.lng
+                        }
+                        startLoc = {
+                            lat: addr.lat,
+                            lng: addr.lng
+                        };
+                        addUserVenueToFirebase(category, venue);
+                        console.log("Added new venue to firebase: ");
+                        console.log(venue);
+                    }
+                });
+            });
         } else {
             if (!$("#shakeBtn").hasClass("disabled")) {
-                $("#shakeBtn").addClass("disabled")
+                $("#shakeBtn").addClass("disabled");
+                // Remove any handlers
+                $("#shakeBtn").off();
             }
         }
     };
+
     //------------------------------------end of modal-----------------------------------
 
     //-----------------------filter functions------------------------------
 
     // Handler for when user flips a filter
-    $(".lever").on("click", function() {
-        console.log($(this).attr("class"));
-        if ($(this).attr("data-check") == "checked") {
-            $(this).attr("data-check", "unchecked");
-        } else {
-            $(this).attr("data-check", "checked");
-        }
+    $("#eatSwitch").on("click", function() {
 
-        if ($(".meetup").attr("data-check") == "unchecked") {
-            $(".meetup-result-table").hide(0);
-            toggleMarkerGroup("meetups", false);
-            showVenues.meetups = false;
-        } else {
-            $(".meetup-result-table").show(0);
-            toggleMarkerGroup("meetups", true);
-            showVenues.meetups = true;
-        }
-
-        if ($(".eat").attr("data-check") == "unchecked") {
-            $(".eatVenue").hide(0);
+        if (!$(this).prop("checked")) {
+            $(".eatVenue").hide();
             toggleMarkerGroup("restaurants", false);
             showVenues.restaurants = false;
         } else {
-            $(".eatVenue").show(0);
+            $(".eatVenue").show();
             toggleMarkerGroup("restaurants", true);
             showVenues.restaurants = true;
         }
+    });
 
-        if ($(".stay").attr("data-check") == "unchecked") {
-            $(".stayVenue").hide(0);
-            toggleMarkerGroup("hotels", false);
-            showVenues.hotels = false;
-        } else {
-            $(".stayVenue").show(0);
-            toggleMarkerGroup("hotels", true);
-            showVenues.hotels = true;
-        }
+    $("#playSwitch").on("click", function() {
 
-        if ($(".play").attr("data-check") == "unchecked") {
-            $(".playVenue").hide(0);
+        if (!$(this).prop("checked")) {
+            $(".playVenue").hide();
             toggleMarkerGroup("parks", false);
             showVenues.parks = false;
         } else {
-            $(".playVenue").show(0);
+            $(".playVenue").show();
             toggleMarkerGroup("parks", true);
             showVenues.parks = true;
         }
-    })
+    });
+
+    $("#staySwitch").on("click", function() {
+
+        if (!$(this).prop("checked")) {
+            $(".stayVenue").hide();
+            toggleMarkerGroup("hotels", false);
+            showVenues.hotels = false;
+        } else {
+            $(".stayVenue").show();
+            toggleMarkerGroup("hotels", true);
+            showVenues.hotels = true;
+        }
+    });
+
+    $("#meetupSwitch").on("click", function() {
+
+        if (!$(this).prop("checked")) {
+            $(".meetup-result-table").hide();
+            toggleMarkerGroup("meetups", false);
+            showVenues.meetups = false;
+        } else {
+            $(".meetup-result-table").show();
+            toggleMarkerGroup("meetups", true);
+            showVenues.meetups = true;
+        }
+    });
 
     // Handler for when user changes search radius
     $("#dropdown2 > li").on("click", function() {
