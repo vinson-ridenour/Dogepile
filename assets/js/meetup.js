@@ -32,7 +32,7 @@ function displayMeetups(results) {
     // Clear div
     $(".meetup-result-table").empty();
 
-    for (var i = 0; i < results.length; i++) {
+    for (let i = 0; i < results.length; i++) {
 
         var muName = results[i].name; //meetup's name
         var muURL = results[i].event_url; //url link to meetup page

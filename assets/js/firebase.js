@@ -156,8 +156,6 @@ function searchAll(address, radius) {
     searchCategory(address, "restaurants", radius, function(results) {
         resultArray = resultArray.concat(results);
 
-        meetupSearch(startLoc.lat, startLoc.lng);
-
         searchCategory(address, "parks", radius, function(results) {
             resultArray = resultArray.concat(results);
 
