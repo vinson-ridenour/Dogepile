@@ -104,7 +104,7 @@ function searchCategory(address, category, radius, callback) {
         let categoryRef = database.ref(category);
         let categoryArr = categoryRef.once("value", function(data) {
             console.log("Inside searchCategory...");
-            console.log(data.val().trim());
+            console.log(data.val());
             getCoorFromAddress(address, function(addr) {
                 // Set the start location
                 startLoc = addr;
