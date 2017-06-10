@@ -218,7 +218,28 @@ function displayVenue(venueArr) {
         $("#venue-row-" + i).append("<div class=result-name>" + venue.name + "</div>");
         $("#venue-row-" + i).append("<div class=result-address>" + venue.address + "</p></div>");
         $("#venue-row-" + i).append("<div class=result-phone>" + venue.phone + "</p></div>");
-        // $("#venue-row-" + i).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>lead the way" +
-        // "<i class=material-icons right>chevron_right</i></button></div>");
+        $("#venue-row-" + i).append("<div class=result-btn><button class=btn waves-effect waves-light id=\"" +
+        venue.address +
+        "\">lead the way" + 
+        "<i class=material-icons right>chevron_right</i></button></div>");
     }
 }
+
+$(document.body).on("click", ".btn", function() {
+    var destinationCoor;
+    var sourceCoor;
+    getCoorFromAddress($(this)[0].id, function(coor) {
+        destinationCoor = coor;
+        getCoorCurrentLocation(function(returnedCoor) {
+            sourceCoor = returnedCoor;
+            console.log("Dest is ");
+            console.log(destinationCoor);
+            console.log("Source is ");
+            console.log(sourceCoor);
+            var googleDirectionUrl = "https://maps.google.com/?saddr=" + sourceCoor.lat + "," + sourceCoor.lng + "&daddr=" + destinationCoor.lat + "," + destinationCoor.lng;
+            console.log("Google direction url: " + googleDirectionUrl);
+            //window.open(googleDirectionUrl);
+            window.location.href = googleDirectionUrl;
+        });
+    });
+});
