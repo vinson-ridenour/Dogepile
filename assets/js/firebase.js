@@ -223,7 +223,7 @@ function displayVenue(venueArr) {
     }
 }
 
-$(document.body).on("click", ".btn", function() {
+$(document.body).on("click", "#dirBtn, .yelpDirBtn", function() {
     var destinationCoor;
     var sourceCoor;
     getCoorFromAddress($(this)[0].id, function(coor) {
