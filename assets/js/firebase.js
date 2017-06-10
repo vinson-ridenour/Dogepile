@@ -129,6 +129,11 @@ function searchCategory(address, category, radius, callback) {
                     // Copy results to meetupResults to be used later without having to query meetup API again
                     meetupResults = results.slice();
                     let resultArr = filterByDistance(addr, milesToMeters(radius), results);
+
+                    // Sort meetups
+                    resultArr.sort(function(a, b) {
+                        return (parseFloat(a.distance) - parseFloat(b.distance));
+                    });
                     displayMeetups(resultArr);
                 });
             });
@@ -139,6 +144,10 @@ function searchCategory(address, category, radius, callback) {
             console.log("Reusing meetup results");
             getCoorFromAddress(address, function(addr) {
                 let resultArr = filterByDistance(addr, milesToMeters(radius), meetupResults);
+                // Sort meetups
+                resultArr.sort(function(a, b) {
+                    return (parseFloat(a.distance) - parseFloat(b.distance));
+                });
                 displayMeetups(resultArr);
             });
         }
