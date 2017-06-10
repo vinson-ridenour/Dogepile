@@ -103,8 +103,8 @@ function searchCategory(address, category, radius, callback) {
         console.log("Searching in " + category);
         let categoryRef = database.ref(category);
         let categoryArr = categoryRef.once("value", function(data) {
-            console.log("Inside searchCategory...");
-            console.log(data.val());
+            //console.log("Inside searchCategory...");
+            //console.log(data.val());
             getCoorFromAddress(address, function(addr) {
                 // Set the start location
                 startLoc = addr;
@@ -160,7 +160,7 @@ function searchAll(address, radius) {
             resultArray = resultArray.concat(results);
 
             searchCategory(address, "hotels", radius, function(results) {
-                console.log("Prepare to display MAP!");
+                // console.log("Prepare to display MAP!");
                 resultArray = resultArray.concat(results);
 
                 // Sort array by distance
@@ -247,7 +247,7 @@ $(document.body).on("click", "#dirBtn, .yelpDirBtn", function() {
 
     sourceCoor = startLoc;
     var googleDirectionUrl = "https://maps.google.com/?saddr=" + sourceCoor.lat + "," + sourceCoor.lng + "&daddr=" + addr;
-    console.log("Google direction url: " + googleDirectionUrl);
+    // console.log("Google direction url: " + googleDirectionUrl);
     //window.open(googleDirectionUrl);
     window.location.href = googleDirectionUrl;
 });

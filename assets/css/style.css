@@ -39,6 +39,7 @@ body {
 	/*visibility: visible;*/
 	/*position: absolute;*/
 	background-color: #fff;
+	border-radius: 10px;
 }
 
 #addressSearch {

@@ -43,7 +43,7 @@ $(document).ready(function() {
         else if ($(this).attr("id") === "geoBtn") {
             getCoorCurrentLocation(function(coord) {
                 startLoc = Object.assign({}, coord);
-                console.log("Current user pos: (" + coord.lat + ", " + coord.lng + ")");
+                // console.log("Current user pos: (" + coord.lat + ", " + coord.lng + ")");
                 $("#icon_prefix").val(coord.lat + ", " + coord.lng);
                 $(".input-label").addClass("active");
                 $(".prefix").addClass("active");
@@ -63,13 +63,13 @@ $(document).ready(function() {
 
     $("#addLoc").on("click", $(".modal").modal());
 
-    console.log($("#venueTypeBtn").text());
+    // console.log($("#venueTypeBtn").text());
 
     $(".dropdown-item-venue").on("click", function() {
         $("#venueTypeBtn").text($(this).attr("data-type"));
         $("#venueTypeBtn").removeClass("blue");
         $("#venueTypeBtn").css("background-color", $(this).attr("data-color"));
-        console.log($("#venueTypeBtn").text());
+        // console.log($("#venueTypeBtn").text());
         enableShake();
     });
 
