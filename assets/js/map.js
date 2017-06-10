@@ -19,11 +19,11 @@ searchReslt = [
 displayMap(searchReslt);
 */
 var markers = [];
+var meetupMarkers = [];
 var markerGroups = {
     restaurants: [],
     hotels: [],
     parks: [],
-    meetups: []
 }
 var map;
 var showVenues = {
@@ -130,12 +130,15 @@ function displayMapOfLocations(locationArray) {
         } else {
             console.log("No locations in range!");
         }
-    }, 500);
+    }, 250);
 }
 
 // Shows/hides all markers of the given type ("restaurants"|"hotels"|"parks"|"meetups")
 function toggleMarkerGroup(type, on) {
     let groupArr = markerGroups[type];
+    if (type==="meetups"){
+        groupArr = meetupMarkers;
+    }
     for (let i in groupArr) {
         var marker = groupArr[i];
         if (on) {
@@ -242,7 +245,7 @@ https://developers.google.com/maps/documentation/distance-matrix/intro
 */
 function filterByDistance(myLocation, radius, places) {
     var newLocationArray = [];
-    console.log("Filtering");
+    console.log("Filtering by distance");
     for (var i = 0; i < places.length; i++) {
         // console.log("Distance: " + getDistanceFromLatLonInM(places[i], myLocation));
         let distance = getDistanceFromLatLonInM(places[i], myLocation);
@@ -277,8 +280,12 @@ $("body").on("mouseenter", ".venue-row, .meetupVenue", function(event) {
     let id = $(this).attr('id');
     let i = parseInt(id.split("-")[2]);
     // console.log("i: " + i);
-    // Turn on bounce animation
-    markers[i].setAnimation(google.maps.Animation.BOUNCE);
+    if ($(this).hasClass("venue-row")) {
+        // Turn on bounce animation
+        markers[i].setAnimation(google.maps.Animation.BOUNCE);
+    } else {
+        meetupMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
+    }
 });
 
 // Handler when leaving row
@@ -287,6 +294,10 @@ $("body").on("mouseleave", ".venue-row, .meetupVenue", function(event) {
     let id = $(this).attr('id');
     let i = parseInt(id.split("-")[2]);
     // console.log("i: " + i);
-    // Turn off bounce animation
-    markers[i].setAnimation(null);
+    if ($(this).hasClass("venue-row")) {
+        // Turn off bounce animation
+        markers[i].setAnimation(null);
+    } else {
+        meetupMarkers[i].setAnimation(null);
+    }
 });

@@ -103,8 +103,8 @@ function searchCategory(address, category, radius, callback) {
         console.log("Searching in " + category);
         let categoryRef = database.ref(category);
         let categoryArr = categoryRef.once("value", function(data) {
-            console.log("Inside searchCategory...");
-            console.log(data.val());
+            //console.log("Inside searchCategory...");
+            //console.log(data.val());
             getCoorFromAddress(address, function(addr) {
                 // Set the start location
                 startLoc = addr;
@@ -129,6 +129,11 @@ function searchCategory(address, category, radius, callback) {
                     // Copy results to meetupResults to be used later without having to query meetup API again
                     meetupResults = results.slice();
                     let resultArr = filterByDistance(addr, milesToMeters(radius), results);
+
+                    // Sort meetups
+                    resultArr.sort(function(a, b) {
+                        return (parseFloat(a.distance) - parseFloat(b.distance));
+                    });
                     displayMeetups(resultArr);
                 });
             });
@@ -139,6 +144,10 @@ function searchCategory(address, category, radius, callback) {
             console.log("Reusing meetup results");
             getCoorFromAddress(address, function(addr) {
                 let resultArr = filterByDistance(addr, milesToMeters(radius), meetupResults);
+                // Sort meetups
+                resultArr.sort(function(a, b) {
+                    return (parseFloat(a.distance) - parseFloat(b.distance));
+                });
                 displayMeetups(resultArr);
             });
         }
@@ -160,7 +169,7 @@ function searchAll(address, radius) {
             resultArray = resultArray.concat(results);
 
             searchCategory(address, "hotels", radius, function(results) {
-                console.log("Prepare to display MAP!");
+                // console.log("Prepare to display MAP!");
                 resultArray = resultArray.concat(results);
 
                 // Sort array by distance
@@ -247,7 +256,7 @@ $(document.body).on("click", "#dirBtn, .yelpDirBtn", function() {
 
     sourceCoor = startLoc;
     var googleDirectionUrl = "https://maps.google.com/?saddr=" + sourceCoor.lat + "," + sourceCoor.lng + "&daddr=" + addr;
-    console.log("Google direction url: " + googleDirectionUrl);
+    // console.log("Google direction url: " + googleDirectionUrl);
     //window.open(googleDirectionUrl);
     window.location.href = googleDirectionUrl;
 });
