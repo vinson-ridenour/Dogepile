@@ -18,8 +18,13 @@ function meetupSearch(addr, callback) {
         console.log(results);
         for (let i in results) {
             // Create lat/lng properties
-            results[i].lat = results[i].venue.lat;
-            results[i].lng = results[i].venue.lon;
+            if (results[i].hasOwnProperty("venue")) {
+                results[i].lat = results[i].venue.lat;
+                results[i].lng = results[i].venue.lon;
+            } else {
+                results[i].lat = results[i].group.group_lat;
+                results[i].lng = results[i].group.group_lon;
+            }
         }
         callback(results);
     });
