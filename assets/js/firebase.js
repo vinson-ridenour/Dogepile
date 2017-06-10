@@ -230,16 +230,15 @@ $(document.body).on("click", ".btn", function() {
     var sourceCoor;
     getCoorFromAddress($(this)[0].id, function(coor) {
         destinationCoor = coor;
-        getCoorCurrentLocation(function(returnedCoor) {
-            sourceCoor = returnedCoor;
-            console.log("Dest is ");
-            console.log(destinationCoor);
-            console.log("Source is ");
-            console.log(sourceCoor);
-            var googleDirectionUrl = "https://maps.google.com/?saddr=" + sourceCoor.lat + "," + sourceCoor.lng + "&daddr=" + destinationCoor.lat + "," + destinationCoor.lng;
-            console.log("Google direction url: " + googleDirectionUrl);
-            //window.open(googleDirectionUrl);
-            window.location.href = googleDirectionUrl;
-        });
+
+        sourceCoor = startLoc;
+        console.log("Dest is ");
+        console.log(destinationCoor);
+        console.log("Source is ");
+        console.log(sourceCoor);
+        var googleDirectionUrl = "https://maps.google.com/?saddr=" + sourceCoor.lat + "," + sourceCoor.lng + "&daddr=" + destinationCoor.lat + "," + destinationCoor.lng;
+        console.log("Google direction url: " + googleDirectionUrl);
+        //window.open(googleDirectionUrl);
+        window.location.href = googleDirectionUrl;
     });
 });
