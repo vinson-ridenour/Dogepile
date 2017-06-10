@@ -219,8 +219,7 @@ function displayVenue(venueArr) {
         $("#venue-row-" + i).append("<div class=result-address>" + venue.address + "</p></div>");
         $("#venue-row-" + i).append("<div class=result-phone>" + venue.phone + "</p></div>");
         $("#venue-row-" + i).append("<div class=result-btn><button class=\"btn waves-effect waves-light yelpDirBtn\" id=\"" +
-        venue.address +
-        "\">lead the way");
+        venue.address + "\">Go!</button></div>");
     }
 }
 

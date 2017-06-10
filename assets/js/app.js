@@ -33,6 +33,7 @@ $(document).ready(function() {
                 $(".results-page").css("opacity", "1");
                 $("#mainContainer").css("opacity", "1");
                 $("body").css("background-image", "none");
+                $(".page-footer").css("display", "none");
                 $(".results-page").show(0);
             }, 750);
         }
