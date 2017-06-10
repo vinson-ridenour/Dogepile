@@ -218,10 +218,11 @@ function displayVenue(venueArr) {
         $("#venue-row-" + i).append("<div class=result-name>" + venue.name + "</div>");
         $("#venue-row-" + i).append("<div class=result-address>" + venue.address + "</p></div>");
         $("#venue-row-" + i).append("<div class=result-phone>" + venue.phone + "</p></div>");
-        $("#venue-row-" + i).append("<div class=result-btn><button class=btn waves-effect waves-light id=\"" +
-        venue.address +
-        "\">lead the way" + 
-        "<i class=material-icons right>chevron_right</i></button></div>");
+        $("#venue-row-" + i).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>lead the way</button></div>");
+        //   \"" +
+        // venue.address +
+        // "\"
+        // "<i class=material-icons right>chevron_right</i>
     }
 }
 
