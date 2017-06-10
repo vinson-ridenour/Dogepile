@@ -15,9 +15,9 @@ $(document).ready(function() {
 
         if ($(this).attr("id") === "searchBtn" && $("#icon_prefix").val().length > 0) {
 
-            $("#locationEntered").text($("#icon_prefix").val());
+            $("#locationEntered").text($("#icon_prefix").val().trim());
             console.log("Searching...");
-            startAddr = $("#icon_prefix").val();
+            startAddr = $("#icon_prefix").val().trim();
             searchAll(startAddr, 2);
 
             $("#searchPageContainer").css("opacity", "0");
@@ -80,8 +80,8 @@ $(document).ready(function() {
 
             // Handler for when user adds a venue
             $("#shakeBtn").on("click", function() {
-                let name = $("#new-name").val();
-                let address = $("#new-address").val();
+                let name = $("#new-name").val().trim();
+                let address = $("#new-address").val().trim();
                 let category = $("#venueTypeBtn").text();
 
                 if (category === "eat") {

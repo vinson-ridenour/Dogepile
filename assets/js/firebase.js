@@ -77,19 +77,21 @@ function addUserVenueToFirebase(category, userVenue) {
         console.log("Empty address found in user input venue.");
         return;
     }
-    var indexForUserVenue;
-    if (database.ref(category).length) {
-        indexForUserVenue = database.ref(category).length;
-    } else {
-        indexForUserVenue = 0;
-    }
-    database.ref(category + "/" + indexForUserVenue).set({
-        address: userVenue.address,
-        imgURL: userVenue.imgURL || "",
-        name: userVenue.name,
-        phone: userVenue.phone || "",
-        lat: userVenue.lat,
-        lng: userVenue.lng
+
+    // Insert into category list in firebase
+    database.ref(category).once("value", function(data) {
+        // Get length of current list
+        let indexForUserVenue = data.val().length;
+
+        console.log("Inserting new venue to '" + category + "' at index " + indexForUserVenue);
+        database.ref(category + "/" + indexForUserVenue).set({
+            address: userVenue.address,
+            imgURL: userVenue.imgURL || "",
+            name: userVenue.name,
+            phone: userVenue.phone || "",
+            lat: userVenue.lat,
+            lng: userVenue.lng
+        });
     });
 }
 
@@ -102,7 +104,7 @@ function searchCategory(address, category, radius, callback) {
         let categoryRef = database.ref(category);
         let categoryArr = categoryRef.once("value", function(data) {
             console.log("Inside searchCategory...");
-            console.log(data.val());
+            console.log(data.val().trim());
             getCoorFromAddress(address, function(addr) {
                 // Set the start location
                 startLoc = addr;
