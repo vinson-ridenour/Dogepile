@@ -14,6 +14,7 @@ function meetupSearch(addr, callback) {
         method: "GET"
     }).done(function(response) {
         var results = response.results;
+        console.log("Meetup results: ");
         console.log(results);
         for (let i in results) {
             // Create lat/lng properties
@@ -70,7 +71,7 @@ function displayMeetups(results) {
             "<p>" + locSAdd + "</p>" +
             "<p>" + locCAdd + " " + locStAdd + "</p></div>");
         // $("#meetup"+i).append("<td class='col s2'></td>");
-        $("#result-row-" + j).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>lead the way</button></div>");
+        $("#result-row-" + j).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>go!</button></div>");
 
         // Generate marker            
         let markerIcon = {};
