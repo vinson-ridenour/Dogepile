@@ -50,15 +50,23 @@ i.left {
 
 #dirBtn {
 	padding: 0 10px;
+	line-height: 0px;
+	background-color: red;
+	min-width: 160px;
+	min-height: 57px;
 }
 
-#searchBtn, #shakeBtn, #dirBtn {
+#searchBtn, #shakeBtn {
 	background-color: red;
 }
 
 #shakeBtn {
 	padding: 0 10px;
 }
+
+/*#shakeText {
+	padding-bottom: 20px;
+}*/
 
 #searchBtn {
 	min-width: 130px;
