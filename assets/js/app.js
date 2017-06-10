@@ -15,9 +15,9 @@ $(document).ready(function() {
 
         if ($(this).attr("id") === "searchBtn" && $("#icon_prefix").val().length > 0) {
 
-            $("#locationEntered").text($("#icon_prefix").val());
+            $("#locationEntered").text($("#icon_prefix").val().trim());
             console.log("Searching...");
-            startAddr = $("#icon_prefix").val();
+            startAddr = $("#icon_prefix").val().trim();
             searchAll(startAddr, 2);
 
             $("#searchPageContainer").css("opacity", "0");
@@ -61,28 +61,66 @@ $(document).ready(function() {
 
     $("#addLoc").on("click", $(".modal").modal());
 
-    console.log($("#venueTypeBtn").text())
+    console.log($("#venueTypeBtn").text());
 
     $(".dropdown-item-venue").on("click", function() {
         $("#venueTypeBtn").text($(this).attr("data-type"));
         $("#venueTypeBtn").removeClass("blue");
         $("#venueTypeBtn").css("background-color", $(this).attr("data-color"));
-        console.log($("#venueTypeBtn").text())
+        console.log($("#venueTypeBtn").text());
         enableShake();
     });
 
-    $("#new-name").keyup(enableShake)
-    $("#new-address").keyup(enableShake)
+    $("#new-name").keyup(enableShake);
+    $("#new-address").keyup(enableShake);
 
     function enableShake() {
         if ($("#new-name").val().length > 0 && $("#new-address").val().length > 0 && $("#venueTypeBtn").text() != "type") {
             $("#shakeBtn").removeClass("disabled");
+
+            // Handler for when user adds a venue
+            $("#shakeBtn").on("click", function() {
+                let name = $("#new-name").val().trim();
+                let address = $("#new-address").val().trim();
+                let category = $("#venueTypeBtn").text();
+
+                if (category === "eat") {
+                    category = "restaurants";
+                } else if (category === "play") {
+                    category = "parks";
+                } else if (category === "stay") {
+                    category = "hotels";
+                } else {
+                    console.log("Invalid category. Venue not added");
+                    return;
+                }
+
+                // Get and verify coordinates of address                
+                getCoorFromAddress(address, function(addr) {
+                    if (addr === null) {
+                        console.log("Invalid address. Venue not added!")
+                    } else {
+                        let venue = {
+                            name: name,
+                            address: address,
+                            lat: addr.lat,
+                            lng: addr.lng
+                        }
+                        addUserVenueToFirebase(category, venue);
+                        console.log("Added new venue to firebase: ");
+                        console.log(venue);
+                    }
+                });
+            });
         } else {
             if (!$("#shakeBtn").hasClass("disabled")) {
-                $("#shakeBtn").addClass("disabled")
+                $("#shakeBtn").addClass("disabled");
+                // Remove any handlers
+                $("#shakeBtn").off();
             }
         }
     };
+
     //------------------------------------end of modal-----------------------------------
 
     //-----------------------filter functions------------------------------

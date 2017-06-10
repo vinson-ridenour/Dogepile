@@ -63,6 +63,8 @@ addUserVenueToFirebase("hotels", {
     "address": "199 N El Camino Real Encinitas, CA 92024",
     "phone": "(760) 487-5429",
     "name": "Hammeru2019s NY Pizza"
+    "lat":
+    "lng":
   });
 */
 function addUserVenueToFirebase(category, userVenue) {
@@ -75,19 +77,21 @@ function addUserVenueToFirebase(category, userVenue) {
         console.log("Empty address found in user input venue.");
         return;
     }
-    var indexForUserVenue;
-    if (database.ref(category).length) {
-        indexForUserVenue = database.ref(category).length;
-    } else {
-        indexForUserVenue = 0;
-    }
-    database.ref(category + "/" + indexForUserVenue).set({
-        address: userVenue.address,
-        imgURL: userVenue.imgURL,
-        name: userVenue.name,
-        phone: userVenue.phone,
-        lat: getCoorFromAddress(userVenue.address).lat,
-        lng: getCoorFromAddress(userVenue.address).lng
+
+    // Insert into category list in firebase
+    database.ref(category).once("value", function(data) {
+        // Get length of current list
+        let indexForUserVenue = data.val().length;
+
+        console.log("Inserting new venue to '" + category + "' at index " + indexForUserVenue);
+        database.ref(category + "/" + indexForUserVenue).set({
+            address: userVenue.address,
+            imgURL: userVenue.imgURL || "",
+            name: userVenue.name,
+            phone: userVenue.phone || "",
+            lat: userVenue.lat,
+            lng: userVenue.lng
+        });
     });
 }
 
@@ -100,7 +104,7 @@ function searchCategory(address, category, radius, callback) {
         let categoryRef = database.ref(category);
         let categoryArr = categoryRef.once("value", function(data) {
             console.log("Inside searchCategory...");
-            console.log(data.val());
+            console.log(data.val().trim());
             getCoorFromAddress(address, function(addr) {
                 // Set the start location
                 startLoc = addr;
@@ -160,6 +164,12 @@ function searchAll(address, radius) {
             searchCategory(address, "hotels", radius, function(results) {
                 console.log("Prepare to display MAP!");
                 resultArray = resultArray.concat(results);
+
+                // Sort array by distance
+                resultArray.sort(function(a, b) {
+                    return (parseFloat(a.distance) - parseFloat(b.distance));
+                });
+
                 displayMapOfLocations(resultArray);
                 displayVenue(resultArray);
                 searchCategory(address, "meetups", radius);
