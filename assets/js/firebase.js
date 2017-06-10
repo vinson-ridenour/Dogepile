@@ -63,6 +63,8 @@ addUserVenueToFirebase("hotels", {
     "address": "199 N El Camino Real Encinitas, CA 92024",
     "phone": "(760) 487-5429",
     "name": "Hammeru2019s NY Pizza"
+    "lat":
+    "lng":
   });
 */
 function addUserVenueToFirebase(category, userVenue) {
@@ -83,11 +85,11 @@ function addUserVenueToFirebase(category, userVenue) {
     }
     database.ref(category + "/" + indexForUserVenue).set({
         address: userVenue.address,
-        imgURL: userVenue.imgURL,
+        imgURL: userVenue.imgURL || "",
         name: userVenue.name,
-        phone: userVenue.phone,
-        lat: getCoorFromAddress(userVenue.address).lat,
-        lng: getCoorFromAddress(userVenue.address).lng
+        phone: userVenue.phone || "",
+        lat: userVenue.lat,
+        lng: userVenue.lng
     });
 }
 

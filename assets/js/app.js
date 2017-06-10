@@ -77,19 +77,38 @@ $(document).ready(function() {
     function enableShake() {
         if ($("#new-name").val().length > 0 && $("#new-address").val().length > 0 && $("#venueTypeBtn").text() != "type") {
             $("#shakeBtn").removeClass("disabled");
-            
+
             // Handler for when user adds a venue
-            $("#shakeBtn").on("click", function(){
+            $("#shakeBtn").on("click", function() {
                 let name = $("#new-name").val();
                 let address = $("#new-address").val();
-                let category = $("#venueTypeBtn").val();
+                let category = $("#venueTypeBtn").text();
 
-                // Get and verify coordinates of address
-                getCoordFromAddress(address, function(addr){
-                    if (addr===null){
+                if (category === "eat") {
+                    category = "restaurants";
+                } else if (category === "play") {
+                    category = "parks";
+                } else if (category === "stay") {
+                    category = "hotels";
+                } else {
+                    console.log("Invalid category. Venue not added");
+                    return;
+                }
+
+                // Get and verify coordinates of address                
+                getCoorFromAddress(address, function(addr) {
+                    if (addr === null) {
                         console.log("Invalid address. Venue not added!")
                     } else {
-
+                        let venue = {
+                            name: name,
+                            address: address,
+                            lat: addr.lat,
+                            lng: addr.lng
+                        }
+                        addUserVenueToFirebase(category, venue);
+                        console.log("Added new venue to firebase: ");
+                        console.log(venue);
                     }
                 });
             });
