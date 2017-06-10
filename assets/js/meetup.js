@@ -85,4 +85,9 @@ function displayMeetups(results) {
         });
     } //end of for create table loop
 
+    // Hide table if filter switch is flipped
+    if (!showVenues.meetups) {
+        $(".meetup-result-table").hide();
+    }
+
 } //end of function

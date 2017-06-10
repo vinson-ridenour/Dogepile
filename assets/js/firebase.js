@@ -221,6 +221,20 @@ function displayVenue(venueArr) {
         $("#venue-row-" + i).append("<div class=result-btn><button class=\"btn waves-effect waves-light yelpDirBtn\" id=\"" +
             venue.address + "\">Go!</button></div>");
     }
+
+    // Hide results if filter switches are flipped
+    if (!showVenues.restaurants) {
+        // console.log("Eat venues hidden");
+        $(".eatVenue").hide();
+    }
+    if (!showVenues.parks) {
+        // console.log("Play venues hidden");
+        $(".playVenue").hide();
+    }
+    if (!showVenues.hotels) {
+        // console.log("Stay venues hidden");
+        $(".stayVenue").hide();
+    }
 }
 
 // Handler when user clicks on Go! button
