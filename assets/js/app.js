@@ -5,7 +5,7 @@ var startAddr = "";
 $(document).ready(function() {
 
     // Hide results page on load
-    $(".results-page").hide(0);
+    $(".results-page").hide();
 
     //------------transition from search view to results view-------------------------------
     $(".init").on("click", function(event) {
@@ -18,6 +18,7 @@ $(document).ready(function() {
             $("#locationEntered").text($("#icon_prefix").val().trim());
             console.log("Searching...");
             startAddr = $("#icon_prefix").val().trim();
+
             searchAll(startAddr, 2);
 
             $("#searchPageContainer").css("opacity", "0");
@@ -109,7 +110,8 @@ $(document).ready(function() {
                         }
                         startLoc = {
                             lat: addr.lat,
-                            lng: addr.lng};
+                            lng: addr.lng
+                        };
                         addUserVenueToFirebase(category, venue);
                         console.log("Added new venue to firebase: ");
                         console.log(venue);
@@ -130,54 +132,57 @@ $(document).ready(function() {
     //-----------------------filter functions------------------------------
 
     // Handler for when user flips a filter
-    $(".lever").on("click", function() {
-        console.log($(this).attr("class"));
-        if ($(this).attr("data-check") == "checked") {
-            $(this).attr("data-check", "unchecked");
-        } else {
-            $(this).attr("data-check", "checked");
-        }
+    $("#eatSwitch").on("click", function() {
 
-        if ($(".meetup").attr("data-check") == "unchecked") {
-            $(".meetup-result-table").hide(0);
-            toggleMarkerGroup("meetups", false);
-            showVenues.meetups = false;
-        } else {
-            $(".meetup-result-table").show(0);
-            toggleMarkerGroup("meetups", true);
-            showVenues.meetups = true;
-        }
-
-        if ($(".eat").attr("data-check") == "unchecked") {
-            $(".eatVenue").hide(0);
+        if (!$(this).prop("checked")) {
+            $(".eatVenue").hide();
             toggleMarkerGroup("restaurants", false);
             showVenues.restaurants = false;
         } else {
-            $(".eatVenue").show(0);
+            $(".eatVenue").show();
             toggleMarkerGroup("restaurants", true);
             showVenues.restaurants = true;
         }
+    });
 
-        if ($(".stay").attr("data-check") == "unchecked") {
-            $(".stayVenue").hide(0);
-            toggleMarkerGroup("hotels", false);
-            showVenues.hotels = false;
-        } else {
-            $(".stayVenue").show(0);
-            toggleMarkerGroup("hotels", true);
-            showVenues.hotels = true;
-        }
+    $("#playSwitch").on("click", function() {
 
-        if ($(".play").attr("data-check") == "unchecked") {
-            $(".playVenue").hide(0);
+        if (!$(this).prop("checked")) {
+            $(".playVenue").hide();
             toggleMarkerGroup("parks", false);
             showVenues.parks = false;
         } else {
-            $(".playVenue").show(0);
+            $(".playVenue").show();
             toggleMarkerGroup("parks", true);
             showVenues.parks = true;
         }
-    })
+    });
+
+    $("#staySwitch").on("click", function() {
+
+        if (!$(this).prop("checked")) {
+            $(".stayVenue").hide();
+            toggleMarkerGroup("hotels", false);
+            showVenues.hotels = false;
+        } else {
+            $(".stayVenue").show();
+            toggleMarkerGroup("hotels", true);
+            showVenues.hotels = true;
+        }
+    });
+
+    $("#meetupSwitch").on("click", function() {
+
+        if (!$(this).prop("checked")) {
+            $(".meetup-result-table").hide();
+            toggleMarkerGroup("meetups", false);
+            showVenues.meetups = false;
+        } else {
+            $(".meetup-result-table").show();
+            toggleMarkerGroup("meetups", true);
+            showVenues.meetups = true;
+        }
+    });
 
     // Handler for when user changes search radius
     $("#dropdown2 > li").on("click", function() {

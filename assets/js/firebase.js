@@ -156,8 +156,6 @@ function searchAll(address, radius) {
     searchCategory(address, "restaurants", radius, function(results) {
         resultArray = resultArray.concat(results);
 
-        meetupSearch(startLoc.lat, startLoc.lng);
-
         searchCategory(address, "parks", radius, function(results) {
             resultArray = resultArray.concat(results);
 
@@ -215,20 +213,34 @@ function displayVenue(venueArr) {
             $("#venue-row-" + i).addClass("playVenue");
         }
         $("#venue-row-" + i).append("<div class=result-image><img class=img-results src=" + venue.imgURL + "></div>");
-        $("#venue-row-" + i).append("<div class=result-name>" + venue.name + "</div>");
+        $("#venue-row-" + i).append("<div class=result-name><a href='" + venue.URL + "'>" + venue.name + "</a></div>");
         $("#venue-row-" + i).append("<div class=result-address>" + venue.address + "</p></div>");
         $("#venue-row-" + i).append("<div class=result-phone>" + venue.phone + "</p></div>");
         $("#venue-row-" + i).append("<div class=result-btn><button class=\"btn waves-effect waves-light yelpDirBtn\" id=\"" +
-        venue.address + "\">Go!</button></div>");
+            venue.address + "\">Go!</button></div>");
+    }
+
+    // Hide results if filter switches are flipped
+    if (!showVenues.restaurants) {
+        // console.log("Eat venues hidden");
+        $(".eatVenue").hide();
+    }
+    if (!showVenues.parks) {
+        // console.log("Play venues hidden");
+        $(".playVenue").hide();
+    }
+    if (!showVenues.hotels) {
+        // console.log("Stay venues hidden");
+        $(".stayVenue").hide();
     }
 }
 
+// Handler when user clicks on Go! button
 $(document.body).on("click", "#dirBtn, .yelpDirBtn", function() {
     var destinationCoor;
     var sourceCoor;
     getCoorFromAddress($(this)[0].id, function(coor) {
         destinationCoor = coor;
-
         sourceCoor = startLoc;
         console.log("Dest is ");
         console.log(destinationCoor);
