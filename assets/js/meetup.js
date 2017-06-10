@@ -71,7 +71,12 @@ function displayMeetups(results) {
             "<p>" + locSAdd + "</p>" +
             "<p>" + locCAdd + " " + locStAdd + "</p></div>");
         // $("#meetup"+i).append("<td class='col s2'></td>");
-        $("#result-row-" + j).append("<div class=result-btn><button class=btn waves-effect waves-light id=dirBtn>go!</button></div>");
+        let fullAddr = locSAdd + " " + locCAdd + " " + locStAdd;
+        let goBtn = $("<button>").addClass("btn waves-effect waves-light")
+            .attr("id", "dirBtn")
+            .attr("addr", fullAddr)
+            .text("go!");
+        $("#result-row-" + j).append($("<div>").addClass("result-btn").append(goBtn));
 
         // Generate marker            
         let markerIcon = {};

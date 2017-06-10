@@ -239,7 +239,15 @@ function displayVenue(venueArr) {
 $(document.body).on("click", "#dirBtn, .yelpDirBtn", function() {
     var destinationCoor;
     var sourceCoor;
-    getCoorFromAddress($(this)[0].id, function(coor) {
+    let addr;
+
+    if ($(this).attr("id") === "dirBtn"){
+        addr = $(this).attr("addr");
+    } else {
+        addr = $(this)[0].id;
+    }
+
+    getCoorFromAddress(addr, function(coor) {
         destinationCoor = coor;
         sourceCoor = startLoc;
         console.log("Dest is ");
