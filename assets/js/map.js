@@ -1,4 +1,6 @@
-var googleMapApiKey = "AIzaSyBvUKChGjalgP1YNjJC66vq_tgbRuqa_Oc";
+// var googleMapApiKey = "AIzaSyBvUKChGjalgP1YNjJC66vq_tgbRuqa_Oc";
+var googleMapApiKey = "AIzaSyBIVs32damZdk7eo75amT2gqpauBXz0NZE";
+
 
 /*
 INPUT
