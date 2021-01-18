@@ -1,6 +1,6 @@
 // Firebase config
 var firebaseConfig = {
-    apiKey: "AIzaSyBIVs32damZdk7eo75amT2gqpauBXz0NZE",
+    apiKey: "AIzaSyCEETOTkoBmwuv6cfGcdZs7lkXilrX1Nok",
 //     apiKey: "AIzaSyBvUKChGjalgP1YNjJC66vq_tgbRuqa_Oc",
     authDomain: "ah829-9c19e.firebaseapp.com",
     databaseURL: "https://ah829-9c19e.firebaseio.com",
