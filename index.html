@@ -1,203 +1,289 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"
+    ></script>
+
     <!-- Compiled and minified CSS for MATERIALIZE -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"
+    />
 
     <!-- Compiled and minified JavaScript for Materialize -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-    
+
     <!-- Materialize icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
     <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Indie+Flower"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
- 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+    />
+
     <script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
-    <link rel="icon" type="image/png" href="assets/images/animal-paw-print.png">
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style2.css">
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/images/animal-paw-print.png"
+    />
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/style2.css" />
 
-    <title>Dogepile!</title>
-</head>
+    <title>dogepile!</title>
+  </head>
 
-<body>
-
-<!-- Begin Search/Add Page - Page 1 -->
+  <body>
+    <!-- Begin Search/Add Page - Page 1 -->
     <div id="searchPageContainer" class="search-page">
-        <div id="searchContainer">
+      <div id="searchContainer">
+        <h1 class="animated bounceInRight">dogepile!</h1>
 
-            <h1 class="animated bounceInRight">dogepile!</h1>
+        <form class="col s12" id="addressSearch">
+          <div class="row">
+            <div class="input-field col s10">
+              <i class="material-icons prefix">pets</i>
+              <input id="icon_prefix" type="text" />
+              <label class="input-label" for="icon_prefix"
+                >enter address or location</label
+              >
+            </div>
 
-            <form class="col s12" id="addressSearch">
-                <div class="row">
-                    <div class="input-field col s10">
-                        <i class="material-icons prefix">pets</i>
-                        <input id="icon_prefix" type="text">
-                        <label class="input-label" for="icon_prefix">enter address or location</label>
-                    </div>
-                
-                    <div class="col s2">
-                        <button id="searchBtn" class="btn-large init waves-effect waves-light" type="submit" name="action" data-btnType="address">retrieve
-                            <i class="material-icons left">search</i>
-                        </button>
-                    </div>
-                </div>
+            <div class="col s2">
+              <button
+                id="searchBtn"
+                class="btn-large init waves-effect waves-light"
+                type="submit"
+                name="action"
+                data-btnType="address"
+              >
+                retrieve
+                <i class="material-icons left">search</i>
+              </button>
+            </div>
+          </div>
 
-                <div class="row">
-                    <div class="col s6">
-                        <button class="btn-large init waves-effect waves-light" type="submit" id="geoBtn" data-btnType="geo">use my location
-                        <i class="material-icons left">public</i>
-                        </button>
-                    </div>
-                    <div class="col s6">
-                        <button data-target="modal1" class="btn-large waves-effect waves-light" type="submit" id="addLocBtn">add new place
-                        <i class="material-icons left">add_location</i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
+          <div class="row">
+            <div class="col s6">
+              <button
+                class="btn-large init waves-effect waves-light"
+                type="submit"
+                id="geoBtn"
+                data-btnType="geo"
+              >
+                use my location
+                <i class="material-icons left">public</i>
+              </button>
+            </div>
+            <div class="col s6">
+              <button
+                data-target="modal1"
+                class="btn-large waves-effect waves-light"
+                type="submit"
+                id="addLocBtn"
+              >
+                add new place
+                <i class="material-icons left">add_location</i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- Modal Structure -->
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-                <h4 class="addVenueText">add a new pet-friendly venue:</h4>
-                <div class="input field">
-                    <input id="new-name" type="text" placeholder="place name">
-                    <!-- <label for="new-name">place name</label> -->
-                </div>
-                <div class="input field">
-                    <input id="new-address" type="text" placeholder="street address">
-                    <!-- <label for="new-address">street address</label> -->
-                </div>
-
-                <div id="btnRow">
-
-                    <div class="fixed-action-btn horizontal left-align">
-                        <a class="btn-floating btn-large blue" id="venueTypeBtn">type
-                        </a>
-                        <ul>
-                          <li><a class="btn-floating btn-large yellow darken-3 dropdown-item-venue" data-color="#f9a825" data-type="eat">eat</a></li>
-                          <li><a class="btn-floating btn-large green dropdown-item-venue" data-color="#4CAF50" data-type="play">play</a></li>
-                          <li><a class="btn-floating btn-large red dropdown-item-venue" data-color="red" data-type="stay">stay</a></li>
-                        </ul>
-                    </div>
-
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-large disabled" id="shakeBtn"><i class="material-icons prefix">pets</i><span id="shakeText"> shake</span></a>
-                </div>
-            </div>
-        </div> <!-- end modal structure -->
-
-<!-- Begin Results Page - page 2 -->
-    <div class="results-page">
-        <header>
-            <div id="headerContainer">
-                <h2 id="logo">dogepile!</h2>
-                <div id="addressDisplay">
-                    <span id="locationsNear">showing locations near: </span><span id="locationEntered">your current location</span>
-                </div>
-            </div>
-        </header>
-
-    <!-- wrapper for map, filter switches, and radius button -->
-        <div class="container">
-            <div id="mainContainer">
-                <div class="row">
-                    <div class="col s6">
-                        <div id="map">
-                            map
-                        </div>
-                    </div>
-                    <div class="col s2">
-                        <div id="filter-results">
-                            <div class="switch filter-restaurants">
-                                <label>
-                                    eat
-                                    <!-- first checked to default to checked check attr is to follow filter -->
-                                    <input type="checkbox" id="eatSwitch" checked>
-                                    <span class="lever"></span>
-                                </label>
-                            </div>
-                            <div class="switch filter-parks">
-                                <label>
-                                    play
-                                    <input type="checkbox" id="playSwitch" checked>
-                                    <span class="lever"></span>
-                                </label>
-                            </div>
-                            <div class="switch filter-hotels">
-                                <label>
-                                    stay
-                                    <input type="checkbox" id="staySwitch" checked>
-                                    <span class="lever"></span>
-                                </label>
-                            </div>
-                            <div class="switch filter-meetup">
-                                <label>
-                                    meetup
-                                    <input type="checkbox" id="meetupSwitch" checked>
-                                    <span class="lever"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col s2" id="radDiv">
-                        <button class='dropdown-button btn dropdown-item-radius' id="radiusBtn" data-radius="2" data-belowOrigin="false" href='#' data-activates='dropdown2'>2 miles</button>
-                    <!-- Dropdown Radius Structure -->
-                            <ul id='dropdown2' class='dropdown-content'>
-                                <li class="dropdown-item-radius" data-radius="2" data-display="2 miles">2 miles</li>
-                                <li class="dropdown-item-radius" data-radius="5" data-display="5 miles">5 miles</li>
-                                <li class="dropdown-item-radius" data-radius="10" data-display="10 miles">10 miles</li>
-                            </ul>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- end map/filter switches wrapper -->
-        
-    <!-- Results Tables -->
-        <div class="container results-tables">
-
-            <!-- yelp results table -->
-
-            <!-- <div class="container"> -->
-                <div class="yelp-result-table">
-                </div>
-            <!-- </div> -->
-            
-            <!-- meetup results table -->
-
-            <!-- <div class="container"> -->
-                <div class="meetup-result-table">
-                </div>
-            <!-- </div> -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4 class="addVenueText">add a new pet-friendly venue:</h4>
+        <div class="input field">
+          <input id="new-name" type="text" placeholder="place name" />
+          <!-- <label for="new-name">place name</label> -->
+        </div>
+        <div class="input field">
+          <input id="new-address" type="text" placeholder="street address" />
+          <!-- <label for="new-address">street address</label> -->
         </div>
 
-        <!-- footer -->
-        <footer class="page-footer">
-            &copy; 2017 team TBD
-        </footer>
+        <div id="btnRow">
+          <div class="fixed-action-btn horizontal left-align">
+            <a class="btn-floating btn-large blue" id="venueTypeBtn">type </a>
+            <ul>
+              <li>
+                <a
+                  class="btn-floating btn-large yellow darken-3 dropdown-item-venue"
+                  data-color="#f9a825"
+                  data-type="eat"
+                  >eat</a
+                >
+              </li>
+              <li>
+                <a
+                  class="btn-floating btn-large green dropdown-item-venue"
+                  data-color="#4CAF50"
+                  data-type="play"
+                  >play</a
+                >
+              </li>
+              <li>
+                <a
+                  class="btn-floating btn-large red dropdown-item-venue"
+                  data-color="red"
+                  data-type="stay"
+                  >stay</a
+                >
+              </li>
+            </ul>
+          </div>
 
-    </div>  <!-- end results page -->
+          <a
+            href="#!"
+            class="modal-action modal-close waves-effect waves-green btn-large disabled"
+            id="shakeBtn"
+            ><i class="material-icons prefix">pets</i
+            ><span id="shakeText"> shake</span></a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- end modal structure -->
 
+    <!-- Begin Results Page - page 2 -->
+    <div class="results-page">
+      <header>
+        <div id="headerContainer">
+          <h2 id="logo">dogepile!</h2>
+          <div id="addressDisplay">
+            <span id="locationsNear">showing locations near: </span
+            ><span id="locationEntered">your current location</span>
+          </div>
+        </div>
+      </header>
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvUKChGjalgP1YNjJC66vq_tgbRuqa_Oc"></script>
-<script type="text/javascript" src="assets/js/map.js"></script>
-<script type="text/javascript" src="assets/js/firebase.js"></script>
-<script type="text/javascript" src="assets/js/meetup.js"></script>
-<script type="text/javascript" src="assets/js/app.js"></script>
+      <!-- wrapper for map, filter switches, and radius button -->
+      <div class="container">
+        <div id="mainContainer">
+          <div class="row">
+            <div class="col s6">
+              <div id="map">map</div>
+            </div>
+            <div class="col s2">
+              <div id="filter-results">
+                <div class="switch filter-restaurants">
+                  <label>
+                    eat
+                    <!-- first checked to default to checked check attr is to follow filter -->
+                    <input type="checkbox" id="eatSwitch" checked />
+                    <span class="lever"></span>
+                  </label>
+                </div>
+                <div class="switch filter-parks">
+                  <label>
+                    play
+                    <input type="checkbox" id="playSwitch" checked />
+                    <span class="lever"></span>
+                  </label>
+                </div>
+                <div class="switch filter-hotels">
+                  <label>
+                    stay
+                    <input type="checkbox" id="staySwitch" checked />
+                    <span class="lever"></span>
+                  </label>
+                </div>
+                <div class="switch filter-meetup">
+                  <label>
+                    meetup
+                    <input type="checkbox" id="meetupSwitch" checked />
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col s2" id="radDiv">
+              <button
+                class="dropdown-button btn dropdown-item-radius"
+                id="radiusBtn"
+                data-radius="2"
+                data-belowOrigin="false"
+                href="#"
+                data-activates="dropdown2"
+              >
+                2 miles
+              </button>
+              <!-- Dropdown Radius Structure -->
+              <ul id="dropdown2" class="dropdown-content">
+                <li
+                  class="dropdown-item-radius"
+                  data-radius="2"
+                  data-display="2 miles"
+                >
+                  2 miles
+                </li>
+                <li
+                  class="dropdown-item-radius"
+                  data-radius="5"
+                  data-display="5 miles"
+                >
+                  5 miles
+                </li>
+                <li
+                  class="dropdown-item-radius"
+                  data-radius="10"
+                  data-display="10 miles"
+                >
+                  10 miles
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end map/filter switches wrapper -->
 
-</body>
+      <!-- Results Tables -->
+      <div class="container results-tables">
+        <!-- yelp results table -->
 
+        <!-- <div class="container"> -->
+        <div class="yelp-result-table"></div>
+        <!-- </div> -->
+
+        <!-- meetup results table -->
+
+        <!-- <div class="container"> -->
+        <div class="meetup-result-table"></div>
+        <!-- </div> -->
+      </div>
+
+      <!-- footer -->
+      <footer class="page-footer">&copy; 2017 team TBD</footer>
+    </div>
+    <!-- end results page -->
+
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvUKChGjalgP1YNjJC66vq_tgbRuqa_Oc"
+    ></script>
+    <script type="text/javascript" src="assets/js/map.js"></script>
+    <script type="text/javascript" src="assets/js/firebase.js"></script>
+    <script type="text/javascript" src="assets/js/meetup.js"></script>
+    <script type="text/javascript" src="assets/js/app.js"></script>
+  </body>
 </html>
